@@ -25,6 +25,19 @@ provider "upstash" {
 
 `api_key` can be generated from Upstash Console. For more information please check our [docs](https://docs.upstash.com/howto/developerapi).
 
+## Create Database Using Terraform
+
+Here example code snippet that creates database:
+
+```hcl
+resource "upstash_database" "mydb" {
+  database_name = "mydb3"
+  region = "eu-west-1"
+  tls = "true"
+  multi_zone = "false"
+}
+```
+You can check full spec and [doc from here](https://registry.terraform.io/providers/upstash/upstash/latest/docs).
 
 ## Support, Bugs Reports, Feature Requests
 
