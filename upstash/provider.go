@@ -2,6 +2,7 @@ package upstash
 
 import (
 	"context"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -25,9 +26,11 @@ func Provider() *schema.Provider {
 		},
 		ResourcesMap: map[string]*schema.Resource{
 			"upstash_database": resourceDatabase(),
+			"upstash_cluster":  resourceCluster(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"upstash_database": dataSourceDatabase(),
+			"upstash_cluster":  dataSourceCluster(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}

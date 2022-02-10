@@ -3,12 +3,14 @@ package upstash
 import (
 	"encoding/base64"
 	"errors"
-	"github.com/imroc/req"
 	"net/http"
 	"strconv"
+
+	"github.com/imroc/req"
 )
 
 const UPSTASH_API_ENDPOINT = "https://api.upstash.com"
+const UPSTASH_V2_API_ENDPOINT = "https://api-dev.upstash.io"
 
 type UpstashClient struct {
 	Email  string
@@ -93,4 +95,83 @@ func (c *UpstashClient) EnableMultiZone(databaseId string, enabled bool) (err er
 func basicAuth(user string, password string) string {
 	token := user + ":" + password
 	return "Basic " + base64.StdEncoding.EncodeToString([]byte(token))
+}
+
+// Clusters
+
+func (c *UpstashClient) DeleteCluster(clusterId string) (err error) {
+	resp, err := req.Delete(UPSTASH_V2_API_ENDPOINT+"/v2/kafka/cluster/"+clusterId,
+		req.Header{
+			"Accept":        "application/json",
+			"Authorization": basicAuth(c.Email, c.Apikey),
+		},
+	)
+	if err != nil {
+		return err
+	}
+	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
+		return errors.New("Delete cluster failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
+
+	}
+	return err
+}
+
+func (c *UpstashClient) GetCluster(clusterId string) (cluster Cluster, err error) {
+	resp, err := req.Get(UPSTASH_V2_API_ENDPOINT+"/v2/kafka/cluster/"+clusterId,
+		req.Header{
+			"Accept":        "application/json",
+			"Authorization": basicAuth(c.Email, c.Apikey),
+		},
+	)
+	if err != nil {
+		return cluster, err
+	}
+	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
+		return cluster, errors.New("Get cluster failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
+	}
+	err = resp.ToJSON(&cluster)
+	return cluster, err
+
+}
+
+func (c *UpstashClient) CreateCluster(body CreateClusterRequest) (cluster Cluster, err error) {
+	resp, err := req.Post(UPSTASH_V2_API_ENDPOINT+"/v2/kafka/cluster",
+		req.Header{
+			"Accept":        "application/json",
+			"Authorization": basicAuth(c.Email, c.Apikey),
+		},
+		req.BodyJSON(body),
+	)
+	if err != nil {
+		return cluster, err
+	}
+	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
+		return cluster, errors.New("Create cluster failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
+	}
+	err = resp.ToJSON(&cluster)
+	return cluster, err
+
+}
+
+// how to send as body parameter?
+func (c *UpstashClient) RenameCluster(clusterId string, newName string) (err error) {
+
+	header := req.Header{
+		"Accept":        "application/json",
+		"Authorization": basicAuth(c.Email, c.Apikey),
+	}
+
+	param := req.Param{
+		"name": newName,
+	}
+
+	resp, err := req.Post(UPSTASH_V2_API_ENDPOINT+"/v2/kafka/rename-cluster/"+clusterId, req.BodyJSON(param), header)
+
+	if err != nil {
+		return err
+	}
+	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
+		return errors.New("Renaming cluster failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
+	}
+	return nil
 }

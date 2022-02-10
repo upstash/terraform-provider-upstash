@@ -2,6 +2,7 @@ package upstash
 
 import (
 	"context"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -75,6 +76,7 @@ func resourceDatabaseUpdate(ctx context.Context, data *schema.ResourceData, m in
 			return diag.FromErr(err)
 		}
 	}
+	// I think this creates a problem. Doesnt give tls as a parameter for the client to use.
 	if data.HasChange("tls") {
 		if err := c.EnableTLS(databaseId); err != nil {
 			return diag.FromErr(err)
