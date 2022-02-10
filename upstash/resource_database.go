@@ -137,9 +137,9 @@ func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m in
 	database, err := c.CreateDatabase(CreateDatabaseRequest{
 		Region:       data.Get("region").(string),
 		DatabaseName: data.Get("database_name").(string),
-		Tls:          false,
-		Consistent:   false,
-		MultiZone:    false,
+		Tls:          data.Get("tls").(bool),
+		Consistent:   data.Get("consistent").(bool),
+		MultiZone:    data.Get("multi_zone").(bool),
 	})
 	if err != nil {
 		return diag.FromErr(err)

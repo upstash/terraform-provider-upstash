@@ -29,8 +29,8 @@ func Provider() *schema.Provider {
 			"upstash_cluster":  resourceCluster(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
-			"upstash_database": dataSourceDatabase(),
-			"upstash_cluster":  dataSourceCluster(),
+			"upstash_database_data": dataSourceDatabase(),
+			"upstash_cluster_data":  dataSourceCluster(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}
