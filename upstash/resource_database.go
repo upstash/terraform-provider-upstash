@@ -2,6 +2,7 @@ package upstash
 
 import (
 	"context"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -49,12 +50,12 @@ func resourceDatabase() *schema.Resource {
 				ForceNew:    true,
 				Description: "When enabled database runs in Consistency Mode",
 			},
-			"multi_zone": &schema.Schema{
+			"multizone": &schema.Schema{
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
 				ForceNew:    false,
-				Description: "When enabled database is highly available and deployed multi-zone",
+				Description: "When enabled database is highly available and deployed multizone",
 			},
 			"tls": &schema.Schema{
 				Type:        schema.TypeBool,
@@ -70,11 +71,12 @@ func resourceDatabase() *schema.Resource {
 func resourceDatabaseUpdate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*UpstashClient)
 	databaseId := data.Get("database_id").(string)
-	if data.HasChange("multi_zone") {
-		if err := c.EnableMultiZone(databaseId, data.Get("multi_zone").(bool)); err != nil {
+	if data.HasChange("multizone") {
+		if err := c.EnableMultiZone(databaseId, data.Get("multizone").(bool)); err != nil {
 			return diag.FromErr(err)
 		}
 	}
+	// I think this creates a problem. Doesnt give tls as a parameter for the client to use.
 	if data.HasChange("tls") {
 		if err := c.EnableTLS(databaseId); err != nil {
 			return diag.FromErr(err)
@@ -120,7 +122,7 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 	if err = data.Set("consistent", database.Consistent); err != nil {
 		return diag.FromErr(err)
 	}
-	if err = data.Set("multi_zone", database.MultiZone); err != nil {
+	if err = data.Set("multizone", database.MultiZone); err != nil {
 		return diag.FromErr(err)
 	}
 	if err = data.Set("tls", database.Tls); err != nil {
@@ -135,9 +137,9 @@ func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m in
 	database, err := c.CreateDatabase(CreateDatabaseRequest{
 		Region:       data.Get("region").(string),
 		DatabaseName: data.Get("database_name").(string),
-		Tls:          false,
-		Consistent:   false,
-		MultiZone:    false,
+		Tls:          data.Get("tls").(bool),
+		Consistent:   data.Get("consistent").(bool),
+		MultiZone:    data.Get("multizone").(bool),
 	})
 	if err != nil {
 		return diag.FromErr(err)

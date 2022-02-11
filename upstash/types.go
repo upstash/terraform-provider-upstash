@@ -12,7 +12,7 @@ type Database struct {
 	Endpoint     string `json:"endpoint"`
 	Tls          bool   `json:"tls"`
 	Consistent   bool   `json:"consistent"`
-	MultiZone    bool   `json:"multi_zone"`
+	MultiZone    bool   `json:"multizone"`
 	RestToken    string `json:"rest_token,omitempty"`
 }
 
@@ -21,5 +21,33 @@ type CreateDatabaseRequest struct {
 	DatabaseName string `json:"database_name"`
 	Tls          bool   `json:"tls"`
 	Consistent   bool   `json:"consistent"`
-	MultiZone    bool   `json:"multi_zone"`
+	MultiZone    bool   `json:"multizone"`
+}
+
+type Cluster struct {
+	ClusterId   string `json:"cluster_id"`
+	ClusterName string `json:"name"`
+	Region      string `json:"region"`
+
+	Type                 string `json:"type"`
+	MultiZone            bool   `json:"multizone"`
+	TcpEndpoint          string `json:"tcp_endpoint"`
+	RestEndpoint         string `json:"rest_endpoint"`
+	State                string `json:"state"`
+	Username             string `json:"username"`
+	EncodedUsername      string `json:"encoded_username"`
+	Password             string `json:"password"`
+	MaxRetentionSize     int64  `json:"max_retention_size"`
+	MaxRetentionTime     int64  `json:"max_retention_time"`
+	MaxMessagesPerSecond int    `json:"max_messages_per_second"`
+	MaxMessageSize       int64  `json:"max_message_size"`
+	MaxPartitions        int    `json:"max_partitions"`
+
+	CreationTime int64 `json:"creation_time"`
+}
+
+type CreateClusterRequest struct {
+	ClusterName string `json:"name"`
+	Region      string `json:"region"`
+	MultiZone   bool   `json:"multizone"`
 }

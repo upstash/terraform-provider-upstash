@@ -38,7 +38,7 @@ func dataSourceDatabase() *schema.Resource {
 				Computed:    true,
 				Description: "When enabled database runs in Consistency Mode",
 			},
-			"multi_zone": &schema.Schema{
+			"multizone": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
 				Description: "When enabled database is highly available and deployed multi-zone",
