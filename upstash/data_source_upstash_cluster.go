@@ -20,7 +20,7 @@ func dataSourceCluster() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 				Description: "Region of the cluster. Possible values (may change) are: " +
-					"\"eu-west-1\", \"us-east-1\", \"us-west-1\", \"ap-northeast-1\" , \"eu-central1\"",
+					"\"eu-west-1\", \"us-east-1\"",
 			},
 			"type": &schema.Schema{
 				Type:        schema.TypeString,
