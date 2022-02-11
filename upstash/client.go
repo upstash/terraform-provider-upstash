@@ -7,6 +7,8 @@ import (
 	"strconv"
 
 	"github.com/imroc/req"
+	"github.com/upstash/terraform-provider-upstash/upstash/kafka/cluster"
+	"github.com/upstash/terraform-provider-upstash/upstash/redis/database"
 )
 
 const UPSTASH_API_ENDPOINT = "https://api.upstash.com"
@@ -25,7 +27,7 @@ func NewUpstashClient(email string, apikey string) *UpstashClient {
 	}
 }
 
-func (c *UpstashClient) CreateDatabase(body CreateDatabaseRequest) (database Database, err error) {
+func (c *UpstashClient) CreateDatabase(body database.CreateDatabaseRequest) (database database.Database, err error) {
 	resp, err := req.Post(UPSTASH_API_ENDPOINT+"/v2/redis/database",
 		req.Header{"Accept": "application/json"},
 		req.Header{"Authorization": basicAuth(c.Email, c.Apikey)},
@@ -40,7 +42,7 @@ func (c *UpstashClient) CreateDatabase(body CreateDatabaseRequest) (database Dat
 	return database, err
 }
 
-func (c *UpstashClient) GetDatabase(databaseId string) (database Database, err error) {
+func (c *UpstashClient) GetDatabase(databaseId string) (database database.Database, err error) {
 	resp, err := req.Get(UPSTASH_API_ENDPOINT+"/v2/redis/database/"+databaseId,
 		req.Header{"Accept": "application/json"},
 		req.Header{"Authorization": basicAuth(c.Email, c.Apikey)})
@@ -117,7 +119,7 @@ func (c *UpstashClient) DeleteCluster(clusterId string) (err error) {
 	return err
 }
 
-func (c *UpstashClient) GetCluster(clusterId string) (cluster Cluster, err error) {
+func (c *UpstashClient) GetCluster(clusterId string) (cluster cluster.Cluster, err error) {
 	resp, err := req.Get(UPSTASH_API_ENDPOINT+"/v2/kafka/cluster/"+clusterId,
 		req.Header{
 			"Accept":        "application/json",
@@ -135,7 +137,7 @@ func (c *UpstashClient) GetCluster(clusterId string) (cluster Cluster, err error
 
 }
 
-func (c *UpstashClient) CreateCluster(body CreateClusterRequest) (cluster Cluster, err error) {
+func (c *UpstashClient) CreateCluster(body cluster.CreateClusterRequest) (cluster cluster.Cluster, err error) {
 	resp, err := req.Post(UPSTASH_API_ENDPOINT+"/v2/kafka/cluster",
 		req.Header{
 			"Accept":        "application/json",

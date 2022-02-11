@@ -1,14 +1,15 @@
-terraform {
-  required_providers {
-    upstash = {
-      source = "upstash/upstash"
-      version = "0.0.1"
-    }
-  }
-}
+# terraform {
+#   required_providers {
+#     upstash = {
+#       source = "upstash/upstash"
+#       version = "0.0.1"
+#     }
+#   }
+# }
+
 provider "upstash" {
-  api_key = "FILL_HERE"
-  email = "FILL_HERE"
+  api_key = "4a4634fa-71dc-4249-b029-144b82957571"
+  email = "bylmaz744@gmail.com"
 }
 
 resource "upstash_database" "mydb" {

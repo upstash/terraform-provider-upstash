@@ -5,6 +5,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/upstash/terraform-provider-upstash/upstash/redis/database"
 )
 
 func resourceDatabase() *schema.Resource {
@@ -134,7 +135,7 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 
 func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*UpstashClient)
-	database, err := c.CreateDatabase(CreateDatabaseRequest{
+	database, err := c.CreateDatabase(database.CreateDatabaseRequest{
 		Region:       data.Get("region").(string),
 		DatabaseName: data.Get("database_name").(string),
 		Tls:          data.Get("tls").(bool),

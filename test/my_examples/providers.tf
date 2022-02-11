@@ -1,6 +1,4 @@
-# ENV VARIABLES COULD BE BETTER 
-
 provider "upstash" {
+  api_key = "4a4634fa-71dc-4249-b029-144b82957571"
   email = "bylmaz744@gmail.com"
-  api_key = "7194c042-1295-4d2f-bc98-667167be0642"
 }

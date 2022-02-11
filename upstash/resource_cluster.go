@@ -5,6 +5,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/upstash/terraform-provider-upstash/upstash/kafka/cluster"
 )
 
 func resourceCluster() *schema.Resource {
@@ -167,7 +168,7 @@ func resourceClusterRead(ctx context.Context, data *schema.ResourceData, m inter
 
 func resourceClusterCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*UpstashClient)
-	cluster, err := c.CreateCluster(CreateClusterRequest{
+	cluster, err := c.CreateCluster(cluster.CreateClusterRequest{
 		ClusterName: data.Get("cluster_name").(string),
 		Region:      data.Get("region").(string),
 	})
