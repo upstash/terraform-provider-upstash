@@ -12,7 +12,7 @@ type Database struct {
 	Endpoint     string `json:"endpoint"`
 	Tls          bool   `json:"tls"`
 	Consistent   bool   `json:"consistent"`
-	MultiZone    bool   `json:"multi_zone"`
+	MultiZone    bool   `json:"multizone"`
 	RestToken    string `json:"rest_token,omitempty"`
 }
 
@@ -21,7 +21,7 @@ type CreateDatabaseRequest struct {
 	DatabaseName string `json:"database_name"`
 	Tls          bool   `json:"tls"`
 	Consistent   bool   `json:"consistent"`
-	MultiZone    bool   `json:"multi_zone"`
+	MultiZone    bool   `json:"multizone"`
 }
 
 type Cluster struct {
@@ -30,7 +30,7 @@ type Cluster struct {
 	Region      string `json:"region"`
 
 	Type                 string `json:"type"`
-	MultiZone            bool   `json:"multi_zone"`
+	MultiZone            bool   `json:"multizone"`
 	TcpEndpoint          string `json:"tcp_endpoint"`
 	RestEndpoint         string `json:"rest_endpoint"`
 	State                string `json:"state"`

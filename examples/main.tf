@@ -15,7 +15,7 @@ resource "upstash_database" "mydb" {
   database_name = "mydb3"
   region = "eu-west-1"
   tls = "true"
-  multi_zone = "false"
+  multizone = "false"
 }
 
 output "endpoint" {

@@ -10,7 +10,8 @@ import (
 )
 
 const UPSTASH_API_ENDPOINT = "https://api.upstash.com"
-const UPSTASH_V2_API_ENDPOINT = "https://api-dev.upstash.io"
+
+// const UPSTASH_V2_API_ENDPOINT = "https://api-dev.upstash.io"
 
 type UpstashClient struct {
 	Email  string
@@ -25,7 +26,7 @@ func NewUpstashClient(email string, apikey string) *UpstashClient {
 }
 
 func (c *UpstashClient) CreateDatabase(body CreateDatabaseRequest) (database Database, err error) {
-	resp, err := req.Post(UPSTASH_API_ENDPOINT+"/v1/database",
+	resp, err := req.Post(UPSTASH_API_ENDPOINT+"/v2/redis/database",
 		req.Header{"Accept": "application/json"},
 		req.Header{"Authorization": basicAuth(c.Email, c.Apikey)},
 		req.BodyJSON(body))
@@ -40,7 +41,7 @@ func (c *UpstashClient) CreateDatabase(body CreateDatabaseRequest) (database Dat
 }
 
 func (c *UpstashClient) GetDatabase(databaseId string) (database Database, err error) {
-	resp, err := req.Get(UPSTASH_API_ENDPOINT+"/v1/database/"+databaseId,
+	resp, err := req.Get(UPSTASH_API_ENDPOINT+"/v2/redis/database/"+databaseId,
 		req.Header{"Accept": "application/json"},
 		req.Header{"Authorization": basicAuth(c.Email, c.Apikey)})
 	if err != nil {
@@ -54,7 +55,7 @@ func (c *UpstashClient) GetDatabase(databaseId string) (database Database, err e
 }
 
 func (c *UpstashClient) DeleteDatabase(databaseId string) (err error) {
-	resp, err := req.Delete(UPSTASH_API_ENDPOINT+"/v1/database/"+databaseId,
+	resp, err := req.Delete(UPSTASH_API_ENDPOINT+"/v2/redis/database/"+databaseId,
 		req.Header{"Accept": "application/json"},
 		req.Header{"Authorization": basicAuth(c.Email, c.Apikey)})
 	if err != nil {
@@ -67,7 +68,7 @@ func (c *UpstashClient) DeleteDatabase(databaseId string) (err error) {
 }
 
 func (c *UpstashClient) EnableTLS(databaseId string) (err error) {
-	resp, err := req.Post(UPSTASH_API_ENDPOINT+"/v1/tls/"+databaseId,
+	resp, err := req.Post(UPSTASH_API_ENDPOINT+"/v2/redis/enable-tls/"+databaseId,
 		req.Header{"Accept": "application/json"},
 		req.Header{"Authorization": basicAuth(c.Email, c.Apikey)})
 	if err != nil {
@@ -80,14 +81,14 @@ func (c *UpstashClient) EnableTLS(databaseId string) (err error) {
 }
 
 func (c *UpstashClient) EnableMultiZone(databaseId string, enabled bool) (err error) {
-	resp, err := req.Post(UPSTASH_API_ENDPOINT+"/v1/multizone/"+databaseId,
+	resp, err := req.Post(UPSTASH_API_ENDPOINT+"/v2/redis/enable-multizone/"+databaseId,
 		req.Header{"Accept": "application/json"},
 		req.Header{"Authorization": basicAuth(c.Email, c.Apikey)}, req.BodyJSON(req.Param{"enabled": enabled}))
 	if err != nil {
 		return err
 	}
 	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
-		return errors.New("Enable TLS failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
+		return errors.New("Enable Multizone failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
 	}
 	return err
 }
@@ -100,7 +101,7 @@ func basicAuth(user string, password string) string {
 // Clusters
 
 func (c *UpstashClient) DeleteCluster(clusterId string) (err error) {
-	resp, err := req.Delete(UPSTASH_V2_API_ENDPOINT+"/v2/kafka/cluster/"+clusterId,
+	resp, err := req.Delete(UPSTASH_API_ENDPOINT+"/v2/kafka/cluster/"+clusterId,
 		req.Header{
 			"Accept":        "application/json",
 			"Authorization": basicAuth(c.Email, c.Apikey),
@@ -117,7 +118,7 @@ func (c *UpstashClient) DeleteCluster(clusterId string) (err error) {
 }
 
 func (c *UpstashClient) GetCluster(clusterId string) (cluster Cluster, err error) {
-	resp, err := req.Get(UPSTASH_V2_API_ENDPOINT+"/v2/kafka/cluster/"+clusterId,
+	resp, err := req.Get(UPSTASH_API_ENDPOINT+"/v2/kafka/cluster/"+clusterId,
 		req.Header{
 			"Accept":        "application/json",
 			"Authorization": basicAuth(c.Email, c.Apikey),
@@ -135,7 +136,7 @@ func (c *UpstashClient) GetCluster(clusterId string) (cluster Cluster, err error
 }
 
 func (c *UpstashClient) CreateCluster(body CreateClusterRequest) (cluster Cluster, err error) {
-	resp, err := req.Post(UPSTASH_V2_API_ENDPOINT+"/v2/kafka/cluster",
+	resp, err := req.Post(UPSTASH_API_ENDPOINT+"/v2/kafka/cluster",
 		req.Header{
 			"Accept":        "application/json",
 			"Authorization": basicAuth(c.Email, c.Apikey),
@@ -165,7 +166,7 @@ func (c *UpstashClient) RenameCluster(clusterId string, newName string) (err err
 		"name": newName,
 	}
 
-	resp, err := req.Post(UPSTASH_V2_API_ENDPOINT+"/v2/kafka/rename-cluster/"+clusterId, req.BodyJSON(param), header)
+	resp, err := req.Post(UPSTASH_API_ENDPOINT+"/v2/kafka/rename-cluster/"+clusterId, req.BodyJSON(param), header)
 
 	if err != nil {
 		return err

@@ -41,12 +41,12 @@ func resourceCluster() *schema.Resource {
 				Computed:    true,
 				Description: "Type of the cluster",
 			},
-			"multi_zone": &schema.Schema{
+			"multizone": &schema.Schema{
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
 				ForceNew:    true,
-				Description: "Whether cluster has multi_zone attribute",
+				Description: "Whether cluster has multizone attribute",
 			},
 			"tcp_endpoint": &schema.Schema{
 				Type:        schema.TypeString,
@@ -148,7 +148,7 @@ func resourceClusterRead(ctx context.Context, data *schema.ResourceData, m inter
 		"cluster_name":            cluster.ClusterName,
 		"region":                  cluster.Region,
 		"type":                    cluster.Type,
-		"multi_zone":              cluster.MultiZone,
+		"multizone":               cluster.MultiZone,
 		"tcp_endpoint":            cluster.TcpEndpoint,
 		"rest_endpoint":           cluster.RestEndpoint,
 		"state":                   cluster.State,
@@ -163,56 +163,6 @@ func resourceClusterRead(ctx context.Context, data *schema.ResourceData, m inter
 	}
 
 	return setAndCheckErrors(data, mapping)
-
-	// if err = data.Set("cluster_id", cluster.ClusterId); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("cluster_name", cluster.ClusterName); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("region", cluster.Region); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("type", cluster.Type); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("multi_zone", cluster.MultiZone); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("tcp_endpoint", cluster.TcpEndpoint); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("rest_endpoint", cluster.RestEndpoint); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("state", cluster.State); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("username", cluster.Username); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("encoded_username", cluster.EncodedUsername); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("password", cluster.Password); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("max_retention_size", cluster.MaxRetentionSize); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("max_retention_time", cluster.MaxRetentionTime); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("max_messages_per_second", cluster.MaxMessagesPerSecond); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("max_message_size", cluster.MaxMessageSize); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-	// if err = data.Set("max_retention_size", cluster.MaxRetentionSize); err != nil {
-	// 	return diag.FromErr(err)
-	// }
-
 }
 
 func resourceClusterCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
