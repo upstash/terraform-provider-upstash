@@ -32,7 +32,7 @@ func resourceCluster() *schema.Resource {
 				Required: true,
 				ForceNew: true,
 				Description: "region of the cluster. Possible values (may change) are: " +
-					"\"eu-west-1\", \"us-east-1\", \"us-west-1\", \"ap-northeast-1\" , \"eu-central1\"",
+					"\"eu-west-1\", \"us-east-1\"",
 			},
 
 			// not implemented yet
