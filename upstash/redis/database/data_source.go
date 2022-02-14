@@ -1,8 +1,8 @@
-package upstash
+package database
 
 import "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-func dataSourceDatabase() *schema.Resource {
+func DataSourceDatabase() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: resourceDatabaseRead,
 		Schema: map[string]*schema.Schema{

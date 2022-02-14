@@ -1,8 +1,8 @@
-package upstash
+package cluster
 
 import "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-func dataSourceCluster() *schema.Resource {
+func DataSourceCluster() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: resourceClusterRead,
 		Schema: map[string]*schema.Schema{

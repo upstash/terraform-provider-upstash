@@ -6,9 +6,10 @@ terraform {
     }
   }
 }
+
 provider "upstash" {
-  api_key = "FILL_HERE"
-  email = "FILL_HERE"
+  api_key = "FILL HERE"
+  email = "FILL HERE"
 }
 
 resource "upstash_database" "mydb" {

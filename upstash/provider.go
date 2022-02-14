@@ -4,6 +4,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/upstash/terraform-provider-upstash/upstash/client"
+	"github.com/upstash/terraform-provider-upstash/upstash/kafka/cluster"
+	"github.com/upstash/terraform-provider-upstash/upstash/redis/database"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -25,12 +28,13 @@ func Provider() *schema.Provider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"upstash_database": resourceDatabase(),
-			"upstash_cluster":  resourceCluster(),
+			"upstash_database": database.ResourceDatabase(),
+			"upstash_cluster":  cluster.ResourceCluster(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
-			"upstash_database_data": dataSourceDatabase(),
-			"upstash_cluster_data":  dataSourceCluster(),
+			"upstash_database_data": database.DataSourceDatabase(),
+			"upstash_cluster_data":  cluster.DataSourceCluster(),
+			"upstash_team_data":     team.dataSourceTeam(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}
@@ -40,6 +44,6 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 	username := d.Get("email").(string)
 	password := d.Get("api_key").(string)
 
-	c := NewUpstashClient(username, password)
+	c := client.NewUpstashClient(username, password)
 	return c, nil
 }
