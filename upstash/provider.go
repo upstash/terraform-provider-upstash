@@ -7,6 +7,7 @@ import (
 	"github.com/upstash/terraform-provider-upstash/upstash/client"
 	"github.com/upstash/terraform-provider-upstash/upstash/kafka/cluster"
 	"github.com/upstash/terraform-provider-upstash/upstash/redis/database"
+	"github.com/upstash/terraform-provider-upstash/upstash/team"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -30,11 +31,12 @@ func Provider() *schema.Provider {
 		ResourcesMap: map[string]*schema.Resource{
 			"upstash_database": database.ResourceDatabase(),
 			"upstash_cluster":  cluster.ResourceCluster(),
+			"upstash_team":     team.ResourceTeam(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"upstash_database_data": database.DataSourceDatabase(),
 			"upstash_cluster_data":  cluster.DataSourceCluster(),
-			"upstash_team_data":     team.dataSourceTeam(),
+			"upstash_team_data":     team.DataSourceTeam(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}

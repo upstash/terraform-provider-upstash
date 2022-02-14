@@ -6,6 +6,7 @@ import (
 
 func ResourceCluster() *schema.Resource {
 	return &schema.Resource{
+		// rename these, like in team, also redis/db ones
 		CreateContext: resourceClusterCreate,
 		ReadContext:   resourceClusterRead,
 		UpdateContext: resourceClusterUpdate,

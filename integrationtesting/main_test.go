@@ -10,7 +10,7 @@ import (
 func TestTerraformResourceGroup(t *testing.T) {
 
 	options := &terraform.Options{
-		TerraformDir: "../test/my_examples",
+		TerraformDir: "../test/dbAndCluster",
 	}
 
 	defer terraform.Destroy(t, options)
