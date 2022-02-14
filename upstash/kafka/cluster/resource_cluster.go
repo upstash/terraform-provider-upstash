@@ -1,27 +1,38 @@
-package upstash
+package cluster
 
-import "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+)
 
-func dataSourceCluster() *schema.Resource {
+func ResourceCluster() *schema.Resource {
 	return &schema.Resource{
-		ReadContext: resourceClusterRead,
+		CreateContext: resourceClusterCreate,
+		ReadContext:   resourceClusterRead,
+		UpdateContext: resourceClusterUpdate,
+		DeleteContext: resourceClusterDelete,
 		Schema: map[string]*schema.Schema{
+
 			"cluster_id": &schema.Schema{
 				Type:        schema.TypeString,
-				Required:    true,
-				Description: "Unique Cluster ID for requested cluster",
+				Computed:    true,
+				Description: "Unique Cluster ID for created cluster",
 			},
 			"cluster_name": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
+				Type:     schema.TypeString,
+				Required: true,
+				// Not sure about this
+				// ForceNew:    true,
 				Description: "Name of the cluster",
 			},
 			"region": &schema.Schema{
 				Type:     schema.TypeString,
-				Computed: true,
-				Description: "Region of the cluster. Possible values (may change) are: " +
+				Required: true,
+				ForceNew: true,
+				Description: "region of the cluster. Possible values (may change) are: " +
 					"\"eu-west-1\", \"us-east-1\", \"us-west-1\", \"ap-northeast-1\" , \"eu-central1\"",
 			},
+
+			// not implemented yet
 			"type": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -29,7 +40,9 @@ func dataSourceCluster() *schema.Resource {
 			},
 			"multizone": &schema.Schema{
 				Type:        schema.TypeBool,
-				Computed:    true,
+				Optional:    true,
+				Default:     false,
+				ForceNew:    true,
 				Description: "Whether cluster has multizone attribute",
 			},
 			"tcp_endpoint": &schema.Schema{
@@ -90,4 +103,5 @@ func dataSourceCluster() *schema.Resource {
 			},
 		},
 	}
+
 }
