@@ -1,9 +1,5 @@
 package database
 
-import "github.com/upstash/terraform-provider-upstash/upstash/client"
-
-type upstashClient client.UpstashClient
-
 type Database struct {
 	DatabaseId   string `json:"database_id"`
 	DatabaseName string `json:"database_name"`
