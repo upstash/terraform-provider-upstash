@@ -9,7 +9,7 @@ import (
 
 func TestAllUpstashResources(t *testing.T) {
 	terraformOptions := &terraform.Options{
-		TerraformDir: "../test/my_examples",
+		TerraformDir: "../test/dbAndCluster",
 	}
 
 	defer terraform.Destroy(t, terraformOptions)

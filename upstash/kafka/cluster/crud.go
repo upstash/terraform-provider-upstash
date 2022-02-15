@@ -9,6 +9,21 @@ import (
 	"github.com/upstash/terraform-provider-upstash/upstash/utils"
 )
 
+func resourceClusterCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
+	c := m.(*client.UpstashClient)
+	cluster, err := createCluster(c, CreateClusterRequest{
+		ClusterName: data.Get("cluster_name").(string),
+		Region:      data.Get("region").(string),
+	})
+	if err != nil {
+		return diag.FromErr(err)
+	}
+	data.SetId("upstash-cluster-" + cluster.ClusterId)
+	data.Set("cluster_id", cluster.ClusterId)
+	return resourceClusterRead(ctx, data, m)
+
+}
+
 // Only name can change in v2 api.
 func resourceClusterUpdate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
@@ -63,19 +78,4 @@ func resourceClusterRead(ctx context.Context, data *schema.ResourceData, m inter
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)
-}
-
-func resourceClusterCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
-	c := m.(*client.UpstashClient)
-	cluster, err := createCluster(c, CreateClusterRequest{
-		ClusterName: data.Get("cluster_name").(string),
-		Region:      data.Get("region").(string),
-	})
-	if err != nil {
-		return diag.FromErr(err)
-	}
-	data.SetId("upstash-cluster-" + cluster.ClusterId)
-	data.Set("cluster_id", cluster.ClusterId)
-	return resourceClusterRead(ctx, data, m)
-
 }
