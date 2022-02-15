@@ -28,7 +28,7 @@ func DataSourceTopic() *schema.Resource {
 					"\"eu-west-1\", \"us-east-1\", \"us-west-1\", \"ap-northeast-1\" , \"eu-central1\"",
 			},
 			"creation_time": &schema.Schema{
-				Type:        schema.TypeString,
+				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Creation time of the topic",
 			},
@@ -38,7 +38,7 @@ func DataSourceTopic() *schema.Resource {
 				Description: "State of the topic (active or deleted)",
 			},
 			"partitions": &schema.Schema{
-				Type:        schema.TypeString,
+				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Number of partitions the topic has",
 			},
@@ -78,12 +78,12 @@ func DataSourceTopic() *schema.Resource {
 				Computed:    true,
 				Description: "Cleanup policy will be used in the topic(compact or delete)",
 			},
-			"max_retention_size": &schema.Schema{
+			"retention_size": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Max Retention Size of the topic",
 			},
-			"max_retention_time": &schema.Schema{
+			"retention_time": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Max Retention Time of the topic",
