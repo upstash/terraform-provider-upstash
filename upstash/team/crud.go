@@ -61,23 +61,49 @@ func resourceUpdate(ctx context.Context, data *schema.ResourceData, m interface{
 
 	// Only members can change, what to do in that case?
 	if data.HasChange("team_members") {
-		membersMap := data.Get("team_members").(map[string]interface{})
 
-		for email, role := range membersMap {
-			if role != "owner" {
+		a, b := data.GetChange("team_members")
+		old := a.(map[string]interface{})
+		new := b.(map[string]interface{})
 
-				memberNotFound, err := removeMember(c, teamId, email)
-				if err != nil && !memberNotFound {
-					return diag.FromErr(err)
+		for email, role := range old {
+			if role.(string) != "owner" {
+				if role.(string) != new[email] {
+					_, err := removeMember(c, teamId, email)
+					if err != nil {
+						return diag.FromErr(err)
+					}
 				}
-
-				err = addMember(c, teamId, email, role.(string))
-				if err != nil {
-					return diag.FromErr(err)
-				}
-
 			}
 		}
+
+		for email, role := range new {
+			if role.(string) != "owner" {
+				if role.(string) != old[email] {
+					err := addMember(c, teamId, email, role.(string))
+					if err != nil {
+						return diag.FromErr(err)
+					}
+				}
+			}
+		}
+
+		// membersMap := data.Get("team_members").(map[string]interface{})
+
+		// for email, role := range membersMap {
+		// 	if role != "owner" {
+
+		// 		memberNotFound, err := removeMember(c, teamId, email)
+		// 		if err != nil && !memberNotFound {
+		// 			return diag.FromErr(err)
+		// 		}
+
+		// 		err = addMember(c, teamId, email, role.(string))
+		// 		if err != nil {
+		// 			return diag.FromErr(err)
+		// 		}
+		// 	}
+		// }
 
 	}
 

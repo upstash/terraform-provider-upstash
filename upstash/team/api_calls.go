@@ -86,7 +86,6 @@ func addMember(c *client.UpstashClient, teamId string, email string, role string
 		return errors.New(teamId + " " + email + " " + role + " " + "Add team member failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
 	}
 
-	// return errors.New(teamId + " " + email + " " + role + " " + "Add team member succeeded, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
 	return nil
 
 }

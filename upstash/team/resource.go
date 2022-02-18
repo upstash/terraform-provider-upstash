@@ -35,20 +35,6 @@ func ResourceTeam() *schema.Resource {
 				},
 				Description: "Members of the team",
 			},
-			// Not sure about these.
-
-			// "tags": {
-			// 	Type:     schema.TypeMap,
-			// 	Elem: &schema.Schema{
-			// 	  Type: schema.TypeString,
-			// 	},
-			//   },
-			// "members": &schema.Schema{
-			// 	Type: schema.TypeSlice,
-			// 	Required: false,
-			// 	Default: [],
-			// 	Description: "Members of the team",
-			// }
 		},
 	}
 

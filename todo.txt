@@ -1,0 +1,4 @@
+Member --> new resource
+id --> team + member.email
+
+team_members --> reset only the changed members
