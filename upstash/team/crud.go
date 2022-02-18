@@ -20,41 +20,68 @@ func resourceCreate(ctx context.Context, data *schema.ResourceData, m interface{
 	}
 	data.SetId("upstash-team-" + team.TeamId)
 	data.Set("team_id", team.TeamId)
-	return resourceRead(ctx, data, m)
+
+	return resourceUpdate(ctx, data, m)
+	// return resourceRead(ctx, data, m)
 }
 
 func resourceRead(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
-	// c := m.(*client.UpstashClient)
-	// teamId := data.Get("team_id").(string)
-	// team, err := getTeamMembers(c, teamId)
-	team := Team{
-		TeamName: "Terraform Team",
-		CopyCC:   false,
+	c := m.(*client.UpstashClient)
+	teamId := data.Get("team_id").(string)
+	teamMembers, err := getTeamMembers(c, teamId)
+
+	teamName := teamMembers[0].TeamName
+
+	membersMap := make(map[string]string)
+
+	for i := 0; i < len(teamMembers); i++ {
+		membersMap[teamMembers[i].MemberEmail] = teamMembers[i].MemberRole
 	}
 
-	// if err != nil {
-	// 	return diag.FromErr(err)
-	// }
+	if err != nil {
+		return diag.FromErr(err)
+	}
 
-	data.SetId("upstash-team-" + team.TeamId)
+	data.SetId("upstash-team-" + teamId)
 
 	mapping := map[string]interface{}{
-		"team_id":   team.TeamId,
-		"team_name": team.TeamName,
-		"copy_cc":   team.CopyCC,
+		"team_id":      teamId,
+		"team_name":    teamName,
+		"team_members": membersMap,
+		// "copy_cc": data.Get("copy_cc").(bool)
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)
+
 }
 
 func resourceUpdate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
-	// c := m.(*client.UpstashClient)
-	// teamId := data.Get("team_name").(string)
+	c := m.(*client.UpstashClient)
+	teamId := data.Get("team_id").(string)
 
-	// // Only members can change, what to do in that case?
-	// if data.HasChange("members") {
+	// Only members can change, what to do in that case?
+	if data.HasChange("team_members") {
+		membersMap := data.Get("team_members").(map[string]interface{})
 
-	// }
+		for email, role := range membersMap {
+			if role != "owner" {
+
+				memberNotFound, err := removeMember(c, teamId, email)
+				if err != nil && !memberNotFound {
+					return diag.FromErr(err)
+				}
+
+				err = addMember(c, teamId, email, role.(string))
+				if err != nil {
+					return diag.FromErr(err)
+				}
+
+			}
+		}
+
+	}
+
+	// TO DO: ADD MEMBER ADD/REMOVE LOGIC HERE.
 
 	return resourceRead(ctx, data, m)
 }

@@ -15,10 +15,9 @@ func ResourceTeam() *schema.Resource {
 				Description: "Unique Cluster ID for created cluster",
 			},
 			"team_name": &schema.Schema{
-				Type:     schema.TypeString,
-				Required: true,
-				// !!!!!!!!!!!!!!
-				// ForceNew:    true,
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 				Description: "Name of the cluster",
 			},
 			"copy_cc": &schema.Schema{
@@ -26,6 +25,15 @@ func ResourceTeam() *schema.Resource {
 				Required:    true,
 				ForceNew:    true,
 				Description: "Whether Credit Card is copied",
+			},
+			"team_members": &schema.Schema{
+				Type:     schema.TypeMap,
+				Optional: true,
+				ForceNew: false,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Description: "Members of the team",
 			},
 			// Not sure about these.
 

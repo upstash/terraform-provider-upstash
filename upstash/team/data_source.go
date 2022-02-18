@@ -21,6 +21,14 @@ func DataSourceTeam() *schema.Resource {
 				Computed:    true,
 				Description: "Whether Credit card info is copied or not",
 			},
+			"team_members": &schema.Schema{
+				Type:     schema.TypeMap,
+				Computed: true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Description: "Members of the team",
+			},
 		},
 	}
 
