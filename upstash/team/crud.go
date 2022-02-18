@@ -69,7 +69,7 @@ func resourceUpdate(ctx context.Context, data *schema.ResourceData, m interface{
 		for email, role := range old {
 			if role.(string) != "owner" {
 				if role.(string) != new[email] {
-					_, err := removeMember(c, teamId, email)
+					err := removeMember(c, teamId, email)
 					if err != nil {
 						return diag.FromErr(err)
 					}
@@ -87,27 +87,7 @@ func resourceUpdate(ctx context.Context, data *schema.ResourceData, m interface{
 				}
 			}
 		}
-
-		// membersMap := data.Get("team_members").(map[string]interface{})
-
-		// for email, role := range membersMap {
-		// 	if role != "owner" {
-
-		// 		memberNotFound, err := removeMember(c, teamId, email)
-		// 		if err != nil && !memberNotFound {
-		// 			return diag.FromErr(err)
-		// 		}
-
-		// 		err = addMember(c, teamId, email, role.(string))
-		// 		if err != nil {
-		// 			return diag.FromErr(err)
-		// 		}
-		// 	}
-		// }
-
 	}
-
-	// TO DO: ADD MEMBER ADD/REMOVE LOGIC HERE.
 
 	return resourceRead(ctx, data, m)
 }

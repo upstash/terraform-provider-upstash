@@ -1,81 +1,55 @@
 package database
 
 import (
-	"errors"
-	"net/http"
-	"strconv"
-
-	"github.com/imroc/req"
 	"github.com/upstash/terraform-provider-upstash/upstash/client"
-	"github.com/upstash/terraform-provider-upstash/upstash/utils"
 )
 
-const api_endpoint = client.UPSTASH_API_ENDPOINT
+// not needed if changes
 
 func CreateDatabase(c *client.UpstashClient, body CreateDatabaseRequest) (database Database, err error) {
-	resp, err := req.Post(api_endpoint+"/v2/redis/database",
-		req.Header{"Accept": "application/json"},
-		req.Header{"Authorization": utils.BasicAuth(c.Email, c.Apikey)},
-		req.BodyJSON(body))
+
+	resp, err := c.PostCalls("/v2/redis/database", body, "Create Redis Database")
+
 	if err != nil {
 		return database, err
 	}
-	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
-		return database, errors.New("Create database failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
-	}
+
 	err = resp.ToJSON(&database)
 	return database, err
+
 }
 
 func GetDatabase(c *client.UpstashClient, databaseId string) (database Database, err error) {
-	resp, err := req.Get(api_endpoint+"/v2/redis/database/"+databaseId,
-		req.Header{"Accept": "application/json"},
-		req.Header{"Authorization": utils.BasicAuth(c.Email, c.Apikey)})
+
+	resp, err := c.GetCalls("/v2/redis/database/"+databaseId, "Get Redis Database")
+
 	if err != nil {
 		return database, err
 	}
-	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
-		return database, errors.New("Get database failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
-	}
+
 	err = resp.ToJSON(&database)
 	return database, err
+
 }
 
 func EnableTLS(c *client.UpstashClient, databaseId string) (err error) {
-	resp, err := req.Post(api_endpoint+"/v2/redis/enable-tls/"+databaseId,
-		req.Header{"Accept": "application/json"},
-		req.Header{"Authorization": utils.BasicAuth(c.Email, c.Apikey)})
-	if err != nil {
-		return err
-	}
-	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
-		return errors.New("Enable TLS failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
-	}
+
+	_, err = c.PostCalls("/v2/redis/enable-tls/"+databaseId, nil, "Enable Tls for Redis Database")
+
 	return err
+
 }
 
 func EnableMultiZone(c *client.UpstashClient, databaseId string, enabled bool) (err error) {
-	resp, err := req.Post(api_endpoint+"/v2/redis/enable-multizone/"+databaseId,
-		req.Header{"Accept": "application/json"},
-		req.Header{"Authorization": utils.BasicAuth(c.Email, c.Apikey)}, req.BodyJSON(req.Param{"enabled": enabled}))
-	if err != nil {
-		return err
-	}
-	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
-		return errors.New("Enable Multizone failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
-	}
+
+	_, err = c.PostCalls("/v2/redis/enable-multizone/"+databaseId, nil, "Enable Multizone for Redis Database")
+
 	return err
+
 }
 
 func DeleteDatabase(c *client.UpstashClient, databaseId string) (err error) {
-	resp, err := req.Delete(api_endpoint+"/v2/redis/database/"+databaseId,
-		req.Header{"Accept": "application/json"},
-		req.Header{"Authorization": utils.BasicAuth(c.Email, c.Apikey)})
-	if err != nil {
-		return err
-	}
-	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
-		return errors.New("Get database failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
-	}
-	return err
+
+	return c.DeleteCalls("/v2/redis/database/"+databaseId, nil, "Delete Redis Database")
+
 }
