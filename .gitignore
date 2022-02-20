@@ -144,3 +144,4 @@ terraform.rc
 
 test/**
 terraform-provider-upstash
+tfplugindocs
