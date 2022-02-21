@@ -1,6 +1,10 @@
 package team
 
-import "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+import (
+	"fmt"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+)
 
 func ResourceTeam() *schema.Resource {
 	return &schema.Resource{
@@ -28,12 +32,24 @@ func ResourceTeam() *schema.Resource {
 			},
 			"team_members": &schema.Schema{
 				Type:     schema.TypeMap,
-				Optional: true,
+				Required: true,
 				ForceNew: false,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Description: "Members of the team",
+				Description: "Members of the team. (Owner must be specified, which is the owner of the api key.)",
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					noOwner := true
+					for _, b := range val.(map[string]interface{}) {
+						if b.(string) == "owner" {
+							noOwner = false
+						}
+					}
+					if noOwner {
+						errs = append(errs, fmt.Errorf("Owner of the api key should be given the role of owner"))
+					}
+					return
+				},
 			},
 		},
 	}

@@ -14,6 +14,7 @@ func resourceClusterCreate(ctx context.Context, data *schema.ResourceData, m int
 	cluster, err := createCluster(c, CreateClusterRequest{
 		ClusterName: data.Get("cluster_name").(string),
 		Region:      data.Get("region").(string),
+		MultiZone:   data.Get("multizone").(bool),
 	})
 	if err != nil {
 		return diag.FromErr(err)
