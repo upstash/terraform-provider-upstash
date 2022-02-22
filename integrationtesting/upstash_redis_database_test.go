@@ -21,7 +21,7 @@ func TestUpstashRedisDatabase(t *testing.T) {
 	)
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir: "../examples/integrationExamples/upstash_redis_database",
+		TerraformDir: "../examples/examples/redis_database",
 		Vars: map[string]interface{}{
 			"email":         email,
 			"api_key":       apikey,
