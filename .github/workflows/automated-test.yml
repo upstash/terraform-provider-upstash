@@ -22,7 +22,8 @@ jobs:
         run: go build .
       - name: Test
         working-directory: integrationtesting
-        env:
+        env: ${{ secrets }}
+
           UPSTASH_EMAIL: ${{ secrets.UPSTASH_EMAIL }}
           UPSTASH_API_KEY: ${{ secrets.UPSTASH_API_KEY }}
           # TF_CLI_CONFIG_FILE: ${{ secrets.TF_CLI_CONFIG_FILE }}
