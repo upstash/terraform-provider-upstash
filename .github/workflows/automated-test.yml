@@ -26,8 +26,6 @@ jobs:
           UPSTASH_EMAIL: "bylmaz744@gmail.com"
           UPSTASH_API_KEY: "4a4634fa-71dc-4249-b029-144b82957571"
           TF_CLI_CONFIG_FILE: "/home/runner/work/terraform-provider-upstash/terraform-provider-upstash/terraformForGit.rc"
-          UPSTASH_EMAIL: "bylmaz744@gmail.com"
-          UPSTASH_API_KEY: "4a4634fa-71dc-4249-b029-144b82957571"
           UPSTASH_REDIS_DATABASE_NAME: "TestingRedisDatabase"
           UPSTASH_REDIS_DATABASE_REGION: "eu-west-1"
           UPSTASH_REDIS_DATABASE_TLS: "true"
