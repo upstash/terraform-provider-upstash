@@ -23,7 +23,7 @@ func NewUpstashClient(email string, apikey string) *UpstashClient {
 	}
 }
 
-func (c *UpstashClient) DeleteCalls(endpointExtension string, body interface{}, errMessage string) (err error) {
+func (c *UpstashClient) SendDeleteRequest(endpointExtension string, body interface{}, errMessage string) (err error) {
 	resp, err := req.Delete(
 		UPSTASH_API_ENDPOINT+endpointExtension,
 		req.Header{"Accept": "application/json"},
@@ -39,7 +39,7 @@ func (c *UpstashClient) DeleteCalls(endpointExtension string, body interface{}, 
 	return err
 }
 
-func (c *UpstashClient) GetCalls(endpointExtension string, errMessage string) (response *req.Resp, err error) {
+func (c *UpstashClient) SendGetRequest(endpointExtension string, errMessage string) (response *req.Resp, err error) {
 	resp, err := req.Get(
 		UPSTASH_API_ENDPOINT+endpointExtension,
 		req.Header{"Accept": "application/json"},
@@ -54,7 +54,7 @@ func (c *UpstashClient) GetCalls(endpointExtension string, errMessage string) (r
 	return resp, err
 }
 
-func (c *UpstashClient) PostCalls(endpointExtension string, body interface{}, errMessage string) (response *req.Resp, err error) {
+func (c *UpstashClient) SendPostRequest(endpointExtension string, body interface{}, errMessage string) (response *req.Resp, err error) {
 
 	resp, err := req.Post(
 		UPSTASH_API_ENDPOINT+endpointExtension,
@@ -69,5 +69,5 @@ func (c *UpstashClient) PostCalls(endpointExtension string, body interface{}, er
 	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
 		return nil, errors.New(errMessage + " failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
 	}
-	return resp, nil
+	return resp, err
 }
