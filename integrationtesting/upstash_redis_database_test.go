@@ -35,7 +35,7 @@ func TestUpstashRedisDatabase(t *testing.T) {
 	defer terraform.Destroy(t, terraformOptions)
 
 	// Since using built provider, no need to install from the version
-	terraform.Init(t, terraformOptions)
+	// terraform.Init(t, terraformOptions)
 
 	terraform.Apply(t, terraformOptions)
 
