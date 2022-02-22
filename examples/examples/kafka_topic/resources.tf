@@ -1,17 +1,17 @@
 resource "upstash_kafka_cluster" "exampleKafkaCluster" {
-    cluster_name = "Terraform_Upstash_Cluster"
-    region = "eu-west-1"
-    multizone = false
+    cluster_name = var.multizone
+    region = var.region
+    multizone = var.multizone
 }
 
 
 resource "upstash_kafka_topic" "exampleKafkaTopic" {
-    topic_name = "TerraformTopic"
-    partitions = 1
-    retention_time = 625135
-    retention_size = 725124
-    max_message_size = 829213
-    cleanup_policy = "delete"
+    topic_name = var.topic_name
+    partitions = var.partitions
+    retention_time = var.retention_time
+    retention_size = var.retention_size
+    max_message_size = var.max_message_size
+    cleanup_policy = var.cleanup_policy
     cluster_id = resource.upstash_kafka_cluster.exampleKafkaCluster.cluster_id
 }
 

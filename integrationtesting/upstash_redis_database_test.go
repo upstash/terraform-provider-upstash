@@ -9,15 +9,15 @@ import (
 func TestUpstashRedisDatabase(t *testing.T) {
 	t.Parallel()
 
-	upstashCredentials := GetCredentials()
+	envVars := GetEnvVars()
 
 	var (
-		email         = upstashCredentials.Email
-		apikey        = upstashCredentials.Apikey
-		database_name = "TerraformREDISDB"
-		region        = "eu-west-1"
-		tls           = "true"
-		multizone     = "true"
+		email         = envVars.Email
+		apikey        = envVars.Apikey
+		database_name = envVars.RedisDatabaseName
+		region        = envVars.RedisDatabaseRegion
+		tls           = envVars.RedisDatabaseTls
+		multizone     = envVars.RedisDatabaseMultiZone
 	)
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
