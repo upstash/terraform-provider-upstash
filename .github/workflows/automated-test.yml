@@ -13,11 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: PWD
-        run: pwd && ls
+        run: pwd
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
           go-version: 1.16
+      - name: Build provider
+        run: go build .
+      - name: Set config files
+        run: export TF_CLI_CONFIG_FILE="/home/runner/work/terraform-provider-upstash/terraform-provider-upstash/terraformForGit.rc"
       - name: Test
         working-directory: integrationtesting
         env:
