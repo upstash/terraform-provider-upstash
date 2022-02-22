@@ -22,7 +22,6 @@ func TestUpstashRedisDatabase(t *testing.T) {
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		TerraformDir: "../examples/integrationExamples/upstash_redis_database",
-		// TerraformDir: "../test/kafka_cluster",
 		Vars: map[string]interface{}{
 			"email":         email,
 			"api_key":       apikey,
@@ -36,7 +35,7 @@ func TestUpstashRedisDatabase(t *testing.T) {
 	defer terraform.Destroy(t, terraformOptions)
 
 	// Since using built provider, no need to install from the version
-	// terraform.Init(t, terraformOptions)
+	terraform.Init(t, terraformOptions)
 
 	terraform.Apply(t, terraformOptions)
 
