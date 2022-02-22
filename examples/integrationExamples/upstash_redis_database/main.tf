@@ -1,11 +1,11 @@
-terraform {
-  required_providers {
-    upstash = {
-      # source = "upstash/upstash"
-      # version = "0.0.1"
-    }
-  }
-}
+# terraform {
+#   required_providers {
+#     upstash = {
+#       source = "upstash/upstash"
+#       version = "0.0.1"
+#     }
+#   }
+# }
 
 provider "upstash" {
   email = var.email
