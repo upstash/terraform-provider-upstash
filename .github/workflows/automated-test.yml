@@ -18,7 +18,8 @@ jobs:
         with:
           go-version: 1.16
       - name: Test
+        working-directory: ./integrationtesting
         env:
           UPSTASH_EMAIL: "bylmaz744@gmail.com"
           UPSTASH_API_KEY: "4a4634fa-71dc-4249-b029-144b82957571"
-        run: cd integrationtesting && go test *
+        run: go test *
