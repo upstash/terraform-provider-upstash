@@ -8,6 +8,8 @@ import (
 )
 
 func TestAllUpstashResources(t *testing.T) {
+	t.Parallel()
+
 	terraformOptions := &terraform.Options{
 		TerraformDir: "../test/dbAndCluster",
 	}

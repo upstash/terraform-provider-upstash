@@ -8,6 +8,8 @@ import (
 )
 
 func TestUpstashTeam(t *testing.T) {
+	t.Parallel()
+
 	terraformOptions := &terraform.Options{
 		TerraformDir: "../test/team",
 	}
@@ -18,7 +20,7 @@ func TestUpstashTeam(t *testing.T) {
 	terraform.Plan(t, terraformOptions)
 	terraform.Apply(t, terraformOptions)
 
-	teamName := terraform.Output(t, terraformOptions, "cluster_name")
+	teamName := terraform.Output(t, terraformOptions, "team_name")
 
-	assert.Equal(t, "terraformish Teams", teamName)
+	assert.Equal(t, "Terraform Team I1", teamName)
 }

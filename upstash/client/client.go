@@ -67,7 +67,7 @@ func (c *UpstashClient) PostCalls(endpointExtension string, body interface{}, er
 		return nil, err
 	}
 	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
-		return nil, errors.New("Renaming cluster failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
+		return nil, errors.New(errMessage + " failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
 	}
 	return resp, nil
 }
