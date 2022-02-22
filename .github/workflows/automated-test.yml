@@ -44,4 +44,4 @@ jobs:
           UPSTASH_TEAM_OWNER: "bylmaz744@gmail.com"
           UPSTASH_TEAM_DEVS: "dev1@a.com dev2@b.com"
           UPSTASH_TEAM_FINANCES: "finance1@c.com finance2@d.com"
-        run: go test *
+        run: go test -v *
