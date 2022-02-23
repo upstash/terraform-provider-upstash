@@ -1,6 +1,10 @@
 package database
 
 import (
+	"context"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/customdiff"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
@@ -51,16 +55,23 @@ func ResourceDatabase() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
-				ForceNew:    false,
 				Description: "When enabled database is highly available and deployed multizone",
 			},
 			"tls": &schema.Schema{
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
-				ForceNew:    false,
 				Description: "When enabled data is encrypted in transit",
 			},
 		},
+
+		CustomizeDiff: customdiff.All(
+			customdiff.ForceNewIfChange("multizone", func(ctx context.Context, old, new, meta interface{}) bool {
+				return old.(bool) && !new.(bool)
+			}),
+			customdiff.ForceNewIfChange("tls", func(ctx context.Context, old, new, meta interface{}) bool {
+				return old.(bool) && !new.(bool)
+			}),
+		),
 	}
 }
