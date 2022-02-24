@@ -1,5 +1,5 @@
 resource "upstash_kafka_cluster" "exampleKafkaCluster" {
-    cluster_name = var.multizone
+    cluster_name = var.cluster_name
     region = var.region
     multizone = var.multizone
 }
