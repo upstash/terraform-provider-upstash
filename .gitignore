@@ -144,3 +144,7 @@ terraform.rc
 
 test/**
 terraform-provider-upstash
+tfplugindocs
+
+**.terraform.lock.hcl**
+envSetters.txt
