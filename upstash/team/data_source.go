@@ -27,7 +27,7 @@ func DataSourceTeam() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				},
-				Description: "Members of the team",
+				Description: "Members of the team. Email addresses are given as the keys with their roles as the values.",
 			},
 		},
 	}

@@ -30,7 +30,7 @@ func DataSourceCluster() *schema.Resource {
 			"multizone": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
-				Description: "Whether cluster has multizone attribute",
+				Description: "Whether multizone replication is enabled",
 			},
 			"tcp_endpoint": &schema.Schema{
 				Type:        schema.TypeString,
@@ -45,7 +45,7 @@ func DataSourceCluster() *schema.Resource {
 			"state": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
-				Description: "State, where the cluster is originated",
+				Description: "Current state of the cluster (active or deleted)",
 			},
 			"username": &schema.Schema{
 				Type:        schema.TypeString,

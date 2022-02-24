@@ -31,7 +31,7 @@ func ResourceDatabase() *schema.Resource {
 				Required: true,
 				ForceNew: true,
 				Description: "region of the database. Possible values are: " +
-					"\"eu-west-1\", \"us-east-1\", \"us-west-1\", \"ap-northeast-1\" , \"eu-central1\"",
+					"\"global\", \"eu-west-1\", \"us-east-1\", \"us-west-1\", \"ap-northeast-1\" , \"eu-central1\"",
 			},
 			"endpoint": &schema.Schema{
 				Type:        schema.TypeString,
@@ -49,19 +49,19 @@ func ResourceDatabase() *schema.Resource {
 				Optional:    true,
 				Default:     false,
 				ForceNew:    true,
-				Description: "When enabled database runs in Consistency Mode",
+				Description: "When enabled, all writes are synchronously persisted to the disk.",
 			},
 			"multizone": &schema.Schema{
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
-				Description: "When enabled database is highly available and deployed multizone",
+				Description: "When enabled, database becomes highly available and is deployed in multiple zones. (If changed to false from true, results in deletion and recreation of the resource)",
 			},
 			"tls": &schema.Schema{
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
-				Description: "When enabled data is encrypted in transit",
+				Description: "When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)",
 			},
 		},
 

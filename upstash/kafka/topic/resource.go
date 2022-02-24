@@ -29,7 +29,7 @@ func ResourceTopic() *schema.Resource {
 			"retention_time": &schema.Schema{
 				Type:        schema.TypeInt,
 				Required:    true,
-				Description: "Retention time of messsages in the topic",
+				Description: "Retention time of messages in the topic",
 			},
 			"retention_size": &schema.Schema{
 				Type:        schema.TypeInt,
@@ -66,7 +66,7 @@ func ResourceTopic() *schema.Resource {
 			"multizone": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
-				Description: "Whether kafka topic has multizone attribute",
+				Description: "Whether multizone replication is enabled",
 			},
 			"tcp_endpoint": &schema.Schema{
 				Type:        schema.TypeString,

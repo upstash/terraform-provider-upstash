@@ -25,7 +25,7 @@ func DataSourceTopic() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 				Description: "Region of the kafka topic. Possible values (may change) are: " +
-					"\"eu-west-1\", \"us-east-1\", \"us-west-1\", \"ap-northeast-1\" , \"eu-central1\"",
+					"\"eu-west-1\", \"us-east-1\"",
 			},
 			"creation_time": &schema.Schema{
 				Type:        schema.TypeInt,
@@ -45,7 +45,7 @@ func DataSourceTopic() *schema.Resource {
 			"multizone": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
-				Description: "Whether topic has multizone attribute",
+				Description: "Whether multizone replication is enabled",
 			},
 			"tcp_endpoint": &schema.Schema{
 				Type:        schema.TypeString,

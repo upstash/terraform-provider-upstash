@@ -47,7 +47,7 @@ resource "upstash_kafka_topic" "exampleKafkaTopic" {
 - **max_message_size** (Number) Max message size in the topic
 - **partitions** (Number) The number of partitions the topic will have
 - **retention_size** (Number) Retention size of the messages in the topic
-- **retention_time** (Number) Retention time of messsages in the topic
+- **retention_time** (Number) Retention time of messages in the topic
 - **topic_name** (String) Name of the topic
 
 ### Optional
@@ -57,7 +57,7 @@ resource "upstash_kafka_topic" "exampleKafkaTopic" {
 ### Read-Only
 
 - **encoded_username** (String) Base64 encoded username to be used in rest communication
-- **multizone** (Boolean) Whether kafka topic has multizone attribute
+- **multizone** (Boolean) Whether multizone replication is enabled
 - **password** (String, Sensitive) Password to be used in authenticating to the cluster
 - **region** (String) Region of the kafka topic
 - **rest_endpoint** (String) REST Endpoint of the kafka topic

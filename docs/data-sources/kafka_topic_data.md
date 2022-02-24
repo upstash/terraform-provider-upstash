@@ -36,10 +36,10 @@ data "upstash_kafka_topic_data" "kafkaTopicData" {
 - **creation_time** (Number) Creation time of the topic
 - **encoded_username** (String) Base64 encoded username to be used in rest communication
 - **max_message_size** (Number) Max Message Size for the topic
-- **multizone** (Boolean) Whether topic has multizone attribute
+- **multizone** (Boolean) Whether multizone replication is enabled
 - **partitions** (Number) Number of partitions the topic has
 - **password** (String, Sensitive) Password to be used in authenticating to the cluster
-- **region** (String) Region of the kafka topic. Possible values (may change) are: "eu-west-1", "us-east-1", "us-west-1", "ap-northeast-1" , "eu-central1"
+- **region** (String) Region of the kafka topic. Possible values (may change) are: "eu-west-1", "us-east-1"
 - **rest_endpoint** (String) REST Endpoint of the topic
 - **retention_size** (Number) Max Retention Size of the topic
 - **retention_time** (Number) Max Retention Time of the topic

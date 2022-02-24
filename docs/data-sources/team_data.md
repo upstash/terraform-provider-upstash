@@ -32,7 +32,7 @@ data "upstash_team_data" "teamData" {
 ### Read-Only
 
 - **copy_cc** (Boolean) Whether Credit card info is copied or not
-- **team_members** (Map of String) Members of the team
+- **team_members** (Map of String) Members of the team. Email addresses are given as the keys with their roles as the values.
 - **team_name** (String) Name of the cluster
 
 

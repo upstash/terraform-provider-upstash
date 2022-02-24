@@ -38,11 +38,11 @@ data "upstash_kafka_cluster_data" "clusterData" {
 - **max_partitions** (Number) Max Partitions for the cluster
 - **max_retention_size** (Number) Max Retention Size of the cluster
 - **max_retention_time** (Number) Max Retention Time of the cluster
-- **multizone** (Boolean) Whether cluster has multizone attribute
+- **multizone** (Boolean) Whether multizone replication is enabled
 - **password** (String, Sensitive) Password for the cluster
 - **region** (String) Region of the cluster. Possible values (may change) are: "eu-west-1", "us-east-1"
 - **rest_endpoint** (String) REST Endpoint of the cluster
-- **state** (String) State, where the cluster is originated
+- **state** (String) Current state of the cluster (active or deleted)
 - **tcp_endpoint** (String) TCP Endpoint of the cluster
 - **type** (String) Type of the cluster
 - **username** (String) Username for the cluster

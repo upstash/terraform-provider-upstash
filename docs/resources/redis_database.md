@@ -27,14 +27,14 @@ resource "upstash_redis_database" "exampleDB" {
 ### Required
 
 - **database_name** (String) Name of the database
-- **region** (String) region of the database. Possible values are: "eu-west-1", "us-east-1", "us-west-1", "ap-northeast-1" , "eu-central1"
+- **region** (String) region of the database. Possible values are: "global", "eu-west-1", "us-east-1", "us-west-1", "ap-northeast-1" , "eu-central1"
 
 ### Optional
 
-- **consistent** (Boolean) When enabled database runs in Consistency Mode
+- **consistent** (Boolean) When enabled, all writes are synchronously persisted to the disk.
 - **id** (String) The ID of this resource.
-- **multizone** (Boolean) When enabled database is highly available and deployed multizone
-- **tls** (Boolean) When enabled data is encrypted in transit
+- **multizone** (Boolean) When enabled, database becomes highly available and is deployed in multiple zones. (If changed to false from true, results in deletion and recreation of the resource)
+- **tls** (Boolean) When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)
 
 ### Read-Only
 
