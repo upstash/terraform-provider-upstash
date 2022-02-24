@@ -3,8 +3,7 @@ name: 'Automated Tests'
 on:
   push:
     branches:
-      - master
-      - enchancement/kafka_cluster
+      - '**'
   pull_request: 
 
 jobs:
