@@ -6,7 +6,10 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestUpstashRedisDatabase(t *testing.T) {
+// var email, apikey, database_name, region string
+// var tls, multizone bool
+
+func TestUpstashRedisDatabaseMAIN(t *testing.T) {
 	t.Parallel()
 
 	envVars := GetEnvVars()
@@ -40,4 +43,5 @@ func TestUpstashRedisDatabase(t *testing.T) {
 	terraform.Apply(t, terraformOptions)
 
 	terraform.Plan(t, terraformOptions)
+
 }

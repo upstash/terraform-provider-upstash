@@ -12,8 +12,8 @@ type EnvVars struct {
 
 	RedisDatabaseName      string
 	RedisDatabaseRegion    string
-	RedisDatabaseTls       string
-	RedisDatabaseMultiZone string
+	RedisDatabaseTls       bool
+	RedisDatabaseMultiZone bool
 
 	KafkaClusterName      string
 	KafkaClusterRegion    string
@@ -61,8 +61,8 @@ func GetEnvVars() EnvVars {
 
 		RedisDatabaseName:      os.Getenv("UPSTASH_REDIS_DATABASE_NAME"),
 		RedisDatabaseRegion:    os.Getenv("UPSTASH_REDIS_DATABASE_REGION"),
-		RedisDatabaseTls:       os.Getenv("UPSTASH_REDIS_DATABASE_TLS"),
-		RedisDatabaseMultiZone: os.Getenv("UPSTASH_REDIS_DATABASE_MULTIZONE"),
+		RedisDatabaseTls:       os.Getenv("UPSTASH_REDIS_DATABASE_TLS") == "true",
+		RedisDatabaseMultiZone: os.Getenv("UPSTASH_REDIS_DATABASE_MULTIZONE") == "true",
 
 		KafkaClusterName:      os.Getenv("UPSTASH_KAFKA_CLUSTER_NAME"),
 		KafkaClusterRegion:    os.Getenv("UPSTASH_KAFKA_CLUSTER_REGION"),
