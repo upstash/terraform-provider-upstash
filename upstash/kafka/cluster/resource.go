@@ -21,9 +21,8 @@ func ResourceCluster() *schema.Resource {
 			"cluster_name": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
-				// Not sure about this
-				// ForceNew:    true,
-				Description: "Name of the cluster",
+
+				Description: "Name of the team",
 			},
 			"region": &schema.Schema{
 				Type:     schema.TypeString,

@@ -14,7 +14,7 @@ func DataSourceTeam() *schema.Resource {
 			"team_name": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
-				Description: "Name of the cluster",
+				Description: "Name of the team",
 			},
 			"copy_cc": &schema.Schema{
 				Type:        schema.TypeBool,

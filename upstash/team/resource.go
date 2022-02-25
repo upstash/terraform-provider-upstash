@@ -22,7 +22,7 @@ func ResourceTeam() *schema.Resource {
 				Type:        schema.TypeString,
 				Required:    true,
 				ForceNew:    true,
-				Description: "Name of the cluster",
+				Description: "Name of the team",
 			},
 			"copy_cc": &schema.Schema{
 				Type:        schema.TypeBool,

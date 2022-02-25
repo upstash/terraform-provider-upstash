@@ -14,7 +14,7 @@ func DataSourceCluster() *schema.Resource {
 			"cluster_name": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
-				Description: "Name of the cluster",
+				Description: "Name of the team",
 			},
 			"region": &schema.Schema{
 				Type:     schema.TypeString,
