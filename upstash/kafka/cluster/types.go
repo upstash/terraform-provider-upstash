@@ -13,8 +13,8 @@ type Cluster struct {
 	Username             string `json:"username"`
 	EncodedUsername      string `json:"encoded_username"`
 	Password             string `json:"password"`
-	MaxRetentionSize     int64  `json:"retention_size"`
-	MaxRetentionTime     int64  `json:"retention_time"`
+	MaxRetentionSize     int64  `json:"max_retention_size"`
+	MaxRetentionTime     int64  `json:"max_retention_time"`
 	MaxMessagesPerSecond int    `json:"max_messages_per_second"`
 	MaxMessageSize       int64  `json:"max_message_size"`
 	MaxPartitions        int    `json:"max_partitions"`
