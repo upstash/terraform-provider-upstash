@@ -14,7 +14,7 @@ func DataSourceCluster() *schema.Resource {
 			"cluster_name": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
-				Description: "Name of the team",
+				Description: "Name of the cluster",
 			},
 			"region": &schema.Schema{
 				Type:     schema.TypeString,
@@ -50,12 +50,7 @@ func DataSourceCluster() *schema.Resource {
 			"username": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
-				Description: "Username for the cluster",
-			},
-			"encoded_username": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Description: "Encoded Username for the cluster",
+				Description: "Base64 encoded username for the cluster",
 			},
 			"password": &schema.Schema{
 				Type:        schema.TypeString,

@@ -81,12 +81,7 @@ func ResourceTopic() *schema.Resource {
 			"username": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
-				Description: "Username to be used in authenticating to the cluster",
-			},
-			"encoded_username": &schema.Schema{
-				Type:        schema.TypeString,
-				Computed:    true,
-				Description: "Base64 encoded username to be used in rest communication",
+				Description: "Base64 encoded username to be used in authenticating to the cluster",
 			},
 			"password": &schema.Schema{
 				Type:        schema.TypeString,

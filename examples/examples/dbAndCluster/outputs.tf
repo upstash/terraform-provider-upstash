@@ -36,9 +36,6 @@ output "cluster_username" {
   value = data.upstash_kafka_cluster_data.clusterData.username
 }
 
-output "cluster_encoded_username" {
-  value = data.upstash_kafka_cluster_data.clusterData.encoded_username
-}
 
 output "cluster_password" {
   value = data.upstash_kafka_cluster_data.clusterData.password

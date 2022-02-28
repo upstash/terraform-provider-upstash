@@ -25,7 +25,7 @@ resource "upstash_kafka_cluster" "exampleCluster" {
 
 ### Required
 
-- **cluster_name** (String) Name of the cluster
+- **cluster_name** (String) Name of the team
 - **region** (String) region of the cluster. Possible values (may change) are: "eu-west-1", "us-east-1"
 
 ### Optional

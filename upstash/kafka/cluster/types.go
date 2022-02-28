@@ -11,7 +11,6 @@ type Cluster struct {
 	RestEndpoint         string `json:"rest_endpoint"`
 	State                string `json:"state"`
 	Username             string `json:"username"`
-	EncodedUsername      string `json:"encoded_username"`
 	Password             string `json:"password"`
 	MaxRetentionSize     int64  `json:"max_retention_size"`
 	MaxRetentionTime     int64  `json:"max_retention_time"`

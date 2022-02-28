@@ -33,7 +33,7 @@ resource "upstash_team" "exampleTeam" {
 
 - **copy_cc** (Boolean) Whether Credit Card is copied
 - **team_members** (Map of String) Members of the team. (Owner must be specified, which is the owner of the api key.)
-- **team_name** (String) Name of the cluster
+- **team_name** (String) Name of the team
 
 ### Optional
 

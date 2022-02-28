@@ -15,7 +15,6 @@ type Topic struct {
 	TcpEndpoint      string `json:"tcp_endpoint"`
 	RestEndpoint     string `json:"rest_endpoint"`
 	Username         string `json:"username"`
-	EncodedUsername  string `json:"encoded_username"`
 	Password         string `json:"password"`
 
 	CreationTime int `json:"creation_time"`

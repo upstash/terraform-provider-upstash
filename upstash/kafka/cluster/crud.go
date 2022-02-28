@@ -69,7 +69,6 @@ func resourceClusterRead(ctx context.Context, data *schema.ResourceData, m inter
 		"rest_endpoint":           cluster.RestEndpoint,
 		"state":                   cluster.State,
 		"username":                cluster.Username,
-		"encoded_username":        cluster.EncodedUsername,
 		"password":                cluster.Password,
 		"max_retention_size":      cluster.MaxRetentionSize,
 		"max_retention_time":      cluster.MaxRetentionTime,

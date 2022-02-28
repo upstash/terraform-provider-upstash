@@ -54,7 +54,6 @@ func resourceRead(ctx context.Context, data *schema.ResourceData, m interface{})
 		"tcp_endpoint":     topic.TcpEndpoint,
 		"rest_endpoint":    topic.RestEndpoint,
 		"username":         topic.Username,
-		"encoded_username": topic.EncodedUsername,
 		"password":         topic.Password,
 	}
 

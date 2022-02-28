@@ -31,7 +31,7 @@ data "upstash_kafka_cluster_data" "clusterData" {
 
 ### Read-Only
 
-- **cluster_name** (String) Name of the cluster
+- **cluster_name** (String) Name of the team
 - **encoded_username** (String) Encoded Username for the cluster
 - **max_message_size** (Number) Max Message Size for the cluster
 - **max_messages_per_second** (Number) Max Messages Per Second for the cluster

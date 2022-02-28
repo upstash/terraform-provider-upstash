@@ -34,10 +34,6 @@ output "username" {
   value = data.upstash_kafka_cluster_data.clusterData.username
 }
 
-output "encoded_username" {
-  value = data.upstash_kafka_cluster_data.clusterData.encoded_username
-}
-
 output "password" {
   value = data.upstash_kafka_cluster_data.clusterData.password
   sensitive = true
