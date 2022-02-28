@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var email, apikey, cluster_name, region string
-var multizone bool
+var kafka_cluster_name, kafka_cluster_region string
+var kafka_cluster_multizone bool
 
 func TestUpstashKafkaClusterMAIN(t *testing.T) {
 	// t.Parallel()
@@ -17,38 +17,17 @@ func TestUpstashKafkaClusterMAIN(t *testing.T) {
 
 	email = envVars.Email
 	apikey = envVars.Apikey
-	cluster_name = envVars.KafkaClusterName
-	region = envVars.KafkaClusterRegion
-	multizone = envVars.KafkaClusterMultiZone
+	kafka_cluster_name = envVars.KafkaClusterName
+	kafka_cluster_region = envVars.KafkaClusterRegion
+	kafka_cluster_multizone = envVars.KafkaClusterMultiZone
 
-	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir: "../examples/examples/kafka_cluster",
-		Vars: map[string]interface{}{
-			"email":        email,
-			"api_key":      apikey,
-			"cluster_name": cluster_name,
-			"region":       region,
-			"multizone":    multizone,
-		},
-	})
+	terraformOptions := kafkaClusterOptions(t)
 
 	defer terraform.Destroy(t, terraformOptions)
 
-	// Since using built provider, no need to install from the version
-	// terraform.Init(t, terraformOptions)
-
 	terraform.Apply(t, terraformOptions)
-
 	terraform.Plan(t, terraformOptions)
-
-	clusterNameOutput := terraform.Output(t, terraformOptions, "cluster_name")
-	assert.Equal(t, cluster_name, clusterNameOutput)
-
-	regionOutput := terraform.Output(t, terraformOptions, "region")
-	assert.Equal(t, region, regionOutput)
-
-	multizoneOutput := terraform.Output(t, terraformOptions, "multizone") == "true"
-	assert.Equal(t, multizone, multizoneOutput)
+	kafkaClusterAsserter(t, terraformOptions)
 
 	UpstashKafkaClusterRecreate(t)
 	UpstashKafkaClusterUpdate(t)
@@ -57,60 +36,49 @@ func TestUpstashKafkaClusterMAIN(t *testing.T) {
 
 func UpstashKafkaClusterRecreate(t *testing.T) {
 
-	cluster_name = cluster_name + "Updated"
-	region = "us-east-1"
-	multizone = !multizone
+	kafka_cluster_name = kafka_cluster_name + "Updated"
+	kafka_cluster_region = "us-east-1"
+	kafka_cluster_multizone = !kafka_cluster_multizone
 
-	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir: "../examples/examples/kafka_cluster",
-		Vars: map[string]interface{}{
-			"email":        email,
-			"api_key":      apikey,
-			"cluster_name": cluster_name,
-			"region":       region,
-			"multizone":    multizone,
-		},
-	})
-
+	terraformOptions := kafkaClusterOptions(t)
 	terraform.Apply(t, terraformOptions)
-
 	terraform.Plan(t, terraformOptions)
-
-	clusterNameOutput := terraform.Output(t, terraformOptions, "cluster_name")
-	assert.Equal(t, cluster_name, clusterNameOutput)
-
-	regionOutput := terraform.Output(t, terraformOptions, "region")
-	assert.Equal(t, region, regionOutput)
-
-	multizoneOutput := terraform.Output(t, terraformOptions, "multizone") == "true"
-	assert.Equal(t, multizone, multizoneOutput)
+	kafkaClusterAsserter(t, terraformOptions)
 
 }
 
 func UpstashKafkaClusterUpdate(t *testing.T) {
-	cluster_name = cluster_name + "Updated"
 
+	kafka_cluster_name = kafka_cluster_name + "Updated"
+
+	terraformOptions := kafkaClusterOptions(t)
+	terraform.Apply(t, terraformOptions)
+	terraform.Plan(t, terraformOptions)
+	kafkaClusterAsserter(t, terraformOptions)
+}
+
+func kafkaClusterAsserter(t *testing.T, terraformOptions *terraform.Options) {
+	clusterNameOutput := terraform.Output(t, terraformOptions, "cluster_name")
+	assert.Equal(t, kafka_cluster_name, clusterNameOutput)
+
+	regionOutput := terraform.Output(t, terraformOptions, "region")
+	assert.Equal(t, kafka_cluster_region, regionOutput)
+
+	multizoneOutput := terraform.Output(t, terraformOptions, "multizone") == "true"
+	assert.Equal(t, kafka_cluster_multizone, multizoneOutput)
+}
+
+func kafkaClusterOptions(t *testing.T) *terraform.Options {
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		TerraformDir: "../examples/examples/kafka_cluster",
 		Vars: map[string]interface{}{
 			"email":        email,
 			"api_key":      apikey,
-			"cluster_name": cluster_name,
-			"region":       region,
-			"multizone":    multizone,
+			"cluster_name": kafka_cluster_name,
+			"region":       kafka_cluster_region,
+			"multizone":    kafka_cluster_multizone,
 		},
 	})
 
-	terraform.Apply(t, terraformOptions)
-
-	terraform.Plan(t, terraformOptions)
-
-	clusterNameOutput := terraform.Output(t, terraformOptions, "cluster_name")
-	assert.Equal(t, cluster_name, clusterNameOutput)
-
-	regionOutput := terraform.Output(t, terraformOptions, "region")
-	assert.Equal(t, region, regionOutput)
-
-	multizoneOutput := terraform.Output(t, terraformOptions, "multizone") == "true"
-	assert.Equal(t, multizone, multizoneOutput)
+	return terraformOptions
 }

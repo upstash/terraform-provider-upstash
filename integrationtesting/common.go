@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+var email, apikey string
+
 type EnvVars struct {
 	Email  string
 	Apikey string
