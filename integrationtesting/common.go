@@ -34,10 +34,10 @@ type EnvVars struct {
 }
 
 func GetEnvVars() EnvVars {
-	kafkaTopicPartitions, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_PARTITIONS"))
-	kafkaTopicRetentionTime, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_RETENTION_TIME"))
-	kafkaTopicRetentionSize, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_RETENTION_SIZE"))
-	kafkaTopicMessageSize, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_MAX_MESSAGE_SIZE"))
+	a, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_PARTITIONS"))
+	b, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_RETENTION_TIME"))
+	c, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_RETENTION_SIZE"))
+	d, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_MAX_MESSAGE_SIZE"))
 
 	teamMembers := make(map[string]string)
 
@@ -71,10 +71,10 @@ func GetEnvVars() EnvVars {
 		KafkaClusterMultiZone: os.Getenv("UPSTASH_KAFKA_CLUSTER_MULTIZONE") == "true",
 
 		KafkaTopicName:           os.Getenv("UPSTASH_KAFKA_TOPIC_NAME"),
-		KafkaTopicPartitions:     kafkaTopicPartitions,
-		KafkaTopicRetentionTime:  kafkaTopicRetentionTime,
-		KafkaTopicRetentionSize:  kafkaTopicRetentionSize,
-		KafkaTopicMaxMessageSize: kafkaTopicMessageSize,
+		KafkaTopicPartitions:     a,
+		KafkaTopicRetentionTime:  b,
+		KafkaTopicRetentionSize:  c,
+		KafkaTopicMaxMessageSize: d,
 		KafkaTopicCleanupPolicy:  os.Getenv("UPSTASH_KAFKA_TOPIC_CLEANUP_POLICY"),
 
 		TeamName:    os.Getenv("UPSTASH_TEAM_NAME"),

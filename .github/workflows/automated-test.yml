@@ -4,11 +4,7 @@ on:
   push:
     branches:
       - '**'
-  pull_request:
-
-  #  Every day, at 22.00 
-  schedule:
-    - cron: "0 22 * * *"
+  pull_request: 
 
 jobs:
   tests:

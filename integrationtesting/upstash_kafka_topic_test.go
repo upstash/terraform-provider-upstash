@@ -8,11 +8,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var kafkaTopicName, kafkaTopicCleanupPolicy string
-var kafkaTopicPartitions, kafkaTopicRetentionTime, kafkaTopicRetentionSize, kafkaTopicMaxMessageSize int
+var kafka_topic_name, kafka_topic_cleanup_policy string
+var kafka_topic_partitions, kafka_topic_retention_time, kafka_topic_retention_size, kafka_topic_max_message_size int
 
-var clusterName, clusterRegion string
-var clusterMultizone bool
+var cluster_name, cluster_region string
+var cluster_multizone bool
 
 func TestUpstashKafkaTopicMAIN(t *testing.T) {
 	// t.Parallel()
@@ -22,16 +22,16 @@ func TestUpstashKafkaTopicMAIN(t *testing.T) {
 	email = envVars.Email
 	apikey = envVars.Apikey
 
-	clusterName = envVars.KafkaClusterName
-	clusterRegion = envVars.KafkaClusterRegion
-	clusterMultizone = envVars.KafkaClusterMultiZone
+	cluster_name = envVars.KafkaClusterName
+	cluster_region = envVars.KafkaClusterRegion
+	cluster_multizone = envVars.KafkaClusterMultiZone
 
-	kafkaTopicName = envVars.KafkaTopicName
-	kafkaTopicPartitions = envVars.KafkaTopicPartitions
-	kafkaTopicRetentionTime = envVars.KafkaTopicRetentionTime
-	kafkaTopicRetentionSize = envVars.KafkaTopicRetentionSize
-	kafkaTopicMaxMessageSize = envVars.KafkaTopicMaxMessageSize
-	kafkaTopicCleanupPolicy = envVars.KafkaTopicCleanupPolicy
+	kafka_topic_name = envVars.KafkaTopicName
+	kafka_topic_partitions = envVars.KafkaTopicPartitions
+	kafka_topic_retention_time = envVars.KafkaTopicRetentionTime
+	kafka_topic_retention_size = envVars.KafkaTopicRetentionSize
+	kafka_topic_max_message_size = envVars.KafkaTopicMaxMessageSize
+	kafka_topic_cleanup_policy = envVars.KafkaTopicCleanupPolicy
 
 	terraformOptions := kafkaTopicOptions(t)
 
@@ -47,12 +47,12 @@ func TestUpstashKafkaTopicMAIN(t *testing.T) {
 }
 
 func UpstashKafkaTopicRecreate(t *testing.T) {
-	kafkaTopicName = kafkaTopicName + "Updated"
-	kafkaTopicPartitions = kafkaTopicPartitions + 1
-	kafkaTopicRetentionTime = kafkaTopicRetentionTime * 15
-	kafkaTopicRetentionSize = kafkaTopicRetentionSize * 15
-	// kafkaTopicMaxMessageSize = kafkaTopicMaxMessageSize
-	// kafkaTopicCleanupPolicy = kafkaTopicCleanupPolicy
+	kafka_topic_name = kafka_topic_name + "Updated"
+	kafka_topic_partitions = kafka_topic_partitions + 1
+	kafka_topic_retention_time = kafka_topic_retention_time * 15
+	kafka_topic_retention_size = kafka_topic_retention_size * 15
+	// kafka_topic_max_message_size = kafka_topic_max_message_size
+	// kafka_topic_cleanup_policy = kafka_topic_cleanup_policy
 
 	terraformOptions := kafkaTopicOptions(t)
 	terraform.Apply(t, terraformOptions)
@@ -63,9 +63,9 @@ func UpstashKafkaTopicRecreate(t *testing.T) {
 
 func UpstashKafkaTopicUpdate(t *testing.T) {
 
-	kafkaTopicRetentionTime = kafkaTopicRetentionTime / 20
-	kafkaTopicRetentionSize = kafkaTopicRetentionSize / 20
-	kafkaTopicMaxMessageSize = kafkaTopicMaxMessageSize / 20
+	kafka_topic_retention_time = kafka_topic_retention_time / 20
+	kafka_topic_retention_size = kafka_topic_retention_size / 20
+	kafka_topic_max_message_size = kafka_topic_max_message_size / 20
 
 	terraformOptions := kafkaTopicOptions(t)
 	terraform.Apply(t, terraformOptions)
@@ -76,33 +76,33 @@ func UpstashKafkaTopicUpdate(t *testing.T) {
 
 func kafkaTopicAsserter(t *testing.T, terraformOptions *terraform.Options) {
 	// Cluster assertions
-	clusterNameOutput := terraform.Output(t, terraformOptions, "clusterName")
-	assert.Equal(t, clusterName, clusterNameOutput)
+	clusterNameOutput := terraform.Output(t, terraformOptions, "cluster_name")
+	assert.Equal(t, cluster_name, clusterNameOutput)
 
 	regionOutput := terraform.Output(t, terraformOptions, "region")
-	assert.Equal(t, clusterRegion, regionOutput)
+	assert.Equal(t, cluster_region, regionOutput)
 
 	multizoneOutput := terraform.Output(t, terraformOptions, "multizone") == "true"
-	assert.Equal(t, clusterMultizone, multizoneOutput)
+	assert.Equal(t, cluster_multizone, multizoneOutput)
 
 	// Topic assertions
 	topicNameOutput := terraform.Output(t, terraformOptions, "topic_name")
-	assert.Equal(t, kafkaTopicName, topicNameOutput)
+	assert.Equal(t, kafka_topic_name, topicNameOutput)
 
 	partitionsOutput := terraform.Output(t, terraformOptions, "partitions")
-	assert.Equal(t, strconv.Itoa(kafkaTopicPartitions), partitionsOutput)
+	assert.Equal(t, strconv.Itoa(kafka_topic_partitions), partitionsOutput)
 
 	// retention_timeOutput := terraform.Output(t, terraformOptions, "retention_time")
-	// assert.Equal(t, strconv.Itoa(kafkaTopicRetentionTime), retention_timeOutput)
+	// assert.Equal(t, strconv.Itoa(kafka_topic_retention_time), retention_timeOutput)
 
 	// retention_sizeOutput := terraform.Output(t, terraformOptions, "retention_size")
-	// assert.Equal(t, strconv.Itoa(kafkaTopicRetentionSize), retention_sizeOutput)
+	// assert.Equal(t, strconv.Itoa(kafka_topic_retention_size), retention_sizeOutput)
 
 	max_message_sizeOutput := terraform.Output(t, terraformOptions, "max_message_size")
-	assert.Equal(t, strconv.Itoa(kafkaTopicMaxMessageSize), max_message_sizeOutput)
+	assert.Equal(t, strconv.Itoa(kafka_topic_max_message_size), max_message_sizeOutput)
 
 	cleanup_policyOutput := terraform.Output(t, terraformOptions, "cleanup_policy")
-	assert.Equal(t, kafkaTopicCleanupPolicy, cleanup_policyOutput)
+	assert.Equal(t, kafka_topic_cleanup_policy, cleanup_policyOutput)
 }
 
 func kafkaTopicOptions(t *testing.T) *terraform.Options {
@@ -112,16 +112,16 @@ func kafkaTopicOptions(t *testing.T) *terraform.Options {
 			"email":   email,
 			"api_key": apikey,
 
-			"clusterName": clusterName,
-			"region":      clusterRegion,
-			"multizone":   clusterMultizone,
+			"cluster_name": cluster_name,
+			"region":       cluster_region,
+			"multizone":    cluster_multizone,
 
-			"topic_name":       kafkaTopicName,
-			"partitions":       kafkaTopicPartitions,
-			"retention_time":   kafkaTopicRetentionTime,
-			"retention_size":   kafkaTopicRetentionSize,
-			"max_message_size": kafkaTopicMaxMessageSize,
-			"cleanup_policy":   kafkaTopicCleanupPolicy,
+			"topic_name":       kafka_topic_name,
+			"partitions":       kafka_topic_partitions,
+			"retention_time":   kafka_topic_retention_time,
+			"retention_size":   kafka_topic_retention_size,
+			"max_message_size": kafka_topic_max_message_size,
+			"cleanup_policy":   kafka_topic_cleanup_policy,
 		},
 	})
 
