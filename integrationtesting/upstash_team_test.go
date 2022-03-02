@@ -7,9 +7,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var team_name string
-var team_copy_cc bool
-var team_members map[string]string
+var teamName string
+var teamCopyCC bool
+var teamMembers map[string]string
 
 func TestUpstashTeamMAIN(t *testing.T) {
 	t.Parallel()
@@ -19,9 +19,9 @@ func TestUpstashTeamMAIN(t *testing.T) {
 	email = envVars.Email
 	apikey = envVars.Apikey
 
-	team_name = envVars.TeamName
-	team_copy_cc = envVars.CopyCC
-	team_members = envVars.TeamMembers
+	teamName = envVars.TeamName
+	teamCopyCC = envVars.CopyCC
+	teamMembers = envVars.TeamMembers
 
 	terraformOptions := teamOptions(t)
 
@@ -34,8 +34,8 @@ func TestUpstashTeamMAIN(t *testing.T) {
 
 func UpstashTeamRecreate(t *testing.T) {
 
-	team_name = team_name + "Updated"
-	team_copy_cc = !team_copy_cc
+	teamName = teamName + "Updated"
+	teamCopyCC = !teamCopyCC
 
 	terraformOptions := teamOptions(t)
 	terraform.Apply(t, terraformOptions)
@@ -51,9 +51,9 @@ func teamOptions(t *testing.T) *terraform.Options {
 			"email":   email,
 			"api_key": apikey,
 
-			"team_name":    team_name,
-			"copy_cc":      team_copy_cc,
-			"team_members": team_members,
+			"teamName":    teamName,
+			"copy_cc":     teamCopyCC,
+			"teamMembers": teamMembers,
 		},
 	})
 
@@ -63,15 +63,15 @@ func teamOptions(t *testing.T) *terraform.Options {
 func teamAsserter(t *testing.T, terraformOptions *terraform.Options) {
 	// fmt.Sprint(map1) == fmt.Sprint(map2)
 
-	nameOutput := terraform.Output(t, terraformOptions, "team_name")
-	assert.Equal(t, team_name, nameOutput)
+	nameOutput := terraform.Output(t, terraformOptions, "teamName")
+	assert.Equal(t, teamName, nameOutput)
 
 	// Caution here: Copy_cc comes from resource. Not the fetched data.
 	ccOutput := terraform.Output(t, terraformOptions, "copy_cc") == "true"
-	assert.Equal(t, team_copy_cc, ccOutput)
+	assert.Equal(t, teamCopyCC, ccOutput)
 
-	// membersOutput := terraform.Output(t, terraformOptions, "team_members")
-	// assert.Equal(t, createKeyValuePairs(team_members), membersOutput)
+	// membersOutput := terraform.Output(t, terraformOptions, "teamMembers")
+	// assert.Equal(t, createKeyValuePairs(teamMembers), membersOutput)
 
 }
 

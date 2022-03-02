@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var redis_database_name, redis_database_region string
-var redis_database_tls, redis_database_multizone bool
+var redisDatabaseName, redisDatabaseRegion string
+var redisDatabaseTls, redisDatabaseMultizone bool
 
 func TestUpstashRedisDatabaseMAIN(t *testing.T) {
 	t.Parallel()
@@ -17,10 +17,10 @@ func TestUpstashRedisDatabaseMAIN(t *testing.T) {
 
 	email = envVars.Email
 	apikey = envVars.Apikey
-	redis_database_name = envVars.RedisDatabaseName
-	redis_database_region = envVars.RedisDatabaseRegion
-	redis_database_tls = envVars.RedisDatabaseTls
-	redis_database_multizone = envVars.RedisDatabaseMultiZone
+	redisDatabaseName = envVars.RedisDatabaseName
+	redisDatabaseRegion = envVars.RedisDatabaseRegion
+	redisDatabaseTls = envVars.RedisDatabaseTls
+	redisDatabaseMultizone = envVars.RedisDatabaseMultiZone
 
 	terraformOptions := redisDatabaseOptions(t)
 
@@ -37,10 +37,10 @@ func TestUpstashRedisDatabaseMAIN(t *testing.T) {
 
 func UpstashRedisDatabaseRecreate(t *testing.T) {
 
-	redis_database_name = redis_database_name + "Updated"
-	redis_database_region = "us-east-1"
-	redis_database_tls = !redis_database_tls
-	redis_database_multizone = !redis_database_multizone
+	redisDatabaseName = redisDatabaseName + "Updated"
+	redisDatabaseRegion = "us-east-1"
+	redisDatabaseTls = !redisDatabaseTls
+	redisDatabaseMultizone = !redisDatabaseMultizone
 
 	terraformOptions := redisDatabaseOptions(t)
 	terraform.Apply(t, terraformOptions)
@@ -51,8 +51,8 @@ func UpstashRedisDatabaseRecreate(t *testing.T) {
 
 func UpstashRedisDatabaseUpdate(t *testing.T) {
 
-	redis_database_tls = true
-	redis_database_multizone = true
+	redisDatabaseTls = true
+	redisDatabaseMultizone = true
 
 	terraformOptions := redisDatabaseOptions(t)
 	terraform.Apply(t, terraformOptions)
@@ -63,13 +63,13 @@ func UpstashRedisDatabaseUpdate(t *testing.T) {
 
 func redisDatabaseAsserter(t *testing.T, terraformOptions *terraform.Options) {
 	databaseNameOutput := terraform.Output(t, terraformOptions, "database_name")
-	assert.Equal(t, redis_database_name, databaseNameOutput)
+	assert.Equal(t, redisDatabaseName, databaseNameOutput)
 
 	regionOutput := terraform.Output(t, terraformOptions, "region")
-	assert.Equal(t, redis_database_region, regionOutput)
+	assert.Equal(t, redisDatabaseRegion, regionOutput)
 
 	multizoneOutput := terraform.Output(t, terraformOptions, "multizone") == "true"
-	assert.Equal(t, redis_database_multizone, multizoneOutput)
+	assert.Equal(t, redisDatabaseMultizone, multizoneOutput)
 }
 
 func redisDatabaseOptions(t *testing.T) *terraform.Options {
@@ -78,10 +78,10 @@ func redisDatabaseOptions(t *testing.T) *terraform.Options {
 		Vars: map[string]interface{}{
 			"email":         email,
 			"api_key":       apikey,
-			"database_name": redis_database_name,
-			"region":        redis_database_region,
-			"tls":           redis_database_tls,
-			"multizone":     redis_database_multizone,
+			"database_name": redisDatabaseName,
+			"region":        redisDatabaseRegion,
+			"tls":           redisDatabaseTls,
+			"multizone":     redisDatabaseMultizone,
 		},
 	})
 

@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var kafka_cluster_name, kafka_cluster_region string
-var kafka_cluster_multizone bool
+var kafkaClusterName, kafkaClusterRegion string
+var kafkaClusterMultizone bool
 
 func TestUpstashKafkaClusterMAIN(t *testing.T) {
 	// t.Parallel()
@@ -17,9 +17,9 @@ func TestUpstashKafkaClusterMAIN(t *testing.T) {
 
 	email = envVars.Email
 	apikey = envVars.Apikey
-	kafka_cluster_name = envVars.KafkaClusterName
-	kafka_cluster_region = envVars.KafkaClusterRegion
-	kafka_cluster_multizone = envVars.KafkaClusterMultiZone
+	kafkaClusterName = envVars.KafkaClusterName
+	kafkaClusterRegion = envVars.KafkaClusterRegion
+	kafkaClusterMultizone = envVars.KafkaClusterMultiZone
 
 	terraformOptions := kafkaClusterOptions(t)
 
@@ -36,9 +36,9 @@ func TestUpstashKafkaClusterMAIN(t *testing.T) {
 
 func UpstashKafkaClusterRecreate(t *testing.T) {
 
-	kafka_cluster_name = kafka_cluster_name + "Updated"
-	kafka_cluster_region = "us-east-1"
-	kafka_cluster_multizone = !kafka_cluster_multizone
+	kafkaClusterName = kafkaClusterName + "Updated"
+	kafkaClusterRegion = "us-east-1"
+	kafkaClusterMultizone = !kafkaClusterMultizone
 
 	terraformOptions := kafkaClusterOptions(t)
 	terraform.Apply(t, terraformOptions)
@@ -49,7 +49,7 @@ func UpstashKafkaClusterRecreate(t *testing.T) {
 
 func UpstashKafkaClusterUpdate(t *testing.T) {
 
-	kafka_cluster_name = kafka_cluster_name + "Updated"
+	kafkaClusterName = kafkaClusterName + "Updated"
 
 	terraformOptions := kafkaClusterOptions(t)
 	terraform.Apply(t, terraformOptions)
@@ -59,13 +59,13 @@ func UpstashKafkaClusterUpdate(t *testing.T) {
 
 func kafkaClusterAsserter(t *testing.T, terraformOptions *terraform.Options) {
 	clusterNameOutput := terraform.Output(t, terraformOptions, "cluster_name")
-	assert.Equal(t, kafka_cluster_name, clusterNameOutput)
+	assert.Equal(t, kafkaClusterName, clusterNameOutput)
 
 	regionOutput := terraform.Output(t, terraformOptions, "region")
-	assert.Equal(t, kafka_cluster_region, regionOutput)
+	assert.Equal(t, kafkaClusterRegion, regionOutput)
 
 	multizoneOutput := terraform.Output(t, terraformOptions, "multizone") == "true"
-	assert.Equal(t, kafka_cluster_multizone, multizoneOutput)
+	assert.Equal(t, kafkaClusterMultizone, multizoneOutput)
 }
 
 func kafkaClusterOptions(t *testing.T) *terraform.Options {
@@ -74,9 +74,9 @@ func kafkaClusterOptions(t *testing.T) *terraform.Options {
 		Vars: map[string]interface{}{
 			"email":        email,
 			"api_key":      apikey,
-			"cluster_name": kafka_cluster_name,
-			"region":       kafka_cluster_region,
-			"multizone":    kafka_cluster_multizone,
+			"cluster_name": kafkaClusterName,
+			"region":       kafkaClusterRegion,
+			"multizone":    kafkaClusterMultizone,
 		},
 	})
 
