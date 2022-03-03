@@ -1,14 +1,14 @@
 name: 'Automated Tests'
 
 on:
+  #  Every day, at 22.00 
+  schedule:
+    - cron: "40 11 * * *"
   push:
     branches:
       - '**'
   pull_request:
-
-  #  Every day, at 22.00 
-  schedule:
-    - cron: "0 22 * * *"
+  
 
 jobs:
   tests:
