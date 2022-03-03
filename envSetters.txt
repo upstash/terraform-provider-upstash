@@ -1,0 +1,25 @@
+export TF_CLI_CONFIG_FILE=<Path to terraform.rc file>
+export UPSTASH_EMAIL=<email address of the api-key owner>
+export UPSTASH_API_KEY=<api_key>
+
+export UPSTASH_REDIS_DATABASE_NAME="TestingRedisDatabase"
+export UPSTASH_REDIS_DATABASE_REGION="eu-west-1"
+export UPSTASH_REDIS_DATABASE_TLS="true"
+export UPSTASH_REDIS_DATABASE_MULTIZONE="false"
+
+export UPSTASH_KAFKA_CLUSTER_NAME="TestingKafkaCluster"
+export UPSTASH_KAFKA_CLUSTER_REGION="eu-west-1"
+export UPSTASH_KAFKA_CLUSTER_MULTIZONE="true"
+
+export UPSTASH_KAFKA_TOPIC_NAME="TestingKafkaTopic"
+export UPSTASH_KAFKA_TOPIC_PARTITIONS="1"
+export UPSTASH_KAFKA_TOPIC_RETENTION_TIME="625135"
+export UPSTASH_KAFKA_TOPIC_RETENTION_SIZE="725124"
+export UPSTASH_KAFKA_TOPIC_MAX_MESSAGE_SIZE="829213"
+export UPSTASH_KAFKA_TOPIC_CLEANUP_POLICY="delete"
+
+export UPSTASH_TEAM_NAME="TestingTeam"
+export UPSTASH_TEAM_COPY_CC="false"
+export UPSTASH_TEAM_OWNER=<email address of the api-key owner>
+export UPSTASH_TEAM_DEVS="dev1@a.com dev2@b.com"
+export UPSTASH_TEAM_FINANCES="finance1@c.com finance2@d.com"

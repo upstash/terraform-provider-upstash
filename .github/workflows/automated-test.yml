@@ -1,0 +1,50 @@
+name: 'Automated Tests'
+
+on:
+  #  Every day, at 22.00 
+  schedule:
+    - cron: "40 11 * * *"
+  push:
+    branches:
+      - '**'
+  pull_request:
+  
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: PWD
+        run: pwd
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+      - name: Build provider
+        run: go build .
+      - name: Test
+        working-directory: integrationtesting
+        env:
+          UPSTASH_EMAIL: ${{ secrets.UPSTASH_EMAIL }}
+          UPSTASH_API_KEY: ${{ secrets.UPSTASH_API_KEY }}
+          TF_CLI_CONFIG_FILE: ${{ secrets.TF_CLI_CONFIG_FILE }}
+          UPSTASH_REDIS_DATABASE_NAME: ${{ secrets.UPSTASH_REDIS_DATABASE_NAME }}
+          UPSTASH_REDIS_DATABASE_REGION: ${{ secrets.UPSTASH_REDIS_DATABASE_REGION }}
+          UPSTASH_REDIS_DATABASE_TLS: ${{ secrets.UPSTASH_REDIS_DATABASE_TLS }}
+          UPSTASH_REDIS_DATABASE_MULTIZONE: ${{ secrets.UPSTASH_REDIS_DATABASE_MULTIZONE }}
+          UPSTASH_KAFKA_CLUSTER_NAME: ${{ secrets.UPSTASH_KAFKA_CLUSTER_NAME }}
+          UPSTASH_KAFKA_CLUSTER_REGION: ${{ secrets.UPSTASH_KAFKA_CLUSTER_REGION }}
+          UPSTASH_KAFKA_CLUSTER_MULTIZONE: ${{ secrets.UPSTASH_KAFKA_CLUSTER_MULTIZONE }}
+          UPSTASH_KAFKA_TOPIC_NAME: ${{ secrets.UPSTASH_KAFKA_TOPIC_NAME }}
+          UPSTASH_KAFKA_TOPIC_PARTITIONS: ${{ secrets.UPSTASH_KAFKA_TOPIC_PARTITIONS }}
+          UPSTASH_KAFKA_TOPIC_RETENTION_TIME: ${{ secrets.UPSTASH_KAFKA_TOPIC_RETENTION_TIME }}
+          UPSTASH_KAFKA_TOPIC_RETENTION_SIZE: ${{ secrets.UPSTASH_KAFKA_TOPIC_RETENTION_SIZE }}
+          UPSTASH_KAFKA_TOPIC_MAX_MESSAGE_SIZE: ${{ secrets.UPSTASH_KAFKA_TOPIC_MAX_MESSAGE_SIZE }}
+          UPSTASH_KAFKA_TOPIC_CLEANUP_POLICY: ${{ secrets.UPSTASH_KAFKA_TOPIC_CLEANUP_POLICY }}
+          UPSTASH_TEAM_NAME: ${{ secrets.UPSTASH_TEAM_NAME }}
+          UPSTASH_TEAM_COPY_CC: ${{ secrets.UPSTASH_TEAM_COPY_CC }}
+          UPSTASH_TEAM_OWNER: ${{ secrets.UPSTASH_TEAM_OWNER }}
+          UPSTASH_TEAM_DEVS: ${{ secrets.UPSTASH_TEAM_DEVS }}
+          UPSTASH_TEAM_FINANCES: ${{ secrets.UPSTASH_TEAM_FINANCES }}
+        run: go test -v *

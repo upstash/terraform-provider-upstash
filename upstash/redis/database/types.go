@@ -1,4 +1,4 @@
-package upstash
+package database
 
 type Database struct {
 	DatabaseId   string `json:"database_id"`
@@ -12,7 +12,7 @@ type Database struct {
 	Endpoint     string `json:"endpoint"`
 	Tls          bool   `json:"tls"`
 	Consistent   bool   `json:"consistent"`
-	MultiZone    bool   `json:"multi_zone"`
+	MultiZone    bool   `json:"multizone"`
 	RestToken    string `json:"rest_token,omitempty"`
 }
 
@@ -21,5 +21,5 @@ type CreateDatabaseRequest struct {
 	DatabaseName string `json:"database_name"`
 	Tls          bool   `json:"tls"`
 	Consistent   bool   `json:"consistent"`
-	MultiZone    bool   `json:"multi_zone"`
+	MultiZone    bool   `json:"multizone"`
 }

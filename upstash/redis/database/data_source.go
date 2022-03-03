@@ -1,8 +1,8 @@
-package upstash
+package database
 
 import "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-func dataSourceDatabase() *schema.Resource {
+func DataSourceDatabase() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: resourceDatabaseRead,
 		Schema: map[string]*schema.Schema{
@@ -20,7 +20,7 @@ func dataSourceDatabase() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 				Description: "region of the database. Possible values are: " +
-					"\"eu-west-1\", \"us-east-1\", \"us-west-1\", \"ap-northeast-1\" , \"eu-central1\"",
+					"\"global\", \"eu-west-1\", \"us-east-1\", \"us-west-1\", \"ap-northeast-1\" , \"eu-central1\"",
 			},
 			"endpoint": &schema.Schema{
 				Type:        schema.TypeString,
@@ -38,7 +38,7 @@ func dataSourceDatabase() *schema.Resource {
 				Computed:    true,
 				Description: "When enabled database runs in Consistency Mode",
 			},
-			"multi_zone": &schema.Schema{
+			"multizone": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
 				Description: "When enabled database is highly available and deployed multi-zone",
