@@ -48,6 +48,11 @@ func DataSourceDatabase() *schema.Resource {
 				Computed:    true,
 				Description: "When enabled data is encrypted in transit",
 			},
+			"port": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Port of the endpoint",
+			},
 		},
 	}
 }

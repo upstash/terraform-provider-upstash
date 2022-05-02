@@ -63,6 +63,11 @@ func ResourceDatabase() *schema.Resource {
 				Default:     false,
 				Description: "When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)",
 			},
+			"port": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Port of the endpoint",
+			},
 		},
 
 		CustomizeDiff: customdiff.All(

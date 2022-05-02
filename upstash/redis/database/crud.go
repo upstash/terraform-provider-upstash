@@ -55,6 +55,7 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 		"consistent":    database.Consistent,
 		"multizone":     database.MultiZone,
 		"tls":           database.Tls,
+		"port":          database.Port,
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)

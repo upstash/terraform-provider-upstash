@@ -27,3 +27,7 @@ output "password" {
   value = resource.upstash_redis_database.exampleDB
   sensitive = true
 }
+
+output "port" {
+  value = data.upstash_redis_database_data.exampleDBData.port
+}
