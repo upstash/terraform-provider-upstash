@@ -47,14 +47,17 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 	data.SetId("upstash-database-" + database.DatabaseId)
 
 	mapping := map[string]interface{}{
-		"database_id":   database.DatabaseId,
-		"database_name": database.DatabaseName,
-		"region":        database.Region,
-		"endpoint":      database.Endpoint,
-		"password":      database.Password,
-		"consistent":    database.Consistent,
-		"multizone":     database.MultiZone,
-		"tls":           database.Tls,
+		"database_id":          database.DatabaseId,
+		"database_name":        database.DatabaseName,
+		"region":               database.Region,
+		"endpoint":             database.Endpoint,
+		"password":             database.Password,
+		"consistent":           database.Consistent,
+		"multizone":            database.MultiZone,
+		"tls":                  database.Tls,
+		"port":                 database.Port,
+		"rest_token":           database.RestToken,
+		"read_only_rest_token": database.ReadOnlyRestToken,
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)

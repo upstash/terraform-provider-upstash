@@ -63,6 +63,22 @@ func ResourceDatabase() *schema.Resource {
 				Default:     false,
 				Description: "When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)",
 			},
+			"port": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Port of the endpoint",
+			},
+			"rest_token": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Sensitive:   true,
+				Description: "Rest Token for the database.",
+			},
+			"read_only_rest_token": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Rest Token for the database.",
+			},
 		},
 
 		CustomizeDiff: customdiff.All(

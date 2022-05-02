@@ -48,6 +48,22 @@ func DataSourceDatabase() *schema.Resource {
 				Computed:    true,
 				Description: "When enabled data is encrypted in transit",
 			},
+			"port": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Port of the endpoint",
+			},
+			"rest_token": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Sensitive:   true,
+				Description: "Rest Token for the database.",
+			},
+			"read_only_rest_token": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Rest Token for the database.",
+			},
 		},
 	}
 }
