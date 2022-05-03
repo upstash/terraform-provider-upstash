@@ -83,6 +83,11 @@ func DataSourceCluster() *schema.Resource {
 				Computed:    true,
 				Description: "Max Partitions for the cluster",
 			},
+			"creation_time": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Creation time of the cluster",
+			},
 		},
 	}
 }

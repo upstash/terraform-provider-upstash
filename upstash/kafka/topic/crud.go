@@ -55,6 +55,7 @@ func resourceRead(ctx context.Context, data *schema.ResourceData, m interface{})
 		"rest_endpoint":    topic.RestEndpoint,
 		"username":         topic.Username,
 		"password":         topic.Password,
+		"creation_time":    topic.CreationTime,
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)

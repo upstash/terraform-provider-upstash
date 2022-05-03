@@ -75,6 +75,7 @@ func resourceClusterRead(ctx context.Context, data *schema.ResourceData, m inter
 		"max_messages_per_second": cluster.MaxMessagesPerSecond,
 		"max_message_size":        cluster.MaxMessageSize,
 		"max_partitions":          cluster.MaxPartitions,
+		"creation_time":           cluster.CreationTime,
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)

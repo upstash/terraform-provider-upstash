@@ -89,6 +89,11 @@ func ResourceTopic() *schema.Resource {
 				Sensitive:   true,
 				Description: "Password to be used in authenticating to the cluster",
 			},
+			"creation_time": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Creation time of the topic",
+			},
 		},
 	}
 }

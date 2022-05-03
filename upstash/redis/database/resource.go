@@ -79,6 +79,61 @@ func ResourceDatabase() *schema.Resource {
 				Computed:    true,
 				Description: "Rest Token for the database.",
 			},
+			"creation_time": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Creation time of the database",
+			},
+			"database_type": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Type of the database",
+			},
+			"state": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "State of the database",
+			},
+			"user_email": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "User email for the database",
+			},
+			"db_max_clients": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Max clients for the database",
+			},
+			"db_max_request_size": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Max request size for the database",
+			},
+			"db_disk_threshold": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Disk threshold for the database",
+			},
+			"db_max_entry_size": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Max entry size for the database",
+			},
+			"db_memory_threshold": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Memory threshold for the database",
+			},
+			"db_daily_bandwidth_limit": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Daily bandwidth limit for the database",
+			},
+			"db_max_commands_per_second": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Max commands per second for the database",
+			},
 		},
 
 		CustomizeDiff: customdiff.All(

@@ -58,3 +58,7 @@ output "max_message_size" {
 output "max_partitions" {
   value = data.upstash_kafka_cluster_data.clusterData.max_partitions
 }
+
+output "creation_time" {
+  value = data.upstash_kafka_cluster_data.clusterData.creation_time
+}
