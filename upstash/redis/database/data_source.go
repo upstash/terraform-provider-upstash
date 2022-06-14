@@ -37,6 +37,7 @@ func DataSourceDatabase() *schema.Resource {
 				Type:        schema.TypeBool,
 				Computed:    true,
 				Description: "When enabled database runs in Consistency Mode",
+				Deprecated:  "Consistent option is deprecated.",
 			},
 			"multizone": &schema.Schema{
 				Type:        schema.TypeBool,
@@ -47,6 +48,7 @@ func DataSourceDatabase() *schema.Resource {
 				Type:        schema.TypeBool,
 				Computed:    true,
 				Description: "When enabled data is encrypted in transit",
+				Deprecated:  "TLS option is deprecated.",
 			},
 			"port": &schema.Schema{
 				Type:        schema.TypeInt,

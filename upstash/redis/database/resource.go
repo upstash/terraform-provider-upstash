@@ -50,6 +50,7 @@ func ResourceDatabase() *schema.Resource {
 				Default:     false,
 				ForceNew:    true,
 				Description: "When enabled, all writes are synchronously persisted to the disk.",
+				Deprecated:  "Consistent option is deprecated.",
 			},
 			"multizone": &schema.Schema{
 				Type:        schema.TypeBool,
@@ -62,6 +63,7 @@ func ResourceDatabase() *schema.Resource {
 				Optional:    true,
 				Default:     false,
 				Description: "When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)",
+				Deprecated:  "TLS option is deprecated.",
 			},
 			"port": &schema.Schema{
 				Type:        schema.TypeInt,
