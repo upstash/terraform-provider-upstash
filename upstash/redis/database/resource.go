@@ -45,10 +45,9 @@ func ResourceDatabase() *schema.Resource {
 				Description: "Password of the database",
 			},
 			"consistent": &schema.Schema{
-				Type:     schema.TypeBool,
-				Optional: true,
-				Default:  false,
-				// ForceNew:    true,
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
 				Description: "When enabled, all writes are synchronously persisted to the disk.",
 				Deprecated:  "Consistent option is deprecated.",
 			},
@@ -140,6 +139,9 @@ func ResourceDatabase() *schema.Resource {
 
 		CustomizeDiff: customdiff.All(
 			customdiff.ForceNewIfChange("multizone", func(ctx context.Context, old, new, meta interface{}) bool {
+				return old.(bool) && !new.(bool)
+			}),
+			customdiff.ForceNewIfChange("consistent", func(ctx context.Context, old, new, meta interface{}) bool {
 				return old.(bool) && !new.(bool)
 			}),
 		),

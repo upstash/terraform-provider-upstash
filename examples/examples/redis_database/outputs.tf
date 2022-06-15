@@ -84,3 +84,11 @@ output "db_daily_bandwidth_limit" {
 output "db_max_commands_per_second" {
   value = data.upstash_redis_database_data.exampleDBData.db_max_commands_per_second
 }
+
+output "tls" {
+  value = data.upstash_redis_database_data.exampleDBData.tls
+}
+
+output "consistent" {
+  value = data.upstash_redis_database_data.exampleDBData.consistent
+}
