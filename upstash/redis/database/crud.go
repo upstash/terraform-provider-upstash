@@ -19,6 +19,9 @@ func resourceDatabaseUpdate(ctx context.Context, data *schema.ResourceData, m in
 	}
 
 	if data.HasChange("tls") {
+		if !data.Get("tls").(bool) {
+			return diag.Errorf("Cannot disable tls on the DB. All the newly created DBs will be TLS enabled.")
+		}
 		if err := EnableTLS(c, databaseId); err != nil {
 			return diag.FromErr(err)
 		}
@@ -76,6 +79,9 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 }
 
 func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
+	if !data.Get("tls").(bool) {
+		return diag.Errorf("Cannot create new DB with tls disabled.")
+	}
 	c := m.(*client.UpstashClient)
 	database, err := CreateDatabase(c, CreateDatabaseRequest{
 		Region:       data.Get("region").(string),
