@@ -80,7 +80,6 @@ func redisDatabaseOptions(t *testing.T) *terraform.Options {
 			"api_key":       apikey,
 			"database_name": redis_database_name,
 			"region":        redis_database_region,
-			"tls":           redis_database_tls,
 			"multizone":     redis_database_multizone,
 		},
 	})

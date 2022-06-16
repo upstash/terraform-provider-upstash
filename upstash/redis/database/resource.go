@@ -48,8 +48,8 @@ func ResourceDatabase() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
-				ForceNew:    true,
 				Description: "When enabled, all writes are synchronously persisted to the disk.",
+				Deprecated:  "Consistent option is deprecated.",
 			},
 			"multizone": &schema.Schema{
 				Type:        schema.TypeBool,
@@ -60,8 +60,9 @@ func ResourceDatabase() *schema.Resource {
 			"tls": &schema.Schema{
 				Type:        schema.TypeBool,
 				Optional:    true,
-				Default:     false,
+				Computed:    true,
 				Description: "When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)",
+				Deprecated:  "TLS option is deprecated. TLS will always be enabled. If you have a DB without tls enabled, run the same configuration with tls=true to enable it.",
 			},
 			"port": &schema.Schema{
 				Type:        schema.TypeInt,
@@ -140,7 +141,7 @@ func ResourceDatabase() *schema.Resource {
 			customdiff.ForceNewIfChange("multizone", func(ctx context.Context, old, new, meta interface{}) bool {
 				return old.(bool) && !new.(bool)
 			}),
-			customdiff.ForceNewIfChange("tls", func(ctx context.Context, old, new, meta interface{}) bool {
+			customdiff.ForceNewIfChange("consistent", func(ctx context.Context, old, new, meta interface{}) bool {
 				return old.(bool) && !new.(bool)
 			}),
 		),
