@@ -5,8 +5,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/upstash/terraform-provider-upstash/upstash/client"
-	"github.com/upstash/terraform-provider-upstash/upstash/credential"
 	"github.com/upstash/terraform-provider-upstash/upstash/kafka/cluster"
+	"github.com/upstash/terraform-provider-upstash/upstash/kafka/credential"
 	"github.com/upstash/terraform-provider-upstash/upstash/kafka/topic"
 	"github.com/upstash/terraform-provider-upstash/upstash/redis/database"
 	"github.com/upstash/terraform-provider-upstash/upstash/team"

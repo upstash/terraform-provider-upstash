@@ -18,13 +18,3 @@ type CreateCredentialRequest struct {
 	Topic          string `json:"topic"`
 	Permissions    string `json:"permissions"`
 }
-
-// credential_id	ID of the kafka credential
-// credential_name	Name of the kafka credential
-// topic	Name of the kafka topic
-// permissions	Permission scope given to the kafka credential
-// cluster_id	ID of the kafka cluster
-// username	Username to be used for the kafka credential
-// creation_time	Creation time of the credential
-// state	State of the credential(active or deleted)
-// password	Password to be used in authenticating to the cluste

@@ -49,7 +49,7 @@ func TestUpstashKafkaCredentialMAIN(t *testing.T) {
 func kafkaCredentialAsserter(t *testing.T, terraformOptions *terraform.Options) {
 
 	credentialPermissionsOutput := terraform.Output(t, terraformOptions, "credential_permissions")
-	assert.Equal(t, credential_permissions, credentialPermissionsOutput+"2")
+	assert.Equal(t, credential_permissions, credentialPermissionsOutput)
 
 	credentialNameOutput := terraform.Output(t, terraformOptions, "credential_name")
 	assert.Equal(t, credential_name, credentialNameOutput)
