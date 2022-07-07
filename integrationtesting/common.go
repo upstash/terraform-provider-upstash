@@ -21,6 +21,9 @@ type EnvVars struct {
 	KafkaClusterRegion    string
 	KafkaClusterMultiZone bool
 
+	KafkaCredentialName        string
+	KafkaCredentialPermissions string
+
 	KafkaTopicName           string
 	KafkaTopicPartitions     int
 	KafkaTopicRetentionTime  int
@@ -76,6 +79,9 @@ func GetEnvVars() EnvVars {
 		KafkaTopicRetentionSize:  kafkaTopicRetentionSize,
 		KafkaTopicMaxMessageSize: kafkaTopicMessageSize,
 		KafkaTopicCleanupPolicy:  os.Getenv("UPSTASH_KAFKA_TOPIC_CLEANUP_POLICY"),
+
+		KafkaCredentialName:        os.Getenv("UPSTASH_KAFKA_CREDENTIAL_NAME"),
+		KafkaCredentialPermissions: os.Getenv("UPSTASH_KAFKA_CREDENTIAL_PERMISSIONS"),
 
 		TeamName:    os.Getenv("UPSTASH_TEAM_NAME"),
 		CopyCC:      os.Getenv("UPSTASH_TEAM_COPY_CC") == "true",
