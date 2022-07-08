@@ -20,6 +20,7 @@ type GetTeamMembers struct {
 	TeamName    string `json:"team_name"`
 	MemberEmail string `json:"member_email"`
 	MemberRole  string `json:"member_role"`
+	CopyCC      bool   `json:"copy_cc"`
 }
 
 type Member struct {

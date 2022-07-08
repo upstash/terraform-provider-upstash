@@ -34,8 +34,12 @@ func resourceRead(ctx context.Context, data *schema.ResourceData, m interface{})
 
 	membersMap := make(map[string]string)
 
+	var copycc bool
 	for i := 0; i < len(teamMembers); i++ {
 		membersMap[teamMembers[i].MemberEmail] = teamMembers[i].MemberRole
+		if teamMembers[i].CopyCC {
+			copycc = teamMembers[i].CopyCC
+		}
 	}
 
 	if err != nil {
@@ -48,7 +52,7 @@ func resourceRead(ctx context.Context, data *schema.ResourceData, m interface{})
 		"team_id":      teamId,
 		"team_name":    teamName,
 		"team_members": membersMap,
-		// "copy_cc": data.Get("copy_cc").(bool)
+		"copy_cc":      copycc,
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)
