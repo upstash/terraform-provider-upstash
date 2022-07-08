@@ -15,5 +15,5 @@ output "copy_cc" {
 }
 
 output "copy_cc_from_data" {
-    value = data.upstash_team_data.teamData
+    value = data.upstash_team_data.teamData.copy_cc
 }
