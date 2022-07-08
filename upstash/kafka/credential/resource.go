@@ -1,6 +1,10 @@
 package credential
 
-import "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+import (
+	"fmt"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+)
 
 func ResourceCredential() *schema.Resource {
 	return &schema.Resource{
@@ -30,6 +34,13 @@ func ResourceCredential() *schema.Resource {
 				Required:    true,
 				ForceNew:    true,
 				Description: "Permission scope given to the kafka credential",
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != "ALL" && val != "CONSUME" && val != "PRODUCE" {
+						errs = append(errs, fmt.Errorf("permissions field can only take the values: [`ALL`, `PRODUCE`, `CONSUME`]"))
+						// errs = append(errs, fmt.Errorf("Owner of the api key should be given the role of owner"))
+					}
+					return
+				},
 			},
 			"cluster_id": &schema.Schema{
 				Type:        schema.TypeString,
