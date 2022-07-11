@@ -23,28 +23,25 @@ data "upstash_kafka_cluster_data" "clusterData" {
 
 ### Required
 
-- **cluster_id** (String) Unique Cluster ID for requested cluster
-
-### Optional
-
-- **id** (String) The ID of this resource.
+- `cluster_id` (String) Unique Cluster ID for requested cluster
 
 ### Read-Only
 
-- **cluster_name** (String) Name of the team
-- **encoded_username** (String) Encoded Username for the cluster
-- **max_message_size** (Number) Max Message Size for the cluster
-- **max_messages_per_second** (Number) Max Messages Per Second for the cluster
-- **max_partitions** (Number) Max Partitions for the cluster
-- **max_retention_size** (Number) Max Retention Size of the cluster
-- **max_retention_time** (Number) Max Retention Time of the cluster
-- **multizone** (Boolean) Whether multizone replication is enabled
-- **password** (String, Sensitive) Password for the cluster
-- **region** (String) Region of the cluster. Possible values (may change) are: "eu-west-1", "us-east-1"
-- **rest_endpoint** (String) REST Endpoint of the cluster
-- **state** (String) Current state of the cluster (active or deleted)
-- **tcp_endpoint** (String) TCP Endpoint of the cluster
-- **type** (String) Type of the cluster
-- **username** (String) Username for the cluster
+- `cluster_name` (String) Name of the cluster
+- `creation_time` (Number) Creation time of the cluster
+- `id` (String) The ID of this resource.
+- `max_message_size` (Number) Max Message Size for the cluster
+- `max_messages_per_second` (Number) Max Messages Per Second for the cluster
+- `max_partitions` (Number) Max Partitions for the cluster
+- `max_retention_size` (Number) Max Retention Size of the cluster
+- `max_retention_time` (Number) Max Retention Time of the cluster
+- `multizone` (Boolean) Whether multizone replication is enabled
+- `password` (String, Sensitive) Password for the cluster
+- `region` (String) Region of the cluster. Possible values (may change) are: "eu-west-1", "us-east-1"
+- `rest_endpoint` (String) REST Endpoint of the cluster
+- `state` (String) Current state of the cluster (active or deleted)
+- `tcp_endpoint` (String) TCP Endpoint of the cluster
+- `type` (String) Type of the cluster
+- `username` (String) Base64 encoded username for the cluster
 
 

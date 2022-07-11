@@ -18,6 +18,9 @@ export UPSTASH_KAFKA_TOPIC_RETENTION_SIZE="725124"
 export UPSTASH_KAFKA_TOPIC_MAX_MESSAGE_SIZE="829213"
 export UPSTASH_KAFKA_TOPIC_CLEANUP_POLICY="delete"
 
+export UPSTASH_KAFKA_CREDENTIAL_NAME="<Name of credential>"
+export UPSTASH_KAFKA_CREDENTIAL_PERMISSIONS="<Permission for the credential>"
+
 export UPSTASH_TEAM_NAME="TestingTeam"
 export UPSTASH_TEAM_COPY_CC="false"
 export UPSTASH_TEAM_OWNER=<email address of the api-key owner>

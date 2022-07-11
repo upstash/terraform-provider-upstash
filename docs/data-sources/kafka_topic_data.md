@@ -23,29 +23,25 @@ data "upstash_kafka_topic_data" "kafkaTopicData" {
 
 ### Required
 
-- **topic_id** (String) Unique Topic ID for requested kafka topic
-
-### Optional
-
-- **id** (String) The ID of this resource.
+- `topic_id` (String) Unique Topic ID for requested kafka topic
 
 ### Read-Only
 
-- **cleanup_policy** (String) Cleanup policy will be used in the topic(compact or delete)
-- **cluster_id** (String) Id of the cluster this topic belongs to
-- **creation_time** (Number) Creation time of the topic
-- **encoded_username** (String) Base64 encoded username to be used in rest communication
-- **max_message_size** (Number) Max Message Size for the topic
-- **multizone** (Boolean) Whether multizone replication is enabled
-- **partitions** (Number) Number of partitions the topic has
-- **password** (String, Sensitive) Password to be used in authenticating to the cluster
-- **region** (String) Region of the kafka topic. Possible values (may change) are: "eu-west-1", "us-east-1"
-- **rest_endpoint** (String) REST Endpoint of the topic
-- **retention_size** (Number) Max Retention Size of the topic
-- **retention_time** (Number) Max Retention Time of the topic
-- **state** (String) State of the topic (active or deleted)
-- **tcp_endpoint** (String) TCP Endpoint of the topic
-- **topic_name** (String) Name of the kafka topic
-- **username** (String) Username to be used in authenticating to the cluster
+- `cleanup_policy` (String) Cleanup policy will be used in the topic(compact or delete)
+- `cluster_id` (String) Id of the cluster this topic belongs to
+- `creation_time` (Number) Creation time of the topic
+- `id` (String) The ID of this resource.
+- `max_message_size` (Number) Max Message Size for the topic
+- `multizone` (Boolean) Whether multizone replication is enabled
+- `partitions` (Number) Number of partitions the topic has
+- `password` (String, Sensitive) Password to be used in authenticating to the cluster
+- `region` (String) Region of the kafka topic. Possible values (may change) are: "eu-west-1", "us-east-1"
+- `rest_endpoint` (String) REST Endpoint of the topic
+- `retention_size` (Number) Max Retention Size of the topic
+- `retention_time` (Number) Max Retention Time of the topic
+- `state` (String) State of the topic (active or deleted)
+- `tcp_endpoint` (String) TCP Endpoint of the topic
+- `topic_name` (String) Name of the kafka topic
+- `username` (String) Base64 encoded username to be used in authenticating to the cluster
 
 

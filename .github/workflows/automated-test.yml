@@ -24,6 +24,7 @@ jobs:
       - name: Build provider
         run: go build .
       - name: Test
+        id: "testing"
         working-directory: integrationtesting
         env:
           UPSTASH_EMAIL: ${{ secrets.UPSTASH_EMAIL }}
@@ -42,9 +43,18 @@ jobs:
           UPSTASH_KAFKA_TOPIC_RETENTION_SIZE: ${{ secrets.UPSTASH_KAFKA_TOPIC_RETENTION_SIZE }}
           UPSTASH_KAFKA_TOPIC_MAX_MESSAGE_SIZE: ${{ secrets.UPSTASH_KAFKA_TOPIC_MAX_MESSAGE_SIZE }}
           UPSTASH_KAFKA_TOPIC_CLEANUP_POLICY: ${{ secrets.UPSTASH_KAFKA_TOPIC_CLEANUP_POLICY }}
+          UPSTASH_KAFKA_CREDENTIAL_NAME: ${{ secrets.UPSTASH_KAFKA_CREDENTIAL_NAME }}
+          UPSTASH_KAFKA_CREDENTIAL_PERMISSIONS: ${{ secrets.UPSTASH_KAFKA_CREDENTIAL_PERMISSIONS }}
           UPSTASH_TEAM_NAME: ${{ secrets.UPSTASH_TEAM_NAME }}
           UPSTASH_TEAM_COPY_CC: ${{ secrets.UPSTASH_TEAM_COPY_CC }}
           UPSTASH_TEAM_OWNER: ${{ secrets.UPSTASH_TEAM_OWNER }}
           UPSTASH_TEAM_DEVS: ${{ secrets.UPSTASH_TEAM_DEVS }}
           UPSTASH_TEAM_FINANCES: ${{ secrets.UPSTASH_TEAM_FINANCES }}
         run: go test -v *
+      - name: Check on failures
+        env:
+          SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
+        if: always() && steps.testing.outcome != 'success'
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Some tests have failed. Check the repo: '$GITHUB_SERVER_URL'/'$GITHUB_REPOSITORY'/actions/runs/'$GITHUB_RUN_ID'"}' "$SLACK_WEBHOOK"
+        shell: bash
