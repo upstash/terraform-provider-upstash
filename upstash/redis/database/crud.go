@@ -19,9 +19,6 @@ func resourceDatabaseUpdate(ctx context.Context, data *schema.ResourceData, m in
 	}
 
 	if data.HasChange("tls") {
-		if !data.Get("tls").(bool) {
-			return diag.Errorf("Cannot disable tls on the DB. All the newly created DBs will be TLS enabled. Set tls=true.")
-		}
 		if err := EnableTLS(c, databaseId); err != nil {
 			return diag.FromErr(err)
 		}
@@ -85,9 +82,6 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 }
 
 func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
-	if !data.Get("tls").(bool) {
-		return diag.Errorf("Cannot create new DB with tls disabled. Set tls=true in the resource to create with tls enabled.")
-	}
 	if data.Get("consistent").(bool) {
 		return diag.Errorf("Newly created DBs are eventually consistent. Set consistent=false in the resource.")
 	}

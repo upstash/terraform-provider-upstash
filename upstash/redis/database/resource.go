@@ -60,9 +60,8 @@ func ResourceDatabase() *schema.Resource {
 			"tls": &schema.Schema{
 				Type:        schema.TypeBool,
 				Optional:    true,
-				Computed:    true,
+				Default:     false,
 				Description: "When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)",
-				Deprecated:  "TLS option is deprecated. TLS will always be enabled. If you have a DB without tls enabled, run the same configuration with tls=true to enable it.",
 			},
 			"port": &schema.Schema{
 				Type:        schema.TypeInt,
@@ -142,6 +141,9 @@ func ResourceDatabase() *schema.Resource {
 				return old.(bool) && !new.(bool)
 			}),
 			customdiff.ForceNewIfChange("consistent", func(ctx context.Context, old, new, meta interface{}) bool {
+				return old.(bool) && !new.(bool)
+			}),
+			customdiff.ForceNewIfChange("tls", func(ctx context.Context, old, new, meta interface{}) bool {
 				return old.(bool) && !new.(bool)
 			}),
 		),
