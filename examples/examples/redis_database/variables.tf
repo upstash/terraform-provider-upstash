@@ -9,4 +9,5 @@ variable "api_key" {
 
 variable "database_name"{}
 variable "region"{}
+variable "tls"{}
 variable "multizone"{}
