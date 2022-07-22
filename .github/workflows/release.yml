@@ -29,8 +29,8 @@ jobs:
       - name: Import GPG key
         id: import_gpg
         uses: upstash/ghaction-import-gpg@v5
-        env:
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
