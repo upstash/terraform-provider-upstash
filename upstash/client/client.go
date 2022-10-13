@@ -3,7 +3,9 @@ package client
 import (
 	"errors"
 	"net/http"
+	"os"
 	"strconv"
+	"strings"
 
 	"github.com/imroc/req"
 	"github.com/upstash/terraform-provider-upstash/upstash/utils"
@@ -23,9 +25,21 @@ func NewUpstashClient(email string, apikey string) *UpstashClient {
 	}
 }
 
-func (c *UpstashClient) SendDeleteRequest(endpointExtension string, body interface{}, errMessage string) (err error) {
+func (c *UpstashClient) SendDeleteRequest(endpointExtensionOrQstashEndpoint string, body interface{}, errMessage string) (err error) {
+	BEARER_TOKEN := os.Getenv("QSTASH_BEARER_TOKEN")
+	endpoint := UPSTASH_API_ENDPOINT + endpointExtensionOrQstashEndpoint
+	if strings.Contains(endpointExtensionOrQstashEndpoint, "qstash") {
+		endpoint = endpointExtensionOrQstashEndpoint
+		_, err := req.Delete(
+			endpoint,
+			req.Header{"Accept": "application/json"},
+			req.Header{"Authorization": "Bearer " + BEARER_TOKEN},
+			req.BodyJSON(body),
+		)
+		return err
+	}
 	resp, err := req.Delete(
-		UPSTASH_API_ENDPOINT+endpointExtension,
+		endpoint,
 		req.Header{"Accept": "application/json"},
 		req.Header{"Authorization": utils.BasicAuth(c.Email, c.Apikey)},
 		req.BodyJSON(body),
@@ -39,9 +53,19 @@ func (c *UpstashClient) SendDeleteRequest(endpointExtension string, body interfa
 	return err
 }
 
-func (c *UpstashClient) SendGetRequest(endpointExtension string, errMessage string) (response *req.Resp, err error) {
+func (c *UpstashClient) SendGetRequest(endpointExtensionOrQstashEndpoint string, errMessage string) (response *req.Resp, err error) {
+	BEARER_TOKEN := os.Getenv("QSTASH_BEARER_TOKEN")
+	endpoint := UPSTASH_API_ENDPOINT + endpointExtensionOrQstashEndpoint
+	if strings.Contains(endpointExtensionOrQstashEndpoint, "qstash") {
+		endpoint = endpointExtensionOrQstashEndpoint
+		return req.Get(
+			endpoint,
+			req.Header{"Accept": "application/json"},
+			req.Header{"Authorization": "Bearer " + BEARER_TOKEN},
+		)
+	}
 	resp, err := req.Get(
-		UPSTASH_API_ENDPOINT+endpointExtension,
+		endpoint,
 		req.Header{"Accept": "application/json"},
 		req.Header{"Authorization": utils.BasicAuth(c.Email, c.Apikey)},
 	)
@@ -54,10 +78,21 @@ func (c *UpstashClient) SendGetRequest(endpointExtension string, errMessage stri
 	return resp, err
 }
 
-func (c *UpstashClient) SendPostRequest(endpointExtension string, body interface{}, errMessage string) (response *req.Resp, err error) {
+func (c *UpstashClient) SendPostRequest(endpointExtensionOrQstashEndpoint string, body interface{}, errMessage string) (response *req.Resp, err error) {
+	BEARER_TOKEN := os.Getenv("QSTASH_BEARER_TOKEN")
 
+	endpoint := UPSTASH_API_ENDPOINT + endpointExtensionOrQstashEndpoint
+	if strings.Contains(endpointExtensionOrQstashEndpoint, "qstash") {
+		endpoint = endpointExtensionOrQstashEndpoint
+		return req.Post(
+			endpoint,
+			req.Header{"Accept": "application/json"},
+			req.Header{"Authorization": "Bearer " + BEARER_TOKEN},
+			req.BodyJSON(body),
+		)
+	}
 	resp, err := req.Post(
-		UPSTASH_API_ENDPOINT+endpointExtension,
+		endpoint,
 		req.Header{"Accept": "application/json"},
 		req.Header{"Authorization": utils.BasicAuth(c.Email, c.Apikey)},
 		req.BodyJSON(body),

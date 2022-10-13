@@ -1,0 +1,13 @@
+package topic
+
+import "github.com/upstash/terraform-provider-upstash/upstash/qstash/endpoint"
+
+type createQstashTopicRequest struct {
+	Name string `json:"name"`
+}
+
+type QstashTopic struct {
+	Name      string `json:"name"`
+	TopicId   string `json:"topicId"`
+	Endpoints []endpoint.QstashEndpoint
+}
