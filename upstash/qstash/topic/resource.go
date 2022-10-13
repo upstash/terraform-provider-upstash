@@ -26,7 +26,8 @@ func ResourceQstashTopic() *schema.Resource {
 			"endpoints": &schema.Schema{
 				Type:        schema.TypeList,
 				Computed:    true,
-				Elem:        endpoint.ResourceQstashEndpoint(),
+				ForceNew:    true,
+				Elem:        endpoint.DataSourceQstashEndpoint(),
 				Description: "Members of the team. Email addresses are given as the keys with their roles as the values.",
 			},
 		},
