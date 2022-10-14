@@ -1,8 +1,9 @@
+
 variable "email" {
   description = "Upstash user email"
-  default     = ""
+  default     = "<email here>"
 }
 variable "api_key" {
   description = "Api key for the given user"
-  default     = ""
+  default     = "<api key here>"
 }
