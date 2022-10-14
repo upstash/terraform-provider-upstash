@@ -18,18 +18,16 @@ func DataSourceQstashTopic() *schema.Resource {
 				Computed:    true,
 				Description: "Name of the Qstash Topic",
 			},
-			// TODO: Use resource after generating endpoints resource
 			"endpoints": &schema.Schema{
 				Type:     schema.TypeList,
 				Computed: true,
-				// Elem:     endpoint.DataSourceQstashEndpoint(),
 				Elem: &schema.Schema{
 					Type: schema.TypeMap,
 					Elem: &schema.Schema{
 						Type: schema.TypeString,
 					},
 				},
-				Description: "Members of the team. Email addresses are given as the keys with their roles as the values.",
+				Description: "Endpoints for the Qstash Topic",
 			},
 		},
 	}

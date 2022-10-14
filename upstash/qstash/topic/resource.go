@@ -21,7 +21,6 @@ func ResourceQstashTopic() *schema.Resource {
 				ForceNew:    true,
 				Description: "Name of the Qstash Topic",
 			},
-			// TODO: Use resource after generating endpoints resource
 			"endpoints": &schema.Schema{
 				Type:     schema.TypeList,
 				Computed: true,
@@ -31,7 +30,7 @@ func ResourceQstashTopic() *schema.Resource {
 						Type: schema.TypeString,
 					},
 				},
-				Description: "Members of the team. Email addresses are given as the keys with their roles as the values.",
+				Description: "Endpoints for the Qstash Topic",
 			},
 		},
 	}

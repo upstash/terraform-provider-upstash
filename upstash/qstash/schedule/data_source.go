@@ -26,22 +26,22 @@ func DataSourceQstashSchedule() *schema.Resource {
 			"retries": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
-				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
+				Description: "Retries for Qstash Schedule. Either Topic ID or valid URL",
 			},
 			"not_before": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
-				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
+				Description: "Start time for Qstash Schedule",
 			},
 			"created_at": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
-				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
+				Description: "Creation time for Qstash Schedule",
 			},
 			"body": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
-				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
+				Description: "Encoded body for Qstash Schedule",
 			},
 		},
 	}
