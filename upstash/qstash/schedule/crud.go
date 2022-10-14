@@ -5,7 +5,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/imroc/req"
 	"github.com/upstash/terraform-provider-upstash/upstash/client"
 	"github.com/upstash/terraform-provider-upstash/upstash/utils"
 )
@@ -25,12 +24,13 @@ func resourceScheduleRead(ctx context.Context, data *schema.ResourceData, m inte
 		destination = schedule.Destination.Url
 	}
 	mapping := map[string]interface{}{
-		// "content":     schedule.Content,
-		// "createdAt":   schedule.CreatedAt,
+		"created_at":  schedule.CreatedAt,
+		"retries":     schedule.Settings.Retries,
+		"not_before":  schedule.Settings.NotBefore,
 		"cron":        schedule.Cron,
 		"destination": destination,
 		"schedule_id": schedule.ScheduleId,
-		// "settings":    schedule.Settings,
+		"body":        schedule.Content.Body,
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)
@@ -38,21 +38,36 @@ func resourceScheduleRead(ctx context.Context, data *schema.ResourceData, m inte
 
 func resourceScheduleCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
-	headers := []req.Header{}
-
-	headers = append(headers, req.Header{"Upstash-Cron": data.Get("cron").(string)})
 
 	schedule, err := createSchedule(c, CreateQstashScheduleRequest{
 		Destination: data.Get("destination").(string),
+		Body:        data.Get("body").(string),
 	},
-		headers...,
+		data.Get("content_type").(string),
+		data.Get("deduplication_id").(string),
+		data.Get("content_based_deduplication").(bool),
+		data.Get("not_before").(int),
+		data.Get("delay").(string),
+		data.Get("retries").(int),
+		data.Get("cron").(string),
 	)
 	if err != nil {
 		return diag.FromErr(err)
 	}
+
 	data.SetId("upstash-qstash-schedule-" + schedule.ScheduleId)
 	data.Set("schedule_id", schedule.ScheduleId)
-	return resourceScheduleRead(ctx, data, m)
+
+	diagnostics := resourceScheduleRead(ctx, data, m)
+	if diagnostics != nil {
+		return diagnostics
+	}
+
+	if err := data.Set("body", data.Get("body").(string)); err != nil {
+		return diag.FromErr(err)
+	}
+	return nil
+
 }
 
 func resourceScheduleDelete(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {

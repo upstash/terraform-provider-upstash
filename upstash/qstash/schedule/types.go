@@ -4,6 +4,7 @@ import "github.com/upstash/terraform-provider-upstash/upstash/qstash/topic"
 
 type CreateQstashScheduleRequest struct {
 	Destination string `json:"destination"`
+	Body        string
 	// ContentType               string
 	// DeduplicationId           string
 	// ContentBasedDeduplication string
@@ -16,13 +17,12 @@ type CreateQstashScheduleRequest struct {
 }
 
 type QstashSchedule struct {
-	// Content     Content     `json:"content"`
-	// CreatedAt   int64       `json:"createdAt,omitempty"`
+	Content     Content     `json:"content"`
+	CreatedAt   int64       `json:"createdAt"`
 	Cron        string      `json:"cron"`
 	Destination Destination `json:"destination"`
-	// Destination Destination `json:"destination"`
-	ScheduleId string `json:"scheduleId"`
-	// Settings    Settings    `json:"settings"`
+	ScheduleId  string      `json:"scheduleId"`
+	Settings    Settings    `json:"settings"`
 }
 
 type Settings struct {
@@ -40,17 +40,4 @@ type Destination struct {
 type Content struct {
 	Body   string            `json:"body"`
 	Header map[string]string `json:"header"`
-}
-
-type HeaderParameters struct {
-	ContentType                      string
-	UpstashDeduplicationId           string
-	UpstashContentBasedDeduplication string
-	UpstashNotBefore                 string
-	UpstashDelay                     string
-	UpstashRetries                   string
-	UpstashCron                      string
-	// UpstashContentBasedDeduplication bool
-	// UpstashNotBefore                 int64
-	// UpstashRetries                   int64
 }

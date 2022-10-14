@@ -15,6 +15,12 @@ func ResourceQstashSchedule() *schema.Resource {
 				Computed:    true,
 				Description: "Unique Qstash Schedule ID for requested schedule",
 			},
+			"body": &schema.Schema{
+				Type:        schema.TypeString,
+				ForceNew:    true,
+				Optional:    true,
+				Description: "Body to send for the POST request in string format. Needs escaping (\\) double quotes.",
+			},
 			"cron": &schema.Schema{
 				Type:        schema.TypeString,
 				Required:    true,
@@ -40,13 +46,13 @@ func ResourceQstashSchedule() *schema.Resource {
 				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
 			},
 			"content_based_deduplication": &schema.Schema{
-				Type:        schema.TypeString,
+				Type:        schema.TypeBool,
 				ForceNew:    true,
 				Optional:    true,
 				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
 			},
 			"not_before": &schema.Schema{
-				Type:        schema.TypeString,
+				Type:        schema.TypeInt,
 				ForceNew:    true,
 				Optional:    true,
 				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
@@ -58,9 +64,14 @@ func ResourceQstashSchedule() *schema.Resource {
 				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
 			},
 			"retries": &schema.Schema{
-				Type:        schema.TypeString,
+				Type:        schema.TypeInt,
 				ForceNew:    true,
 				Optional:    true,
+				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
+			},
+			"created_at": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
 				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
 			},
 		},

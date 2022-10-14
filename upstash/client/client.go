@@ -24,7 +24,11 @@ func NewUpstashClient(email string, apikey string) *UpstashClient {
 	}
 }
 
-func (c *UpstashClient) getQstashToken() (error, string) {
+func (c *UpstashClient) GetQstashEndpoint() string {
+	return "https://qstash.upstash.io/v1"
+}
+
+func (c *UpstashClient) GetQstashToken() (error, string) {
 	type token struct {
 		Token string `json:"token"`
 	}
@@ -45,7 +49,7 @@ func (c *UpstashClient) getQstashToken() (error, string) {
 func (c *UpstashClient) SendDeleteRequest(endpointExtensionOrQstashEndpoint string, body interface{}, errMessage string) (err error) {
 	endpoint := UPSTASH_API_ENDPOINT + endpointExtensionOrQstashEndpoint
 	if strings.Contains(endpointExtensionOrQstashEndpoint, "qstash") {
-		err, BEARER_TOKEN := c.getQstashToken()
+		err, BEARER_TOKEN := c.GetQstashToken()
 		if err != nil {
 			return err
 		}
@@ -67,7 +71,7 @@ func (c *UpstashClient) SendDeleteRequest(endpointExtensionOrQstashEndpoint stri
 	if err != nil {
 		return err
 	}
-	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
+	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted && resp.Response().StatusCode != http.StatusCreated {
 		return errors.New(errMessage + " failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
 	}
 	return err
@@ -76,7 +80,7 @@ func (c *UpstashClient) SendDeleteRequest(endpointExtensionOrQstashEndpoint stri
 func (c *UpstashClient) SendGetRequest(endpointExtensionOrQstashEndpoint string, errMessage string) (response *req.Resp, err error) {
 	endpoint := UPSTASH_API_ENDPOINT + endpointExtensionOrQstashEndpoint
 	if strings.Contains(endpointExtensionOrQstashEndpoint, "qstash") {
-		err, BEARER_TOKEN := c.getQstashToken()
+		err, BEARER_TOKEN := c.GetQstashToken()
 		if err != nil {
 			return response, err
 		}
@@ -95,42 +99,43 @@ func (c *UpstashClient) SendGetRequest(endpointExtensionOrQstashEndpoint string,
 	if err != nil {
 		return resp, err
 	}
-	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
+	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted && resp.Response().StatusCode != http.StatusCreated {
 		return resp, errors.New(errMessage + " failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
 	}
 	return resp, err
 }
 
-func (c *UpstashClient) SendPostRequest(endpointExtensionOrQstashEndpoint string, body interface{}, errMessage string, headers ...req.Header) (response *req.Resp, err error) {
+func (c *UpstashClient) SendPostRequest(endpointExtensionOrQstashEndpoint string, body interface{}, errMessage string) (response *req.Resp, err error) {
 
 	endpoint := UPSTASH_API_ENDPOINT + endpointExtensionOrQstashEndpoint
 	if strings.Contains(endpointExtensionOrQstashEndpoint, "qstash") {
-		err, BEARER_TOKEN := c.getQstashToken()
+		err, BEARER_TOKEN := c.GetQstashToken()
 		if err != nil {
 			return response, err
 		}
 		endpoint = endpointExtensionOrQstashEndpoint
-		return req.Post(
+		resp, err := req.Post(
 			endpoint,
 			req.Header{"Accept": "application/json"},
 			req.Header{"Authorization": "Bearer " + BEARER_TOKEN},
-			req.Header{"Upstash-Cron": "* * * * *"},
-			// headers,
 			req.BodyJSON(body),
 		)
+		if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted && resp.Response().StatusCode != http.StatusCreated {
+			return nil, errors.New(errMessage + " failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
+		}
+		return resp, err
 	}
 	resp, err := req.Post(
 		endpoint,
 		req.Header{"Accept": "application/json"},
 		req.Header{"Authorization": utils.BasicAuth(c.Email, c.Apikey)},
 		req.BodyJSON(body),
-		headers,
 	)
 
 	if err != nil {
 		return nil, err
 	}
-	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted {
+	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted && resp.Response().StatusCode != http.StatusCreated {
 		return nil, errors.New(errMessage + " failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
 	}
 	return resp, err
