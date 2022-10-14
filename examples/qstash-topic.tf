@@ -24,13 +24,13 @@ resource "upstash_qstash_endpoint" "ep2" {
 resource "upstash_qstash_schedule" "sch1" {
     destination = resource.upstash_qstash_topic.exampleQstashTopic.topic_id
     #for now, runs default * * * * *
-    #cron = "* * * * *"
+    cron = "* * * * * invalid"
 }
 
 resource "upstash_qstash_schedule" "sch2" {
     destination = "https://testing.com"
     #for now, runs default * * * * *
-    #cron = "* * * * *"
+    cron = "* * * * * invalid"
 }
 
 output "a2" {
