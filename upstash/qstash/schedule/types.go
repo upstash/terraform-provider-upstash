@@ -5,15 +5,6 @@ import "github.com/upstash/terraform-provider-upstash/upstash/qstash/topic"
 type CreateQstashScheduleRequest struct {
 	Destination string `json:"destination"`
 	Body        string
-	// ContentType               string
-	// DeduplicationId           string
-	// ContentBasedDeduplication string
-	// NotBefore                 string
-	// Delay                     string
-	// Retries                   string
-	// Cron                      string
-
-	// HeaderParameters HeaderParameters `json:"headerParameters"`
 }
 
 type QstashSchedule struct {
