@@ -2,7 +2,6 @@ package topic
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/upstash/terraform-provider-upstash/upstash/qstash/endpoint"
 )
 
 func ResourceQstashTopic() *schema.Resource {
@@ -24,10 +23,14 @@ func ResourceQstashTopic() *schema.Resource {
 			},
 			// TODO: Use resource after generating endpoints resource
 			"endpoints": &schema.Schema{
-				Type:        schema.TypeList,
-				Computed:    true,
-				ForceNew:    true,
-				Elem:        endpoint.DataSourceQstashEndpoint(),
+				Type:     schema.TypeList,
+				Computed: true,
+				Elem: &schema.Schema{
+					Type: schema.TypeMap,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+				},
 				Description: "Members of the team. Email addresses are given as the keys with their roles as the values.",
 			},
 		},

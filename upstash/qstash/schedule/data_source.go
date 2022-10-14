@@ -18,6 +18,11 @@ func DataSourceQstashSchedule() *schema.Resource {
 				Computed:    true,
 				Description: "Cron string for Qstash Schedule",
 			},
+			"destination": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
+			},
 		},
 	}
 }

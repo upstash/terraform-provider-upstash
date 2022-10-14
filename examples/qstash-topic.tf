@@ -21,6 +21,18 @@ resource "upstash_qstash_endpoint" "ep2" {
     topic_id = resource.upstash_qstash_topic.exampleQstashTopic.topic_id
 }
 
+resource "upstash_qstash_schedule" "sch1" {
+    destination = resource.upstash_qstash_topic.exampleQstashTopic.topic_id
+    #for now, runs default * * * * *
+    #cron = "* * * * *"
+}
+
+resource "upstash_qstash_schedule" "sch2" {
+    destination = "https://testing.com"
+    #for now, runs default * * * * *
+    #cron = "* * * * *"
+}
+
 output "a2" {
     value = "TESTTTTT"
 }

@@ -13,20 +13,23 @@ func resourceTopicRead(ctx context.Context, data *schema.ResourceData, m interfa
 	c := m.(*client.UpstashClient)
 	topicId := data.Get("topic_id").(string)
 	topic, err := getTopic(c, topicId)
+
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
 	data.SetId("upstash-qstash-topic-" + topic.TopicId)
+	// return diag.Errorf("not working %+v", topic)
 
 	mapping := map[string]interface{}{
-		"name":      topic.Name,
-		"topic_id":  topic.TopicId,
-		"endpoints": topic.Endpoints,
+		"name":     topic.Name,
+		"topic_id": topic.TopicId,
+		"endpoints": []map[string]string{
+			{"asd": "asd"},
+		},
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)
-
 }
 
 func resourceTopicCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {

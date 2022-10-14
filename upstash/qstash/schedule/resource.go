@@ -23,7 +23,7 @@ func ResourceQstashSchedule() *schema.Resource {
 			},
 			"destination": &schema.Schema{
 				Type:        schema.TypeString,
-				Optional:    true,
+				Required:    true,
 				ForceNew:    true,
 				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
 			},

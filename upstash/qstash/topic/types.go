@@ -7,7 +7,7 @@ type createQstashTopicRequest struct {
 }
 
 type QstashTopic struct {
-	Name      string `json:"name"`
-	TopicId   string `json:"topicId"`
-	Endpoints []endpoint.QstashEndpoint
+	Name      string                    `json:"name"`
+	TopicId   string                    `json:"topicId"`
+	Endpoints []endpoint.QstashEndpoint `json:"endpoints"`
 }

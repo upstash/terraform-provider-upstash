@@ -3,17 +3,26 @@ package schedule
 import "github.com/upstash/terraform-provider-upstash/upstash/qstash/topic"
 
 type CreateQstashScheduleRequest struct {
-	Destination      string           `json:"destination"`
-	HeaderParameters HeaderParameters `json:"headerParameters"`
+	Destination string `json:"destination"`
+	// ContentType               string
+	// DeduplicationId           string
+	// ContentBasedDeduplication string
+	// NotBefore                 string
+	// Delay                     string
+	// Retries                   string
+	// Cron                      string
+
+	// HeaderParameters HeaderParameters `json:"headerParameters"`
 }
 
 type QstashSchedule struct {
-	Content     Content     `json:"content"`
-	CreatedAt   int64       `json:"createdAt,omitempty"`
+	// Content     Content     `json:"content"`
+	// CreatedAt   int64       `json:"createdAt,omitempty"`
 	Cron        string      `json:"cron"`
 	Destination Destination `json:"destination"`
-	ScheduleId  string      `json:"scheduleId"`
-	Settings    Settings    `json:"settings"`
+	// Destination Destination `json:"destination"`
+	ScheduleId string `json:"scheduleId"`
+	// Settings    Settings    `json:"settings"`
 }
 
 type Settings struct {
@@ -29,7 +38,7 @@ type Destination struct {
 }
 
 type Content struct {
-	Body   []int             `json:"body"`
+	Body   string            `json:"body"`
 	Header map[string]string `json:"header"`
 }
 
