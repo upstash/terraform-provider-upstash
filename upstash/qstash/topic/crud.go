@@ -19,7 +19,6 @@ func resourceTopicRead(ctx context.Context, data *schema.ResourceData, m interfa
 	}
 
 	data.SetId("upstash-qstash-topic-" + topic.TopicId)
-	// return diag.Errorf("not working %+v", topic)
 
 	mapping := map[string]interface{}{
 		"name":     topic.Name,
