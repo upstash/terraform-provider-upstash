@@ -20,12 +20,19 @@ func resourceTopicRead(ctx context.Context, data *schema.ResourceData, m interfa
 
 	data.SetId("upstash-qstash-topic-" + topic.TopicId)
 
+	endpointMap := []map[string]string{}
+	for _, val := range topic.Endpoints {
+		endpointMap = append(endpointMap, map[string]string{
+			"url":         val.Url,
+			"endpoint_id": val.EndpointId,
+			"topic_id":    val.TopicId,
+		})
+	}
+
 	mapping := map[string]interface{}{
-		"name":     topic.Name,
-		"topic_id": topic.TopicId,
-		"endpoints": []map[string]string{
-			{"asd": "asd"},
-		},
+		"name":      topic.Name,
+		"topic_id":  topic.TopicId,
+		"endpoints": endpointMap,
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)

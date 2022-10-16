@@ -30,7 +30,6 @@ func resourceScheduleRead(ctx context.Context, data *schema.ResourceData, m inte
 		"cron":        schedule.Cron,
 		"destination": destination,
 		"schedule_id": schedule.ScheduleId,
-		"body":        schedule.Content.Body,
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)
@@ -58,16 +57,7 @@ func resourceScheduleCreate(ctx context.Context, data *schema.ResourceData, m in
 	data.SetId("upstash-qstash-schedule-" + schedule.ScheduleId)
 	data.Set("schedule_id", schedule.ScheduleId)
 
-	diagnostics := resourceScheduleRead(ctx, data, m)
-	if diagnostics != nil {
-		return diagnostics
-	}
-
-	if err := data.Set("body", data.Get("body").(string)); err != nil {
-		return diag.FromErr(err)
-	}
-	return nil
-
+	return resourceScheduleRead(ctx, data, m)
 }
 
 func resourceScheduleDelete(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {

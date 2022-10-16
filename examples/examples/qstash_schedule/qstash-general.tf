@@ -7,6 +7,11 @@ resource "upstash_qstash_endpoint" "ep" {
     topic_id = resource.upstash_qstash_topic.exampleQstashTopic.topic_id
 }
 
+resource "upstash_qstash_endpoint" "ep2" {
+    url = "https://testing2.com"
+    topic_id = resource.upstash_qstash_topic.exampleQstashTopic.topic_id
+}
+
 resource "upstash_qstash_schedule" "sch" {
     destination = resource.upstash_qstash_topic.exampleQstashTopic.topic_id
     cron = "* * * * */2"
@@ -23,4 +28,12 @@ output "endpoint_id" {
 
 output "schedule_id" {
     value = resource.upstash_qstash_schedule.sch.schedule_id
+}
+
+output "endpoints_of_topic" {
+    value = resource.upstash_qstash_topic.exampleQstashTopic.endpoints
+}
+
+output "endpoints_of_topic2" {
+    value = resource.upstash_qstash_schedule.sch.body
 }
