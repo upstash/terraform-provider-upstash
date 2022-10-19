@@ -25,7 +25,7 @@ func getSchedule(c *client.UpstashClient, scheduleId string) (schedule QstashSch
 	return schedule, err
 }
 
-func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest, contentType string, deduplicationId string, contentBasedDeduplication bool, notBefore int, delay string, retries int, cron string) (schedule QstashSchedule, err error) {
+func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (schedule QstashSchedule, err error) {
 
 	err, BEARER_TOKEN := c.GetQstashToken()
 	if err != nil {
@@ -33,18 +33,27 @@ func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest, c
 	}
 	endpoint := c.GetQstashEndpoint() + "/publish/" + body.Destination
 
-	resp, err := req.Post(
-		endpoint,
+	postParameters := []interface{}{
+		req.Header{"Upstash-Cron": body.Headers.Cron},
+		req.Header{"Upstash-Retries": fmt.Sprint(body.Headers.Retries)},
 		req.Header{"Accept": "application/json"},
 		req.Header{"Authorization": "Bearer " + BEARER_TOKEN},
-		req.Header{"Content-Type": contentType},
-		req.Header{"Upstash-Deduplication-Id": deduplicationId},
-		req.Header{"Upstash-Content-Based-Deduplication": fmt.Sprint(contentBasedDeduplication)},
-		req.Header{"Upstash-NotBefore": fmt.Sprint(notBefore)},
-		req.Header{"Upstash-Delay": delay},
-		req.Header{"Upstash-Retries": fmt.Sprint(retries)},
-		req.Header{"Upstash-Cron": cron},
+		req.Header{"Content-Type": body.Headers.ContentType},
+		req.Header{"Upstash-Deduplication-Id": body.Headers.DeduplicationId},
+		req.Header{"Upstash-Content-Based-Deduplication": fmt.Sprint(body.Headers.ContentBasedDeduplication)},
+		req.Header{"Upstash-NotBefore": fmt.Sprint(body.Headers.NotBefore)},
+		req.Header{"Upstash-Delay": body.Headers.Delay},
 		req.BodyJSON(body.Body),
+	}
+
+	forwardHeaders := body.ForwardHeaders
+	for index := range forwardHeaders {
+		postParameters = append(postParameters, req.Header{fmt.Sprintf("Upstash-Forward-%s", index): forwardHeaders[index].(string)})
+	}
+
+	resp, err := req.Post(
+		endpoint,
+		postParameters...,
 	)
 
 	if err != nil {

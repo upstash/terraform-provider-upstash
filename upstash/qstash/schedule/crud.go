@@ -39,16 +39,19 @@ func resourceScheduleCreate(ctx context.Context, data *schema.ResourceData, m in
 	c := m.(*client.UpstashClient)
 
 	schedule, err := createSchedule(c, CreateQstashScheduleRequest{
-		Destination: data.Get("destination").(string),
-		Body:        data.Get("body").(string),
+		Destination:    data.Get("destination").(string),
+		Body:           data.Get("body").(string),
+		ForwardHeaders: data.Get("forward_headers").(map[string]interface{}),
+		Headers: QstashScheduleHeaders{
+			ContentType:               data.Get("content_type").(string),
+			DeduplicationId:           data.Get("deduplication_id").(string),
+			ContentBasedDeduplication: data.Get("content_based_deduplication").(bool),
+			NotBefore:                 data.Get("not_before").(int),
+			Delay:                     data.Get("delay").(string),
+			Retries:                   data.Get("retries").(int),
+			Cron:                      data.Get("cron").(string),
+		},
 	},
-		data.Get("content_type").(string),
-		data.Get("deduplication_id").(string),
-		data.Get("content_based_deduplication").(bool),
-		data.Get("not_before").(int),
-		data.Get("delay").(string),
-		data.Get("retries").(int),
-		data.Get("cron").(string),
 	)
 	if err != nil {
 		return diag.FromErr(err)

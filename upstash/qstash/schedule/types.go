@@ -3,8 +3,10 @@ package schedule
 import "github.com/upstash/terraform-provider-upstash/upstash/qstash/topic"
 
 type CreateQstashScheduleRequest struct {
-	Destination string `json:"destination"`
-	Body        string
+	Destination    string `json:"destination"`
+	Body           string
+	ForwardHeaders map[string]interface{}
+	Headers        QstashScheduleHeaders
 }
 
 type QstashSchedule struct {
@@ -31,4 +33,15 @@ type Destination struct {
 type Content struct {
 	Body   string            `json:"body"`
 	Header map[string]string `json:"header"`
+}
+
+type QstashScheduleHeaders struct {
+	ContentType               string
+	DeduplicationId           string
+	ContentBasedDeduplication bool
+	NotBefore                 int
+	Delay                     string
+	Retries                   int
+	Cron                      string
+	ForwardHeaders            map[string]string
 }

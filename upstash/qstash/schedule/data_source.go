@@ -43,6 +43,14 @@ func DataSourceQstashSchedule() *schema.Resource {
 				Computed:    true,
 				Description: "Encoded body for Qstash Schedule",
 			},
+			"forward_headers": &schema.Schema{
+				Type:     schema.TypeMap,
+				Computed: true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Description: "Forward headers to your API",
+			},
 		},
 	}
 }

@@ -67,12 +67,22 @@ func ResourceQstashSchedule() *schema.Resource {
 				Type:        schema.TypeInt,
 				ForceNew:    true,
 				Optional:    true,
+				Default:     3,
 				Description: "Retries for Qstash Schedule requests.",
 			},
 			"created_at": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Creation time for Qstash Schedule.",
+			},
+			"forward_headers": &schema.Schema{
+				Type:     schema.TypeMap,
+				ForceNew: true,
+				Optional: true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Description: "Forward headers to your API",
 			},
 		},
 	}
