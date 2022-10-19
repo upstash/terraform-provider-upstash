@@ -30,3 +30,8 @@ func getTopic(c *client.UpstashClient, topicId string) (topic QstashTopic, err e
 	err = resp.ToJSON(&topic)
 	return topic, err
 }
+
+func updateTopic(c *client.UpstashClient, topicId string, body UpdateQstashTopic) (err error) {
+	_, err = c.SendPutRequest(c.GetQstashEndpoint()+"/topics/"+topicId, body, "Update QStash Topic")
+	return err
+}

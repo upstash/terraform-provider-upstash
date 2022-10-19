@@ -28,3 +28,8 @@ func createEndpoint(c *client.UpstashClient, body createQstashEndpointRequest) (
 func deleteEndpoint(c *client.UpstashClient, endpointId string) (err error) {
 	return c.SendDeleteRequest(c.GetQstashEndpoint()+"/endpoints/"+endpointId, nil, "Delete QStash Endpoint")
 }
+
+func updateEndpoint(c *client.UpstashClient, endpointId string, body UpdateQstashEndpoint) (err error) {
+	_, err = c.SendPutRequest(c.GetQstashEndpoint()+"/endpoints/"+endpointId, body, "Update Qstash Endpoint")
+	return err
+}

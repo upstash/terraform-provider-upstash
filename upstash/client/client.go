@@ -140,3 +140,39 @@ func (c *UpstashClient) SendPostRequest(endpointExtensionOrQstashEndpoint string
 	}
 	return resp, err
 }
+
+func (c *UpstashClient) SendPutRequest(endpointExtensionOrQstashEndpoint string, body interface{}, errMessage string) (response *req.Resp, err error) {
+
+	endpoint := UPSTASH_API_ENDPOINT + endpointExtensionOrQstashEndpoint
+	if strings.Contains(endpointExtensionOrQstashEndpoint, "qstash") {
+		err, BEARER_TOKEN := c.GetQstashToken()
+		if err != nil {
+			return response, err
+		}
+		endpoint = endpointExtensionOrQstashEndpoint
+		resp, err := req.Put(
+			endpoint,
+			req.Header{"Accept": "application/json"},
+			req.Header{"Authorization": "Bearer " + BEARER_TOKEN},
+			req.BodyJSON(body),
+		)
+		if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted && resp.Response().StatusCode != http.StatusCreated {
+			return nil, errors.New(errMessage + " failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
+		}
+		return resp, err
+	}
+	resp, err := req.Put(
+		endpoint,
+		req.Header{"Accept": "application/json"},
+		req.Header{"Authorization": utils.BasicAuth(c.Email, c.Apikey)},
+		req.BodyJSON(body),
+	)
+
+	if err != nil {
+		return nil, err
+	}
+	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted && resp.Response().StatusCode != http.StatusCreated {
+		return nil, errors.New(errMessage + " failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
+	}
+	return resp, err
+}

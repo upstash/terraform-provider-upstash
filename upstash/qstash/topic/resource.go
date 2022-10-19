@@ -8,6 +8,7 @@ func ResourceQstashTopic() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceTopicCreate,
 		ReadContext:   resourceTopicRead,
+		UpdateContext: resourceTopicUpdate,
 		DeleteContext: resourceTopicDelete,
 		Schema: map[string]*schema.Schema{
 			"topic_id": &schema.Schema{
@@ -18,7 +19,6 @@ func ResourceQstashTopic() *schema.Resource {
 			"name": &schema.Schema{
 				Type:        schema.TypeString,
 				Required:    true,
-				ForceNew:    true,
 				Description: "Name of the Qstash Topic",
 			},
 			"endpoints": &schema.Schema{

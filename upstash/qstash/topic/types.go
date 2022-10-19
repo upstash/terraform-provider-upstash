@@ -11,3 +11,7 @@ type QstashTopic struct {
 	TopicId   string                    `json:"topicId"`
 	Endpoints []endpoint.QstashEndpoint `json:"endpoints"`
 }
+
+type UpdateQstashTopic struct {
+	Name string `json:"name"`
+}

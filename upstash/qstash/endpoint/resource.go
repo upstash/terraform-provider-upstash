@@ -6,6 +6,7 @@ func ResourceQstashEndpoint() *schema.Resource {
 	return &schema.Resource{
 		CreateContext: resourceEndpointCreate,
 		ReadContext:   resourceEndpointRead,
+		UpdateContext: resourceEndpointUpdate,
 		DeleteContext: resourceEndpointDelete,
 		Schema: map[string]*schema.Schema{
 			"topic_id": &schema.Schema{
@@ -26,7 +27,6 @@ func ResourceQstashEndpoint() *schema.Resource {
 			},
 			"url": &schema.Schema{
 				Type:        schema.TypeString,
-				ForceNew:    true,
 				Required:    true,
 				Description: "URL of the endpoint",
 			},

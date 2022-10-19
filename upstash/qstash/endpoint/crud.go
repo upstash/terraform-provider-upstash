@@ -52,3 +52,18 @@ func resourceEndpointDelete(ctx context.Context, data *schema.ResourceData, m in
 	}
 	return nil
 }
+
+func resourceEndpointUpdate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
+	c := m.(*client.UpstashClient)
+	endpointId := data.Get("endpoint_id").(string)
+	if data.HasChange("url") {
+		err := updateEndpoint(c, endpointId, UpdateQstashEndpoint{
+			Url: data.Get("url").(string),
+		})
+
+		if err != nil {
+			return diag.FromErr(err)
+		}
+	}
+	return resourceEndpointRead(ctx, data, m)
+}

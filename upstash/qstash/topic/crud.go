@@ -60,3 +60,18 @@ func resourceTopicDelete(ctx context.Context, data *schema.ResourceData, m inter
 	}
 	return nil
 }
+
+func resourceTopicUpdate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
+	c := m.(*client.UpstashClient)
+	topicId := data.Get("topic_id").(string)
+	if data.HasChange("name") {
+		err := updateTopic(c, topicId, UpdateQstashTopic{
+			Name: data.Get("name").(string),
+		})
+
+		if err != nil {
+			return diag.FromErr(err)
+		}
+	}
+	return resourceTopicRead(ctx, data, m)
+}
