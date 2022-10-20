@@ -33,16 +33,17 @@ resource "upstash_qstash_schedule" "exampleQstashSchedule" {
 ### Optional
 
 - `body` (String) Body to send for the POST request in string format. Needs escaping (\) double quotes.
-- `content_based_deduplication` (Boolean) Destination for Qstash Schedule. Either Topic ID or valid URL
-- `content_type` (String) Destination for Qstash Schedule. Either Topic ID or valid URL
-- `deduplication_id` (String) Destination for Qstash Schedule. Either Topic ID or valid URL
-- `delay` (String) Destination for Qstash Schedule. Either Topic ID or valid URL
-- `not_before` (Number) Destination for Qstash Schedule. Either Topic ID or valid URL
-- `retries` (Number) Destination for Qstash Schedule. Either Topic ID or valid URL
+- `content_based_deduplication` (Boolean) Content Based Deduplication (bool) for Qstash Scheduling.
+- `content_type` (String) Content type for Qstash Scheduling.
+- `deduplication_id` (String) Deduplication ID for Qstash Scheduling.
+- `delay` (String) Delay for Qstash Schedule.
+- `forward_headers` (Map of String) Forward headers to your API
+- `not_before` (Number) Start time for Qstash Scheduling.
+- `retries` (Number) Retries for Qstash Schedule requests.
 
 ### Read-Only
 
-- `created_at` (Number) Destination for Qstash Schedule. Either Topic ID or valid URL
+- `created_at` (Number) Creation time for Qstash Schedule.
 - `id` (String) The ID of this resource.
 - `schedule_id` (String) Unique Qstash Schedule ID for requested schedule
 

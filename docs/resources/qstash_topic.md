@@ -27,7 +27,7 @@ resource "upstash_qstash_topic" "exampleQstashTopic" {
 
 ### Read-Only
 
-- `endpoints` (List of Map of String) Members of the team. Email addresses are given as the keys with their roles as the values.
+- `endpoints` (List of Map of String) Endpoints for the Qstash Topic
 - `id` (String) The ID of this resource.
 - `topic_id` (String) Unique Qstash Topic ID for requested topic
 

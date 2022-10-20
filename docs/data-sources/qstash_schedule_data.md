@@ -27,12 +27,13 @@ data "upstash_qstash_schedule_data" "exampleQstashScheduleData" {
 
 ### Read-Only
 
-- `body` (String) Destination for Qstash Schedule. Either Topic ID or valid URL
-- `created_at` (Number) Destination for Qstash Schedule. Either Topic ID or valid URL
+- `body` (String) Encoded body for Qstash Schedule
+- `created_at` (Number) Creation time for Qstash Schedule
 - `cron` (String) Cron string for Qstash Schedule
 - `destination` (String) Destination for Qstash Schedule. Either Topic ID or valid URL
+- `forward_headers` (Map of String) Forward headers to your API
 - `id` (String) The ID of this resource.
-- `not_before` (Number) Destination for Qstash Schedule. Either Topic ID or valid URL
-- `retries` (Number) Destination for Qstash Schedule. Either Topic ID or valid URL
+- `not_before` (Number) Start time for Qstash Schedule
+- `retries` (Number) Retries for Qstash Schedule. Either Topic ID or valid URL
 
 
