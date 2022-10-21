@@ -12,7 +12,7 @@ import (
 
 func getSchedule(c *client.UpstashClient, scheduleId string) (schedule QstashSchedule, err error) {
 
-	resp, _ := c.SendGetRequest(c.GetQstashEndpoint()+"/schedules/"+scheduleId, "Get QStash Schedule")
+	resp, _ := c.SendGetRequest(c.GetQstashEndpoint()+"/schedules/"+scheduleId, "Get QStash Schedule", true)
 
 	if err != nil {
 		return schedule, err
@@ -72,5 +72,5 @@ func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (
 }
 
 func deleteSchedule(c *client.UpstashClient, scheduleId string) (err error) {
-	return c.SendDeleteRequest(c.GetQstashEndpoint()+"/schedules/"+scheduleId, nil, "Delete QStash Schedule")
+	return c.SendDeleteRequest(c.GetQstashEndpoint()+"/schedules/"+scheduleId, nil, "Delete QStash Schedule", true)
 }

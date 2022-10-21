@@ -8,7 +8,7 @@ import (
 
 func CreateDatabase(c *client.UpstashClient, body CreateDatabaseRequest) (database Database, err error) {
 
-	resp, err := c.SendPostRequest("/v2/redis/database", body, "Create Redis Database")
+	resp, err := c.SendPostRequest("/v2/redis/database", body, "Create Redis Database", false)
 
 	if err != nil {
 		return database, err
@@ -21,7 +21,7 @@ func CreateDatabase(c *client.UpstashClient, body CreateDatabaseRequest) (databa
 
 func GetDatabase(c *client.UpstashClient, databaseId string) (database Database, err error) {
 
-	resp, err := c.SendGetRequest("/v2/redis/database/"+databaseId, "Get Redis Database")
+	resp, err := c.SendGetRequest("/v2/redis/database/"+databaseId, "Get Redis Database", false)
 
 	if err != nil {
 		return database, err
@@ -34,7 +34,7 @@ func GetDatabase(c *client.UpstashClient, databaseId string) (database Database,
 
 func EnableTLS(c *client.UpstashClient, databaseId string) (err error) {
 
-	_, err = c.SendPostRequest("/v2/redis/enable-tls/"+databaseId, nil, "Enable Tls for Redis Database")
+	_, err = c.SendPostRequest("/v2/redis/enable-tls/"+databaseId, nil, "Enable Tls for Redis Database", false)
 
 	return err
 
@@ -42,7 +42,7 @@ func EnableTLS(c *client.UpstashClient, databaseId string) (err error) {
 
 func EnableMultiZone(c *client.UpstashClient, databaseId string, enabled bool) (err error) {
 
-	_, err = c.SendPostRequest("/v2/redis/enable-multizone/"+databaseId, nil, "Enable Multizone for Redis Database")
+	_, err = c.SendPostRequest("/v2/redis/enable-multizone/"+databaseId, nil, "Enable Multizone for Redis Database", false)
 
 	return err
 
@@ -50,6 +50,6 @@ func EnableMultiZone(c *client.UpstashClient, databaseId string, enabled bool) (
 
 func DeleteDatabase(c *client.UpstashClient, databaseId string) (err error) {
 
-	return c.SendDeleteRequest("/v2/redis/database/"+databaseId, nil, "Delete Redis Database")
+	return c.SendDeleteRequest("/v2/redis/database/"+databaseId, nil, "Delete Redis Database", false)
 
 }
