@@ -47,7 +47,7 @@ data "upstash_redis_database_data" "exampleDBData" {
 - `region` (String) region of the database. Possible values are: "global", "eu-west-1", "us-east-1", "us-west-1", "ap-northeast-1" , "eu-central1"
 - `rest_token` (String, Sensitive) Rest Token for the database.
 - `state` (String) State of the database
-- `tls` (Boolean, Deprecated) When enabled data is encrypted in transit
+- `tls` (Boolean) When enabled data is encrypted in transit
 - `user_email` (String) User email for the database
 
 

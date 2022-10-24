@@ -7,7 +7,16 @@ variable "api_key" {
   default     = ""
 }
 
-variable "database_name"{}
-variable "region"{}
-variable "tls"{}
-variable "multizone"{}
+variable "database_name"{
+  default = "terraform_db"
+}
+variable "region"{
+  default = "eu-west-1"
+
+}
+variable "tls"{
+  default = "false"
+}
+variable "multizone"{
+  default = "false"
+}

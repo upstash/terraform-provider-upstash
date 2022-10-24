@@ -8,6 +8,10 @@ import (
 	"github.com/upstash/terraform-provider-upstash/upstash/kafka/cluster"
 	"github.com/upstash/terraform-provider-upstash/upstash/kafka/credential"
 	"github.com/upstash/terraform-provider-upstash/upstash/kafka/topic"
+	qstashEndpoint "github.com/upstash/terraform-provider-upstash/upstash/qstash/endpoint"
+	qstashSchedule "github.com/upstash/terraform-provider-upstash/upstash/qstash/schedule"
+	qstashTopic "github.com/upstash/terraform-provider-upstash/upstash/qstash/topic"
+
 	"github.com/upstash/terraform-provider-upstash/upstash/redis/database"
 	"github.com/upstash/terraform-provider-upstash/upstash/team"
 
@@ -36,6 +40,9 @@ func Provider() *schema.Provider {
 			"upstash_kafka_topic":      topic.ResourceTopic(),
 			"upstash_kafka_credential": credential.ResourceCredential(),
 			"upstash_team":             team.ResourceTeam(),
+			"upstash_qstash_topic":     qstashTopic.ResourceQstashTopic(),
+			"upstash_qstash_endpoint":  qstashEndpoint.ResourceQstashEndpoint(),
+			"upstash_qstash_schedule":  qstashSchedule.ResourceQstashSchedule(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"upstash_redis_database_data":   database.DataSourceDatabase(),
@@ -43,6 +50,9 @@ func Provider() *schema.Provider {
 			"upstash_kafka_topic_data":      topic.DataSourceTopic(),
 			"upstash_team_data":             team.DataSourceTeam(),
 			"upstash_kafka_credential_data": credential.DataSourceCredential(),
+			"upstash_qstash_topic_data":     qstashTopic.DataSourceQstashTopic(),
+			"upstash_qstash_endpoint_data":  qstashEndpoint.DataSourceQstashEndpoint(),
+			"upstash_qstash_schedule_data":  qstashSchedule.DataSourceQstashSchedule(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}

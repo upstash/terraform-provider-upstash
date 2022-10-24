@@ -33,7 +33,7 @@ resource "upstash_redis_database" "exampleDB" {
 
 - `consistent` (Boolean, Deprecated) When enabled, all writes are synchronously persisted to the disk.
 - `multizone` (Boolean) When enabled, database becomes highly available and is deployed in multiple zones. (If changed to false from true, results in deletion and recreation of the resource)
-- `tls` (Boolean, Deprecated) When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)
+- `tls` (Boolean) When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)
 
 ### Read-Only
 
