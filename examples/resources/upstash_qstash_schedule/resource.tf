@@ -3,5 +3,5 @@ resource "upstash_qstash_schedule" "exampleQstashSchedule" {
     cron = "* * * * */2"
 
     # or simply provide a link
-    destination = "https://***.***"
+    # destination = "https://***.***"
 }
