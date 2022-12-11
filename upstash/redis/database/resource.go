@@ -137,9 +137,6 @@ func ResourceDatabase() *schema.Resource {
 		},
 
 		CustomizeDiff: customdiff.All(
-			customdiff.ForceNewIfChange("multizone", func(ctx context.Context, old, new, meta interface{}) bool {
-				return old.(bool) && !new.(bool)
-			}),
 			customdiff.ForceNewIfChange("consistent", func(ctx context.Context, old, new, meta interface{}) bool {
 				return old.(bool) && !new.(bool)
 			}),
