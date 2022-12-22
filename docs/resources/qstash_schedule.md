@@ -37,6 +37,7 @@ resource "upstash_qstash_schedule" "exampleQstashSchedule" {
 - `content_type` (String) Content type for Qstash Scheduling.
 - `deduplication_id` (String) Deduplication ID for Qstash Scheduling.
 - `delay` (String) Delay for Qstash Schedule.
+- `callback` (String) Callback URL for Qstash Schedule.
 - `forward_headers` (Map of String) Forward headers to your API
 - `not_before` (Number) Start time for Qstash Scheduling.
 - `retries` (Number) Retries for Qstash Schedule requests.
@@ -46,5 +47,3 @@ resource "upstash_qstash_schedule" "exampleQstashSchedule" {
 - `created_at` (Number) Creation time for Qstash Schedule.
 - `id` (String) The ID of this resource.
 - `schedule_id` (String) Unique Qstash Schedule ID for requested schedule
-
-

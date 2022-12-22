@@ -48,6 +48,7 @@ func resourceScheduleCreate(ctx context.Context, data *schema.ResourceData, m in
 			ContentBasedDeduplication: data.Get("content_based_deduplication").(bool),
 			NotBefore:                 data.Get("not_before").(int),
 			Delay:                     data.Get("delay").(string),
+			Callback:                  data.Get("callback").(string),
 			Retries:                   data.Get("retries").(int),
 			Cron:                      data.Get("cron").(string),
 		},

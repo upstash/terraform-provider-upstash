@@ -43,6 +43,7 @@ func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (
 		req.Header{"Upstash-Content-Based-Deduplication": fmt.Sprint(body.Headers.ContentBasedDeduplication)},
 		req.Header{"Upstash-NotBefore": fmt.Sprint(body.Headers.NotBefore)},
 		req.Header{"Upstash-Delay": body.Headers.Delay},
+		req.Header{"Upstash-Callback": body.Headers.Callback},
 		req.BodyJSON(body.Body),
 	}
 

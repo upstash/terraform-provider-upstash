@@ -16,6 +16,7 @@ resource "upstash_qstash_schedule" "sch" {
     destination = resource.upstash_qstash_topic.exampleQstashTopic.topic_id
     cron = "* * * * */2"
     body = "{\"key\": \"value\"}"
+    callback = "https://your-domain.x/qstash-callback"
     forward_headers = {
         My-Header : "My-value"
         My-Header2 : "My-value2"

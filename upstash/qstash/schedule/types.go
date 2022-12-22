@@ -41,6 +41,7 @@ type QstashScheduleHeaders struct {
 	ContentBasedDeduplication bool
 	NotBefore                 int
 	Delay                     string
+	Callback                  string
 	Retries                   int
 	Cron                      string
 	ForwardHeaders            map[string]string

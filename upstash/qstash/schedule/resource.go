@@ -63,6 +63,12 @@ func ResourceQstashSchedule() *schema.Resource {
 				Optional:    true,
 				Description: "Delay for Qstash Schedule.",
 			},
+			"callback": &schema.Schema{
+				Type:        schema.TypeString,
+				ForceNew:    true,
+				Optional:    true,
+				Description: "Callback URL for Qstash Schedule.",
+			},
 			"retries": &schema.Schema{
 				Type:        schema.TypeInt,
 				ForceNew:    true,
