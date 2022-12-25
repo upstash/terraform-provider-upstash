@@ -48,6 +48,30 @@ func EnableMultiZone(c *client.UpstashClient, databaseId string, enabled bool) (
 
 }
 
+func ConfigureEviction(c *client.UpstashClient, databaseId string, enabled bool) (err error) {
+
+	body := ConfigureEvictionRequest{
+		DatabaseId: databaseId,
+		Eviction:   enabled,
+	}
+	_, err = c.SendPatchRequest("/v2/redis/eviction", body, "Configure Eviction Redis Database", false)
+
+	return err
+
+}
+
+func ConfigureAutoUpgrade(c *client.UpstashClient, databaseId string, enabled bool) (err error) {
+
+	body := ConfigureAutoUpgradeRequest{
+		DatabaseId:  databaseId,
+		AutoUpgrade: enabled,
+	}
+	_, err = c.SendPatchRequest("/v2/redis/autoupgrade", body, "Configure Auto Upgrade for Redis Database", false)
+
+	return err
+
+}
+
 func DeleteDatabase(c *client.UpstashClient, databaseId string) (err error) {
 
 	return c.SendDeleteRequest("/v2/redis/database/"+databaseId, nil, "Delete Redis Database", false)

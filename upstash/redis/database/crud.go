@@ -24,6 +24,18 @@ func resourceDatabaseUpdate(ctx context.Context, data *schema.ResourceData, m in
 		}
 	}
 
+	if data.HasChange("eviction") {
+		if err := ConfigureEviction(c, databaseId, data.Get("eviction").(bool)); err != nil {
+			return diag.FromErr(err)
+		}
+	}
+
+	if data.HasChange("auto_scale") {
+		if err := ConfigureAutoUpgrade(c, databaseId, data.Get("auto_scale").(bool)); err != nil {
+			return diag.FromErr(err)
+		}
+	}
+
 	if data.HasChange("consistent") {
 		if data.Get("consistent").(bool) {
 			return diag.Errorf("Cannot enable strong consistency on the DB. All the newly created DBs will be eventually consistent. Set consistent=false.")
@@ -61,6 +73,8 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 		"consistent":                 database.Consistent,
 		"multizone":                  database.MultiZone,
 		"tls":                        database.Tls,
+		"eviction":                   database.Eviction,
+		"auto_scale":                 database.AutoUpgrade,
 		"port":                       database.Port,
 		"rest_token":                 database.RestToken,
 		"read_only_rest_token":       database.ReadOnlyRestToken,
@@ -78,7 +92,6 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)
-
 }
 
 func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
@@ -90,6 +103,8 @@ func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m in
 		Region:       data.Get("region").(string),
 		DatabaseName: data.Get("database_name").(string),
 		Tls:          data.Get("tls").(bool),
+		Eviction:     data.Get("eviction").(bool),
+		AutoUpgrade:  data.Get("auto_scale").(bool),
 		Consistent:   data.Get("consistent").(bool),
 		MultiZone:    data.Get("multizone").(bool),
 	})

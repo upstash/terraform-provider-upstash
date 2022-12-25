@@ -9,6 +9,8 @@ type Database struct {
 	Password               string `json:"password,omitempty"`
 	Endpoint               string `json:"endpoint"`
 	Tls                    bool   `json:"tls"`
+	Eviction               bool   `json:"eviction"`
+	AutoUpgrade            bool   `json:"auto_upgrade"`
 	Consistent             bool   `json:"consistent"`
 	MultiZone              bool   `json:"multizone"`
 	RestToken              string `json:"rest_token,omitempty"`
@@ -31,4 +33,16 @@ type CreateDatabaseRequest struct {
 	Tls          bool   `json:"tls"`
 	Consistent   bool   `json:"consistent"`
 	MultiZone    bool   `json:"multizone"`
+	Eviction     bool   `json:"eviction"`
+	AutoUpgrade  bool   `json:"auto_upgrade"`
+}
+
+type ConfigureEvictionRequest struct {
+	DatabaseId string `json:"database_id"`
+	Eviction   bool   `json:"eviction"`
+}
+
+type ConfigureAutoUpgradeRequest struct {
+	DatabaseId  string `json:"database_id"`
+	AutoUpgrade bool   `json:"auto_upgrade"`
 }

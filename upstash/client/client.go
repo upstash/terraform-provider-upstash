@@ -157,3 +157,32 @@ func (c *UpstashClient) SendPutRequest(endpointExtensionOrQstashEndpoint string,
 	}
 	return resp, err
 }
+
+func (c *UpstashClient) SendPatchRequest(endpointExtensionOrQstashEndpoint string, body interface{}, errMessage string, qstashFlag bool) (response *req.Resp, err error) {
+	endpoint := UPSTASH_API_ENDPOINT + endpointExtensionOrQstashEndpoint
+	authHeader := req.Header{"Authorization": utils.BasicAuth(c.Email, c.Apikey)}
+
+	if qstashFlag {
+		endpoint = endpointExtensionOrQstashEndpoint
+		err, BEARER_TOKEN := c.GetQstashToken()
+		if err != nil {
+			return response, err
+		}
+		authHeader = req.Header{"Authorization": "Bearer " + BEARER_TOKEN}
+	}
+
+	resp, err := req.Patch(
+		endpoint,
+		req.Header{"Accept": "application/json"},
+		authHeader,
+		req.BodyJSON(body),
+	)
+
+	if err != nil {
+		return nil, err
+	}
+	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted && resp.Response().StatusCode != http.StatusCreated {
+		return nil, errors.New(errMessage + " failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
+	}
+	return resp, err
+}
