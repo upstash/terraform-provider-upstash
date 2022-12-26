@@ -49,6 +49,16 @@ func DataSourceDatabase() *schema.Resource {
 				Computed:    true,
 				Description: "When enabled data is encrypted in transit",
 			},
+			"eviction": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Description: "Enable eviction, to evict keys when your database reaches the max size",
+			},
+			"auto_scale": &schema.Schema{
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Description: "Upgrade to higher plans automatically when it hits quotas",
+			},
 			"port": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,

@@ -18,5 +18,13 @@ variable "tls"{
   default = "false"
 }
 variable "multizone"{
-  default = "false"
+  default = "true"
+}
+
+variable "eviction"{
+  default = "true"
+}
+
+variable "auto_scale"{
+  default = "true"
 }

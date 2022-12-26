@@ -63,6 +63,18 @@ func ResourceDatabase() *schema.Resource {
 				Default:     false,
 				Description: "When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)",
 			},
+			"eviction": &schema.Schema{
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+				Description: "Enable eviction, to evict keys when your database reaches the max size",
+			},
+			"auto_scale": &schema.Schema{
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+				Description: "Upgrade to higher plans automatically when it hits quotas",
+			},
 			"port": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,

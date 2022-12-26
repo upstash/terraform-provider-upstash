@@ -3,5 +3,7 @@ resource "upstash_redis_database" "exampleDB" {
   region = var.region
   multizone = var.multizone
   tls = var.tls
+  auto_scale = var.auto_scale
+  eviction = var.eviction
   consistent = false
 }

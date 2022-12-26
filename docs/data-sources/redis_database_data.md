@@ -27,6 +27,7 @@ data "upstash_redis_database_data" "exampleDBData" {
 
 ### Read-Only
 
+- `auto_scale` (Boolean) Upgrade to higher plans automatically when it hits quotas
 - `consistent` (Boolean, Deprecated) When enabled database runs in Consistency Mode
 - `creation_time` (Number) Creation time of the database
 - `database_name` (String) Name of the database
@@ -39,6 +40,7 @@ data "upstash_redis_database_data" "exampleDBData" {
 - `db_max_request_size` (Number) Max request size for the database
 - `db_memory_threshold` (Number) Memory threshold for the database
 - `endpoint` (String) Database URL for connection
+- `eviction` (Boolean) Enable eviction, to evict keys when your database reaches the max size
 - `id` (String) The ID of this resource.
 - `multizone` (Boolean) When enabled database is highly available and deployed multi-zone
 - `password` (String, Sensitive) Password of the database
