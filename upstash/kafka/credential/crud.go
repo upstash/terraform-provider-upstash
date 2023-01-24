@@ -47,15 +47,16 @@ func resourceCredentialRead(ctx context.Context, data *schema.ResourceData, m in
 	data.SetId("upstash-kafka-credential-" + credential.CredentialId)
 
 	mapping := map[string]interface{}{
-		"credential_id":   credential.CredentialId,
-		"credential_name": credential.CredentialName,
-		"topic":           credential.Topic,
-		"permissions":     credential.Permissions,
-		"cluster_id":      credential.ClusterId,
-		"username":        credential.Username,
-		"creation_time":   credential.CreationTime,
-		"state":           credential.State,
-		"password":        credential.Password,
+		"credential_id":    credential.CredentialId,
+		"credential_name":  credential.CredentialName,
+		"topic":            credential.Topic,
+		"permissions":      credential.Permissions,
+		"cluster_id":       credential.ClusterId,
+		"username":         credential.EncodedUsername,
+		"decoded_username": credential.Username,
+		"creation_time":    credential.CreationTime,
+		"state":            credential.State,
+		"password":         credential.Password,
 	}
 	return utils.SetAndCheckErrors(data, mapping)
 }

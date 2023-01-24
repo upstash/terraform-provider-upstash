@@ -63,3 +63,11 @@ output "credential_permissions" {
 output "credential_topic" {
     value = data.upstash_kafka_credential_data.kafkaCredentialData.topic
 }
+
+output "credential_username" {
+    value = data.upstash_kafka_credential_data.kafkaCredentialData.username
+}
+
+output "credential_password" {
+    value = data.upstash_kafka_credential_data.kafkaCredentialData.password
+}

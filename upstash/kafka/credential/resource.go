@@ -53,6 +53,11 @@ func ResourceCredential() *schema.Resource {
 				Computed:    true,
 				Description: "Username to be used for the kafka credential",
 			},
+			"decoded_username": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Decoded Username to be used for the kafka credential",
+			},
 			"creation_time": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
