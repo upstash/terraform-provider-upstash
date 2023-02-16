@@ -43,6 +43,7 @@ func DataSourceDatabase() *schema.Resource {
 				Type:        schema.TypeBool,
 				Computed:    true,
 				Description: "When enabled database is highly available and deployed multi-zone",
+				Deprecated:  "Multizone option is deprecated. It is enabled by default for paid databases.",
 			},
 			"tls": &schema.Schema{
 				Type:        schema.TypeBool,

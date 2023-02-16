@@ -12,11 +12,6 @@ import (
 func resourceDatabaseUpdate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	databaseId := data.Get("database_id").(string)
-	if data.HasChange("multizone") {
-		if err := EnableMultiZone(c, databaseId, data.Get("multizone").(bool)); err != nil {
-			return diag.FromErr(err)
-		}
-	}
 
 	if data.HasChange("tls") {
 		if err := EnableTLS(c, databaseId); err != nil {
