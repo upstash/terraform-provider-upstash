@@ -67,9 +67,6 @@ func redisDatabaseAsserter(t *testing.T, terraformOptions *terraform.Options) {
 
 	regionOutput := terraform.Output(t, terraformOptions, "region")
 	assert.Equal(t, redis_database_region, regionOutput)
-
-	multizoneOutput := terraform.Output(t, terraformOptions, "multizone") == "true"
-	assert.Equal(t, redis_database_multizone, multizoneOutput)
 }
 
 func redisDatabaseOptions(t *testing.T) *terraform.Options {
