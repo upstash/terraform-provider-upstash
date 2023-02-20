@@ -42,7 +42,7 @@ data "upstash_redis_database_data" "exampleDBData" {
 - `endpoint` (String) Database URL for connection
 - `eviction` (Boolean) Enable eviction, to evict keys when your database reaches the max size
 - `id` (String) The ID of this resource.
-- `multizone` (Boolean) When enabled database is highly available and deployed multi-zone
+- `multizone` (Boolean, Deprecated) When enabled database is highly available and deployed multi-zone
 - `password` (String, Sensitive) Password of the database
 - `port` (Number) Port of the endpoint
 - `read_only_rest_token` (String) Rest Token for the database.

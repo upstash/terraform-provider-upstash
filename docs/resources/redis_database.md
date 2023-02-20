@@ -34,7 +34,7 @@ resource "upstash_redis_database" "exampleDB" {
 - `auto_scale` (Boolean) Upgrade to higher plans automatically when it hits quotas
 - `consistent` (Boolean, Deprecated) When enabled, all writes are synchronously persisted to the disk.
 - `eviction` (Boolean) Enable eviction, to evict keys when your database reaches the max size
-- `multizone` (Boolean) When enabled, database becomes highly available and is deployed in multiple zones. (If changed to false from true, results in deletion and recreation of the resource)
+- `multizone` (Boolean, Deprecated) When enabled, database becomes highly available and is deployed in multiple zones. (If changed to false from true, results in deletion and recreation of the resource)
 - `tls` (Boolean) When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)
 
 ### Read-Only

@@ -56,6 +56,7 @@ func ResourceDatabase() *schema.Resource {
 				Optional:    true,
 				Default:     false,
 				Description: "When enabled, database becomes highly available and is deployed in multiple zones. (If changed to false from true, results in deletion and recreation of the resource)",
+				Deprecated:  "Multizone option is deprecated. It is enabled by default for paid databases.",
 			},
 			"tls": &schema.Schema{
 				Type:        schema.TypeBool,
