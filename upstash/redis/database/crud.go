@@ -2,6 +2,7 @@ package database
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -12,6 +13,21 @@ import (
 func resourceDatabaseUpdate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	databaseId := data.Get("database_id").(string)
+
+	if data.HasChange("read_regions") {
+		var readRegions []string
+		primaryRegion := data.Get("primary_region").(string)
+
+		for _, v := range (data.Get("read_regions").(*schema.Set)).List() {
+			if v.(string) == primaryRegion {
+				return diag.Errorf(fmt.Sprintf("Primary region '%s' can not be in the list of read regions.", primaryRegion))
+			}
+			readRegions = append([]string{v.(string)}, readRegions...)
+		}
+		if err := UpdateReadRegions(c, databaseId, UpdateReadRegionsRequest{readRegions}); err != nil {
+			return diag.FromErr((err))
+		}
+	}
 
 	if data.HasChange("tls") {
 		if err := EnableTLS(c, databaseId); err != nil {
@@ -84,6 +100,10 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 		"db_daily_bandwidth_limit":   database.DBDailyBandwidthLimit,
 		"db_max_commands_per_second": database.DBMaxCommandsPerSecond,
 		"creation_time":              database.CreationTime,
+		"primary_region":             database.PrimaryRegion,
+		"read_regions":               database.ReadRegions,
+		"primary_members":            database.PrimaryMembers,
+		"all_members":                database.AllMembers,
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)
@@ -94,14 +114,24 @@ func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m in
 		return diag.Errorf("Newly created DBs are eventually consistent. Set consistent=false in the resource.")
 	}
 	c := m.(*client.UpstashClient)
+
+	var readRegions []string
+	for _, v := range (data.Get("read_regions").(*schema.Set)).List() {
+		if v != nil {
+			readRegions = append(readRegions, v.(string))
+		}
+	}
+
 	database, err := CreateDatabase(c, CreateDatabaseRequest{
-		Region:       data.Get("region").(string),
-		DatabaseName: data.Get("database_name").(string),
-		Tls:          data.Get("tls").(bool),
-		Eviction:     data.Get("eviction").(bool),
-		AutoUpgrade:  data.Get("auto_scale").(bool),
-		Consistent:   data.Get("consistent").(bool),
-		MultiZone:    data.Get("multizone").(bool),
+		Region:        data.Get("region").(string),
+		DatabaseName:  data.Get("database_name").(string),
+		Tls:           data.Get("tls").(bool),
+		Eviction:      data.Get("eviction").(bool),
+		AutoUpgrade:   data.Get("auto_scale").(bool),
+		Consistent:    data.Get("consistent").(bool),
+		MultiZone:     data.Get("multizone").(bool),
+		PrimaryRegion: data.Get("primary_region").(string),
+		ReadRegions:   readRegions,
 	})
 	if err != nil {
 		return diag.FromErr(err)

@@ -76,6 +76,36 @@ func ResourceDatabase() *schema.Resource {
 				Default:     false,
 				Description: "Upgrade to higher plans automatically when it hits quotas",
 			},
+			"primary_region": &schema.Schema{
+				Type:        schema.TypeString,
+				Optional:    true,
+				ForceNew:    true,
+				Description: "Primary region for the database (Only works if region='global'. Can be one of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2])",
+			},
+			"read_regions": &schema.Schema{
+				Type: schema.TypeSet,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Optional:    true,
+				Description: "Read regions for the database (Only works if region='global' and primary_region is set. Can be any combination of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2], excluding the one given as primary.)",
+			},
+			"primary_members": &schema.Schema{
+				Type: schema.TypeSet,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Description: "Primary member for the database",
+			},
+			"all_members": &schema.Schema{
+				Type: schema.TypeSet,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Description: "All members for the database",
+			},
 			"port": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,

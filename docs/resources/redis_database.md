@@ -35,10 +35,13 @@ resource "upstash_redis_database" "exampleDB" {
 - `consistent` (Boolean, Deprecated) When enabled, all writes are synchronously persisted to the disk.
 - `eviction` (Boolean) Enable eviction, to evict keys when your database reaches the max size
 - `multizone` (Boolean, Deprecated) When enabled, database becomes highly available and is deployed in multiple zones. (If changed to false from true, results in deletion and recreation of the resource)
+- `primary_region` (String) Primary region for the database (Only works if region='global'. Can be one of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2])
+- `read_regions` (Set of String) Read regions for the database (Only works if region='global' and primary_region is set. Can be any combination of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2], excluding the one given as primary.)
 - `tls` (Boolean) When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)
 
 ### Read-Only
 
+- `all_members` (Set of String) All members for the database
 - `creation_time` (Number) Creation time of the database
 - `database_id` (String) Unique Database ID for created database
 - `database_type` (String) Type of the database
@@ -53,6 +56,7 @@ resource "upstash_redis_database" "exampleDB" {
 - `id` (String) The ID of this resource.
 - `password` (String, Sensitive) Password of the database
 - `port` (Number) Port of the endpoint
+- `primary_members` (Set of String) Primary member for the database
 - `read_only_rest_token` (String) Rest Token for the database.
 - `rest_token` (String, Sensitive) Rest Token for the database.
 - `state` (String) State of the database
