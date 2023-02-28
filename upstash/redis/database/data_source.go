@@ -73,22 +73,6 @@ func DataSourceDatabase() *schema.Resource {
 				Computed:    true,
 				Description: "Read regions for the database",
 			},
-			"primary_members": &schema.Schema{
-				Type: schema.TypeSet,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				Computed:    true,
-				Description: "Primary member for the database",
-			},
-			"all_members": &schema.Schema{
-				Type: schema.TypeSet,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				Computed:    true,
-				Description: "All members for the database",
-			},
 			"port": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,

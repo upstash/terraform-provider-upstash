@@ -27,7 +27,6 @@ data "upstash_redis_database_data" "exampleDBData" {
 
 ### Read-Only
 
-- `all_members` (Set of String) All members for the database
 - `auto_scale` (Boolean) Upgrade to higher plans automatically when it hits quotas
 - `consistent` (Boolean, Deprecated) When enabled database runs in Consistency Mode
 - `creation_time` (Number) Creation time of the database
@@ -46,7 +45,6 @@ data "upstash_redis_database_data" "exampleDBData" {
 - `multizone` (Boolean, Deprecated) When enabled database is highly available and deployed multi-zone
 - `password` (String, Sensitive) Password of the database
 - `port` (Number) Port of the endpoint
-- `primary_members` (Set of String) Primary member for the database
 - `primary_region` (String) Primary region for the database
 - `read_only_rest_token` (String) Rest Token for the database.
 - `read_regions` (Set of String) Read regions for the database

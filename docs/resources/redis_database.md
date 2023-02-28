@@ -41,7 +41,6 @@ resource "upstash_redis_database" "exampleDB" {
 
 ### Read-Only
 
-- `all_members` (Set of String) All members for the database
 - `creation_time` (Number) Creation time of the database
 - `database_id` (String) Unique Database ID for created database
 - `database_type` (String) Type of the database
@@ -56,7 +55,6 @@ resource "upstash_redis_database" "exampleDB" {
 - `id` (String) The ID of this resource.
 - `password` (String, Sensitive) Password of the database
 - `port` (Number) Port of the endpoint
-- `primary_members` (Set of String) Primary member for the database
 - `read_only_rest_token` (String) Rest Token for the database.
 - `rest_token` (String, Sensitive) Rest Token for the database.
 - `state` (String) State of the database

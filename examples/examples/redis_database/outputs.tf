@@ -100,7 +100,3 @@ output "primary_region" {
 output "read_regions" {
   value = data.upstash_redis_database_data.exampleDBData.read_regions
 }
-
-output "primary_members" {
-  value = data.upstash_redis_database_data.exampleDBData.primary_members
-}

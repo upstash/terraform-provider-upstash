@@ -25,8 +25,6 @@ type Database struct {
 	DBMemoryThreshold      int64    `json:"db_memory_threshold"`
 	DBDailyBandwidthLimit  int64    `json:"db_daily_bandwidth_limit"`
 	DBMaxCommandsPerSecond int64    `json:"db_max_commands_per_second"`
-	PrimaryMembers         []string `json:"primary_members"`
-	AllMembers             []string `json:"all_members"`
 	PrimaryRegion          string   `json:"primary_region"`
 	ReadRegions            []string `json:"read_regions"`
 }

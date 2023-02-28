@@ -102,8 +102,6 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 		"creation_time":              database.CreationTime,
 		"primary_region":             database.PrimaryRegion,
 		"read_regions":               database.ReadRegions,
-		"primary_members":            database.PrimaryMembers,
-		"all_members":                database.AllMembers,
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)
