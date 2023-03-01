@@ -45,7 +45,9 @@ data "upstash_redis_database_data" "exampleDBData" {
 - `multizone` (Boolean, Deprecated) When enabled database is highly available and deployed multi-zone
 - `password` (String, Sensitive) Password of the database
 - `port` (Number) Port of the endpoint
+- `primary_region` (String) Primary region for the database
 - `read_only_rest_token` (String) Rest Token for the database.
+- `read_regions` (Set of String) Read regions for the database
 - `region` (String) region of the database. Possible values are: "global", "eu-west-1", "us-east-1", "us-west-1", "ap-northeast-1" , "eu-central1"
 - `rest_token` (String, Sensitive) Rest Token for the database.
 - `state` (String) State of the database

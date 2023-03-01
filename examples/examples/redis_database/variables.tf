@@ -11,9 +11,11 @@ variable "database_name"{
   default = "terraform_db"
 }
 variable "region"{
-  default = "eu-west-1"
-
+  type = string
+  # default = "global"
+  # or for regional, pick a region. eg default="eu-west-1"
 }
+
 variable "tls"{
   default = "false"
 }
@@ -27,4 +29,17 @@ variable "eviction"{
 
 variable "auto_scale"{
   default = "true"
+}
+
+# below ones only work when region="global"
+variable "primary_region" {
+  type = string
+  default = ""
+  # default = "eu-central-1"
+}
+
+variable "read_regions"{
+  type = set(string)
+  default = []
+  # default = ["us-east-1", "eu-west-1", "ap-southeast-1"]
 }

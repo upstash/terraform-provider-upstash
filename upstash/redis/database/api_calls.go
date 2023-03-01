@@ -32,6 +32,14 @@ func GetDatabase(c *client.UpstashClient, databaseId string) (database Database,
 
 }
 
+func UpdateReadRegions(c *client.UpstashClient, databaseId string, readRegions UpdateReadRegionsRequest) (err error) {
+
+	_, err = c.SendPostRequest("/v2/redis/update-regions/"+databaseId, readRegions, "Update Regions for Redis Database", false)
+
+	return err
+
+}
+
 func EnableTLS(c *client.UpstashClient, databaseId string) (err error) {
 
 	_, err = c.SendPostRequest("/v2/redis/enable-tls/"+databaseId, nil, "Enable Tls for Redis Database", false)

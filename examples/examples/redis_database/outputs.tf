@@ -92,3 +92,11 @@ output "tls" {
 output "consistent" {
   value = data.upstash_redis_database_data.exampleDBData.consistent
 }
+
+output "primary_region" {
+  value = data.upstash_redis_database_data.exampleDBData.primary_region
+}
+
+output "read_regions" {
+  value = data.upstash_redis_database_data.exampleDBData.read_regions
+}

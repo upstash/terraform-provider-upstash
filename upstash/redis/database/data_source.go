@@ -60,6 +60,19 @@ func DataSourceDatabase() *schema.Resource {
 				Computed:    true,
 				Description: "Upgrade to higher plans automatically when it hits quotas",
 			},
+			"primary_region": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Primary region for the database",
+			},
+			"read_regions": &schema.Schema{
+				Type: schema.TypeSet,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Description: "Read regions for the database",
+			},
 			"port": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
