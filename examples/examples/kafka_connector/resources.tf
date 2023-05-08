@@ -32,14 +32,3 @@ resource "upstash_kafka_connector" "exampleKafkaConnector" {
     running_state = "running"
 }
 
-data "upstash_kafka_connector_data" "exampleKafkaConnectorData" {
-    connector_id = upstash_kafka_connector.exampleKafkaConnector.connector_id
-}
-
-output "state" {
-    value=data.upstash_kafka_connector_data.exampleKafkaConnectorData.state
-}
-
-output "connector_state" {
-    value=data.upstash_kafka_connector_data.exampleKafkaConnectorData.connector_state
-}
