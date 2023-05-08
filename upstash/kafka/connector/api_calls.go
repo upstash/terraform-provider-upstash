@@ -19,7 +19,6 @@ func createConnector(c *client.UpstashClient, clusterId string, body CreateConne
 
 }
 
-// func reconfigureConnector(c *client.UpstashClient, clusterId, connectorId string, body ReconfigureConnectorRequest) (err error) {
 func reconfigureConnector(c *client.UpstashClient, clusterId, connectorId string, body map[string]interface{}) (err error) {
 
 	_, err = c.SendPatchRequest(fmt.Sprintf("/v2/kafka/cluster/%s/connector/%s", clusterId, connectorId), body, "Reconfigure Kafka Cluster", false)

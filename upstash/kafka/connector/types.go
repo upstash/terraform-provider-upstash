@@ -1,6 +1,5 @@
 package connector
 
-// might reduce some fields here...
 type Connector struct {
 	ConnectorId         string                 `json:"connector_id"`
 	Name                string                 `json:"name"`
@@ -18,10 +17,9 @@ type Connector struct {
 	PropertiesEncrypted string                 `json:"properties_encrypted,omitempty"`
 	EncodedUsername     string                 `json:"encoded_username,omitempty"`
 	UserPassword        string                 `json:"user_password,omitempty"`
-	TTL                 int64                  `json:"TTL,omitempty"` //Do not remove this field, or TTL will be 0 and items will be deleted
+	TTL                 int64                  `json:"TTL,omitempty"`
 }
 
-// not sure if this is necessary
 type KafkaConnectorTask struct {
 	Id    int    `json:"id"`
 	State string `json:"state"`

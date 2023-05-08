@@ -94,7 +94,6 @@ func (c *UpstashClient) SendGetRequest(endpointExtensionOrQstashEndpoint string,
 	if err != nil {
 		return resp, err
 	}
-	// return resp, errors.New(resp.String())
 	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted && resp.Response().StatusCode != http.StatusCreated {
 		return resp, errors.New(errMessage + " failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
 	}
