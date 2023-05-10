@@ -102,6 +102,9 @@ func ResourceCluster() *schema.Resource {
 				Description: "Creation time of the cluster",
 			},
 		},
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 	}
 
 }
