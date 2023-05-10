@@ -32,3 +32,5 @@ resource "upstash_kafka_connector" "exampleKafkaConnector" {
     running_state = "running"
 }
 
+
+resource "upstash_kafka_connector" "importKafkaConnector" {}

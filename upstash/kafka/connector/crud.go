@@ -29,6 +29,9 @@ func resourceCreate(ctx context.Context, data *schema.ResourceData, m interface{
 func resourceRead(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	connectorId := data.Get("connector_id").(string)
+	if connectorId == "" {
+		connectorId = data.Id()
+	}
 	connector, err := getConnector(c, connectorId)
 	if err != nil {
 		return diag.FromErr(err)
