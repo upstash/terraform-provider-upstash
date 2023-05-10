@@ -42,3 +42,10 @@ output "endpoints_of_topic" {
 output "endpoints_of_topic2" {
     value = resource.upstash_qstash_schedule.sch.body
 }
+
+
+resource "upstash_qstash_endpoint" "importEP" {}
+
+resource "upstash_qstash_schedule" "importSCH" {}
+
+resource "upstash_qstash_topic" "importQstashTopic" {}
