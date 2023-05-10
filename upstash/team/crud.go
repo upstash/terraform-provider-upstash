@@ -28,6 +28,9 @@ func resourceCreate(ctx context.Context, data *schema.ResourceData, m interface{
 func resourceRead(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	teamId := data.Get("team_id").(string)
+	if teamId == "" {
+		teamId = data.Id()
+	}
 	teamMembers, err := getTeamMembers(c, teamId)
 
 	teamName := teamMembers[0].TeamName
