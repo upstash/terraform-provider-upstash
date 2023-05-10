@@ -163,6 +163,10 @@ func ResourceDatabase() *schema.Resource {
 			},
 		},
 
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
+
 		CustomizeDiff: customdiff.All(
 			customdiff.ForceNewIfChange("consistent", func(ctx context.Context, old, new, meta interface{}) bool {
 				return old.(bool) && !new.(bool)

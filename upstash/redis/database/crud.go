@@ -68,6 +68,9 @@ func resourceDatabaseDelete(ctx context.Context, data *schema.ResourceData, m in
 func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	databaseId := data.Get("database_id").(string)
+	if databaseId == "" {
+		databaseId = data.Id()
+	}
 	database, err := GetDatabase(c, databaseId)
 	if err != nil {
 		return diag.FromErr(err)
