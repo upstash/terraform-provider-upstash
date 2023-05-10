@@ -70,5 +70,8 @@ func ResourceCredential() *schema.Resource {
 				Description: "Password to be used in authenticating to the cluster",
 			},
 		},
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 	}
 }

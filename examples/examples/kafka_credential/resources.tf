@@ -22,3 +22,6 @@ resource "upstash_kafka_credential" "exampleKafkaCredential" {
     permissions = var.credential_permissions
 }
 
+resource "upstash_kafka_credential" "importKafkaCredential" {}
+
+
