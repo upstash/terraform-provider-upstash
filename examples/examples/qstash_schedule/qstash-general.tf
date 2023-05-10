@@ -44,8 +44,8 @@ output "endpoints_of_topic2" {
 }
 
 
-resource "upstash_qstash_endpoint" "importEP" {}
+# resource "upstash_qstash_endpoint" "importEP" {}
 
-resource "upstash_qstash_schedule" "importSCH" {}
+# resource "upstash_qstash_schedule" "importSCH" {}
 
-resource "upstash_qstash_topic" "importQstashTopic" {}
+# resource "upstash_qstash_topic" "importQstashTopic" {}

@@ -16,5 +16,5 @@ resource "upstash_kafka_topic" "exampleKafkaTopic" {
 }
 
 
-resource "upstash_kafka_topic" "importKafkaTopic" {}
+# resource "upstash_kafka_topic" "importKafkaTopic" {}
 

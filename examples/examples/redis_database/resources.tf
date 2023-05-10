@@ -9,3 +9,5 @@ resource "upstash_redis_database" "exampleDB" {
   primary_region = var.primary_region
   read_regions = var.read_regions
 }
+
+# resource "upstash_redis_database" "importDB" {}

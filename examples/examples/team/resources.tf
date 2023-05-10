@@ -4,4 +4,4 @@ resource "upstash_team" "exampleTeam" {
     team_members = var.team_members
 }
 
-resource "upstash_team" "importTeam" {}
+# resource "upstash_team" "importTeam" {}
