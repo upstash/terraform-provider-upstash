@@ -15,3 +15,6 @@ resource "upstash_kafka_topic" "exampleKafkaTopic" {
     cluster_id = resource.upstash_kafka_cluster.exampleKafkaCluster.cluster_id
 }
 
+
+resource "upstash_kafka_topic" "importKafkaTopic" {}
+
