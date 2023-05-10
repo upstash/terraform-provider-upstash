@@ -12,6 +12,10 @@ import (
 func resourceTopicRead(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	topicId := data.Get("topic_id").(string)
+	if topicId == "" {
+		topicId = data.Id()
+	}
+
 	topic, err := getTopic(c, topicId)
 
 	if err != nil {

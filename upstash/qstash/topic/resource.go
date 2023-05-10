@@ -33,5 +33,8 @@ func ResourceQstashTopic() *schema.Resource {
 				Description: "Endpoints for the Qstash Topic",
 			},
 		},
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 	}
 }

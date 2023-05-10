@@ -91,5 +91,8 @@ func ResourceQstashSchedule() *schema.Resource {
 				Description: "Forward headers to your API",
 			},
 		},
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 	}
 }
