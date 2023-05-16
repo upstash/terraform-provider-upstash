@@ -33,4 +33,4 @@ resource "upstash_kafka_connector" "exampleKafkaConnector" {
 }
 
 
-resource "upstash_kafka_connector" "importKafkaConnector" {}
+# resource "upstash_kafka_connector" "importKafkaConnector" {}

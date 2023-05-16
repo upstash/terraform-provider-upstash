@@ -6,9 +6,9 @@ import (
 	"github.com/upstash/terraform-provider-upstash/upstash/client"
 )
 
-func createConnector(c *client.UpstashClient, clusterId string, body CreateConnectorRequest) (connector Connector, err error) {
+func createConnector(c *client.UpstashClient, body CreateConnectorRequest) (connector Connector, err error) {
 
-	resp, err := c.SendPostRequest(fmt.Sprintf("/v2/kafka/cluster/%s/connector", clusterId), body, "Create Kafka Connector", false)
+	resp, err := c.SendPostRequest("/v2/kafka/connector", body, "Create Kafka Connector", false)
 
 	if err != nil {
 		return connector, err
@@ -19,9 +19,9 @@ func createConnector(c *client.UpstashClient, clusterId string, body CreateConne
 
 }
 
-func reconfigureConnector(c *client.UpstashClient, clusterId, connectorId string, body map[string]interface{}) (err error) {
+func reconfigureConnector(c *client.UpstashClient, connectorId string, body map[string]interface{}) (err error) {
 
-	_, err = c.SendPatchRequest(fmt.Sprintf("/v2/kafka/cluster/%s/connector/%s", clusterId, connectorId), body, "Reconfigure Kafka Cluster", false)
+	_, err = c.SendPatchRequest(fmt.Sprintf("/v2/kafka/connector/%s", connectorId), body, "Reconfigure Kafka Cluster", false)
 
 	return err
 
@@ -29,7 +29,7 @@ func reconfigureConnector(c *client.UpstashClient, clusterId, connectorId string
 
 func deleteConnector(c *client.UpstashClient, clusterId, connectorId string) (err error) {
 
-	return c.SendDeleteRequest(fmt.Sprintf("/v2/kafka/cluster/%s/connector/%s", clusterId, connectorId), nil, "Delete Kafka Connector", false)
+	return c.SendDeleteRequest(fmt.Sprintf("/v2/kafka/connector/%s", connectorId), nil, "Delete Kafka Connector", false)
 
 }
 
@@ -45,25 +45,25 @@ func getConnector(c *client.UpstashClient, connectorId string) (connector Connec
 	return connector, err
 }
 
-func pauseConnector(c *client.UpstashClient, clusterId, connectorId string) (err error) {
+func pauseConnector(c *client.UpstashClient, connectorId string) (err error) {
 
-	_, err = c.SendPostRequest(fmt.Sprintf("/v2/kafka/cluster/%s/connector/%s/pause", clusterId, connectorId), nil, "Pause Kafka Connector", false)
-
-	return err
-
-}
-
-func restartConnector(c *client.UpstashClient, clusterId, connectorId string) (err error) {
-
-	_, err = c.SendPostRequest(fmt.Sprintf("/v2/kafka/cluster/%s/connector/%s/restart", clusterId, connectorId), nil, "Restart Kafka Connector", false)
+	_, err = c.SendPostRequest(fmt.Sprintf("/v2/kafka/connector/%s/pause", connectorId), nil, "Pause Kafka Connector", false)
 
 	return err
 
 }
 
-func startConnector(c *client.UpstashClient, clusterId, connectorId string) (err error) {
+func restartConnector(c *client.UpstashClient, connectorId string) (err error) {
 
-	_, err = c.SendPostRequest(fmt.Sprintf("/v2/kafka/cluster/%s/connector/%s/start", clusterId, connectorId), nil, "Start Kafka Connector", false)
+	_, err = c.SendPostRequest(fmt.Sprintf("/v2/kafka/connector/%s/restart", connectorId), nil, "Restart Kafka Connector", false)
+
+	return err
+
+}
+
+func startConnector(c *client.UpstashClient, connectorId string) (err error) {
+
+	_, err = c.SendPostRequest(fmt.Sprintf("/v2/kafka/connector/%s/start", connectorId), nil, "Start Kafka Connector", false)
 
 	return err
 

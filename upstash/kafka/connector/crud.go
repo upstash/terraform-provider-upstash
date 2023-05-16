@@ -12,9 +12,9 @@ import (
 
 func resourceCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
-	clusterId := data.Get("cluster_id").(string)
-	connector, err := createConnector(c, clusterId, CreateConnectorRequest{
+	connector, err := createConnector(c, CreateConnectorRequest{
 		Name:       data.Get("name").(string),
+		ClusterId:  data.Get("cluster_id").(string),
 		Properties: data.Get("properties").(map[string]interface{}),
 	})
 	if err != nil {
@@ -53,9 +53,8 @@ func resourceRead(ctx context.Context, data *schema.ResourceData, m interface{})
 func resourceUpdate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	connectorId := data.Get("connector_id").(string)
-	clusterId := data.Get("cluster_id").(string)
 	if data.HasChange("properties") {
-		err := reconfigureConnector(c, clusterId, connectorId, data.Get("properties").(map[string]interface{}))
+		err := reconfigureConnector(c, connectorId, data.Get("properties").(map[string]interface{}))
 
 		if err != nil {
 			return diag.FromErr(err)
@@ -66,11 +65,11 @@ func resourceUpdate(ctx context.Context, data *schema.ResourceData, m interface{
 		var err error
 
 		if connectorState == "paused" {
-			err = pauseConnector(c, clusterId, connectorId)
+			err = pauseConnector(c, connectorId)
 		} else if connectorState == "running" {
-			err = startConnector(c, clusterId, connectorId)
+			err = startConnector(c, connectorId)
 		} else if connectorState == "restart" {
-			err = restartConnector(c, clusterId, connectorId)
+			err = restartConnector(c, connectorId)
 		}
 		if err != nil {
 			data.Set("running_state", "")

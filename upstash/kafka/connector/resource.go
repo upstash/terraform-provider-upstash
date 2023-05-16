@@ -43,7 +43,7 @@ func ResourceConnector() *schema.Resource {
 			"running_state": &schema.Schema{
 				Type:        schema.TypeString,
 				Optional:    true,
-				Description: "Running state of the connector",
+				Description: "Running state of the connector. Can be either 'paused', 'running' or 'restart'",
 				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
 					if val != "paused" && val != "running" && val != "restart" {
 						errs = append(errs, fmt.Errorf("running_state field can only take the values: [`paused`, `running`, `restart`]"))

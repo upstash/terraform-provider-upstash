@@ -28,6 +28,7 @@ type KafkaConnectorTask struct {
 
 type CreateConnectorRequest struct {
 	Name       string                 `json:"name"`
+	ClusterId  string                 `json:"cluster_id"`
 	Properties map[string]interface{} `json:"properties"`
 }
 
