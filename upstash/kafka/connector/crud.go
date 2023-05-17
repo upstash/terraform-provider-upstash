@@ -82,8 +82,7 @@ func resourceUpdate(ctx context.Context, data *schema.ResourceData, m interface{
 func resourceDelete(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	connectorId := data.Get("connector_id").(string)
-	clusterId := data.Get("cluster_id").(string)
-	err := deleteConnector(c, clusterId, connectorId)
+	err := deleteConnector(c, connectorId)
 	if err != nil {
 		return diag.FromErr(err)
 	}

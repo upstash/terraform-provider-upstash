@@ -21,13 +21,13 @@ func createConnector(c *client.UpstashClient, body CreateConnectorRequest) (conn
 
 func reconfigureConnector(c *client.UpstashClient, connectorId string, body map[string]interface{}) (err error) {
 
-	_, err = c.SendPatchRequest(fmt.Sprintf("/v2/kafka/connector/%s", connectorId), body, "Reconfigure Kafka Cluster", false)
+	_, err = c.SendPostRequest(fmt.Sprintf("/v2/kafka/update-connector/%s", connectorId), body, "Reconfigure Kafka Connector", false)
 
 	return err
 
 }
 
-func deleteConnector(c *client.UpstashClient, clusterId, connectorId string) (err error) {
+func deleteConnector(c *client.UpstashClient, connectorId string) (err error) {
 
 	return c.SendDeleteRequest(fmt.Sprintf("/v2/kafka/connector/%s", connectorId), nil, "Delete Kafka Connector", false)
 
