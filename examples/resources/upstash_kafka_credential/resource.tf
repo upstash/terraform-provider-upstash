@@ -22,3 +22,10 @@ resource "upstash_kafka_credential" "exampleKafkaCredential" {
     permissions = "ALL"
 }
 
+resource "upstash_kafka_credential" "exampleKafkaCredentialAllTopics" {
+  cluster_id = upstash_kafka_cluster.exampleKafkaCluster.cluster_id
+  credential_name="credentialFromTerraform"
+  topic = "*"
+  permissions = "ALL"
+}
+

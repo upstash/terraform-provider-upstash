@@ -67,7 +67,7 @@ func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (
 
 	err = resp.ToJSON(&schedule)
 	if err != nil {
-		return schedule, fmt.Errorf("ERR2: %+v, %+v", resp, err)
+		return schedule, fmt.Errorf("ERR: %+v, %+v", resp, err)
 	}
 	return schedule, err
 }
