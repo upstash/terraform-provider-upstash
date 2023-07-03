@@ -51,6 +51,9 @@ func resourceClusterDelete(ctx context.Context, data *schema.ResourceData, m int
 func resourceClusterRead(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	clusterId := data.Get("cluster_id").(string)
+	if clusterId == "" {
+		clusterId = data.Id()
+	}
 	cluster, err := getCluster(c, clusterId)
 
 	if err != nil {

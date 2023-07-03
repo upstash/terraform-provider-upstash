@@ -4,3 +4,5 @@ resource "upstash_kafka_cluster" "exampleCluster" {
   region = var.region
   multizone = var.multizone
 }
+
+# resource "upstash_kafka_cluster" "importCluster" {}

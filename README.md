@@ -30,13 +30,25 @@ provider "upstash" {
 Here example code snippet that creates database:
 
 ```hcl
-resource "upstash_database" "mydb" {
-  database_name = "mydb3"
+resource "upstash_redis_database" "redis" {
+  database_name = "db-name"
   region = "eu-west-1"
   tls = "true"
   multi_zone = "false"
 }
 ```
+## Import Resources From Outside of Terraform
+To import resources created outside of the terraform provider, simply create the resource in .tf file as follows:
+```hcl
+resource "upstash_redis_database" "redis" {}
+```
+after this, you can run the command: 
+```
+terraform import upstash_redis_database.redis <db-id>
+```
+
+Above example is given for an Upstash Redis database. You can import all of the resources by changing the resource type and providing the resource id.
+
 You can check full spec and [doc from here](https://registry.terraform.io/providers/upstash/upstash/latest/docs).
 
 ## Support, Bugs Reports, Feature Requests

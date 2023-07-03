@@ -31,5 +31,8 @@ func ResourceQstashEndpoint() *schema.Resource {
 				Description: "URL of the endpoint",
 			},
 		},
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 	}
 }

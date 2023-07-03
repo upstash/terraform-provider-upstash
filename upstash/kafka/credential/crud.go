@@ -38,6 +38,9 @@ func resourceCredentialDelete(ctx context.Context, data *schema.ResourceData, m 
 func resourceCredentialRead(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	credentialId := data.Get("credential_id").(string)
+	if credentialId == "" {
+		credentialId = data.Id()
+	}
 	credential, err := getCredential(c, credentialId)
 
 	if err != nil {

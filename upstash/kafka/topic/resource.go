@@ -95,5 +95,8 @@ func ResourceTopic() *schema.Resource {
 				Description: "Creation time of the topic",
 			},
 		},
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 	}
 }

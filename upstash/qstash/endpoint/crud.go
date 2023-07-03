@@ -12,6 +12,10 @@ import (
 func resourceEndpointRead(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	endpointId := data.Get("endpoint_id").(string)
+	if endpointId == "" {
+		endpointId = data.Id()
+	}
+
 	endpoint, err := getEndpoint(c, endpointId)
 	if err != nil {
 		return diag.FromErr(err)

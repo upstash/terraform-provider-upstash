@@ -28,3 +28,5 @@ resource "upstash_kafka_credential" "exampleKafkaCredentialAllTopics" {
   topic = "*"
   permissions = "ALL"
 }
+
+# resource "upstash_kafka_credential" "importKafkaCredential" {}
