@@ -1,17 +1,16 @@
 package topic
 
-import "github.com/upstash/terraform-provider-upstash/upstash/qstash/endpoint"
-
-type createQstashTopicRequest struct {
-	Name string `json:"name"`
+type QStashEndpoint struct {
+	Url string `json:"url"`
 }
 
-type QstashTopic struct {
-	Name      string                    `json:"name"`
-	TopicId   string                    `json:"topicId"`
-	Endpoints []endpoint.QstashEndpoint `json:"endpoints"`
+type QStashTopic struct {
+	Name      string           `json:"name"`
+	CreatedAt int64            `json:"created_at"`
+	UpdatedAt int64            `json:"updated_at"`
+	Endpoints []QStashEndpoint `json:"endpoints"`
 }
 
-type UpdateQstashTopic struct {
-	Name string `json:"name"`
+type UpdateQStashTopicEndpoints struct {
+	Endpoints []QStashEndpoint `json:"endpoints"`
 }

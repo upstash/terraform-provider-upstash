@@ -8,6 +8,11 @@ func DataSourceQstashSchedule() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: resourceScheduleRead,
 		Schema: map[string]*schema.Schema{
+			"created_at": &schema.Schema{
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Creation time for Qstash Schedule.",
+			},
 			"schedule_id": &schema.Schema{
 				Type:        schema.TypeString,
 				Required:    true,
@@ -21,35 +26,38 @@ func DataSourceQstashSchedule() *schema.Resource {
 			"destination": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
-				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
+				Description: "Destination for Qstash Schedule. Either Topic Name or valid URL",
 			},
-			"retries": &schema.Schema{
-				Type:        schema.TypeInt,
+			"method": &schema.Schema{
+				Type:        schema.TypeString,
 				Computed:    true,
-				Description: "Retries for Qstash Schedule. Either Topic ID or valid URL",
+				Description: "Method of Http Request on QStash",
 			},
-			"not_before": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Description: "Start time for Qstash Schedule",
-			},
-			"created_at": &schema.Schema{
-				Type:        schema.TypeInt,
-				Computed:    true,
-				Description: "Creation time for Qstash Schedule",
+			"header": &schema.Schema{
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Headers for the QStash schedule",
 			},
 			"body": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
-				Description: "Encoded body for Qstash Schedule",
+				Optional:    true,
+				Description: "Body to send for the POST request in string format. Needs escaping (\\) double quotes.",
 			},
-			"forward_headers": &schema.Schema{
-				Type:     schema.TypeMap,
-				Computed: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				Description: "Forward headers to your API",
+			"retries": &schema.Schema{
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Default:     3,
+				Description: "Retries for Qstash Schedule requests.",
+			},
+			"delay": &schema.Schema{
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Delay for Qstash Schedule.",
+			},
+			"callback": &schema.Schema{
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Callback URL for Qstash Schedule.",
 			},
 		},
 	}

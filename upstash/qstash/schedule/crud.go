@@ -2,6 +2,7 @@ package schedule
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -23,49 +24,20 @@ func resourceScheduleRead(ctx context.Context, data *schema.ResourceData, m inte
 
 	data.SetId("upstash-qstash-schedule-" + schedule.ScheduleId)
 
-	destination := schedule.Destination.Topic.TopicId
-	if schedule.Destination.Type == "url" {
-		destination = schedule.Destination.Url
-	}
 	mapping := map[string]interface{}{
 		"created_at":  schedule.CreatedAt,
-		"retries":     schedule.Settings.Retries,
-		"not_before":  schedule.Settings.NotBefore,
-		"cron":        schedule.Cron,
-		"destination": destination,
 		"schedule_id": schedule.ScheduleId,
+		"cron":        schedule.Cron,
+		"destination": schedule.Destination,
+		"method":      schedule.Method,
+		"header":      fmt.Sprintf("%+v", schedule.Header),
+		"body":        schedule.Body,
+		"retries":     schedule.Retries,
+		"delay":       fmt.Sprintf("%d", schedule.Delay),
+		"callback":    schedule.Callback,
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)
-}
-
-func resourceScheduleCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
-	c := m.(*client.UpstashClient)
-
-	schedule, err := createSchedule(c, CreateQstashScheduleRequest{
-		Destination:    data.Get("destination").(string),
-		Body:           data.Get("body").(string),
-		ForwardHeaders: data.Get("forward_headers").(map[string]interface{}),
-		Headers: QstashScheduleHeaders{
-			ContentType:               data.Get("content_type").(string),
-			DeduplicationId:           data.Get("deduplication_id").(string),
-			ContentBasedDeduplication: data.Get("content_based_deduplication").(bool),
-			NotBefore:                 data.Get("not_before").(int),
-			Delay:                     data.Get("delay").(string),
-			Callback:                  data.Get("callback").(string),
-			Retries:                   data.Get("retries").(int),
-			Cron:                      data.Get("cron").(string),
-		},
-	},
-	)
-	if err != nil {
-		return diag.FromErr(err)
-	}
-
-	data.SetId("upstash-qstash-schedule-" + schedule.ScheduleId)
-	data.Set("schedule_id", schedule.ScheduleId)
-
-	return resourceScheduleRead(ctx, data, m)
 }
 
 func resourceScheduleDelete(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
@@ -76,4 +48,30 @@ func resourceScheduleDelete(ctx context.Context, data *schema.ResourceData, m in
 		return diag.FromErr(err)
 	}
 	return nil
+}
+
+func resourceScheduleCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
+	c := m.(*client.UpstashClient)
+
+	scheduleID, err := createSchedule(c, CreateQstashScheduleRequest{
+		Destination:    data.Get("destination").(string),
+		Body:           data.Get("body").(string),
+		ForwardHeaders: data.Get("forward_headers").(map[string]interface{}),
+		Headers: QstashScheduleHeaders{
+			ContentType: data.Get("content_type").(string),
+			Method:      data.Get("method").(string),
+			Delay:       data.Get("delay").(string) + "s",
+			Retries:     data.Get("retries").(int),
+			Callback:    data.Get("callback").(string),
+			Cron:        data.Get("cron").(string),
+		},
+	})
+	if err != nil {
+		return diag.FromErr(err)
+	}
+
+	data.SetId("upstash-qstash-schedule-" + scheduleID)
+	data.Set("schedule_id", scheduleID)
+
+	return resourceScheduleRead(ctx, data, m)
 }

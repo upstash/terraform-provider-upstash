@@ -25,25 +25,29 @@ func getSchedule(c *client.UpstashClient, scheduleId string) (schedule QstashSch
 	return schedule, err
 }
 
-func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (schedule QstashSchedule, err error) {
+func deleteSchedule(c *client.UpstashClient, scheduleId string) (err error) {
+	return c.SendDeleteRequest(c.GetQstashEndpoint()+"/schedules/"+scheduleId, nil, "Delete QStash Schedule", true)
+}
+
+func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (scheduleID string, err error) {
 
 	err, BEARER_TOKEN := c.GetQstashToken()
 	if err != nil {
-		return schedule, err
+		return "", err
 	}
-	endpoint := c.GetQstashEndpoint() + "/publish/" + body.Destination
+	endpoint := c.GetQstashEndpoint() + "/schedules/" + body.Destination
 
 	postParameters := []interface{}{
-		req.Header{"Upstash-Cron": body.Headers.Cron},
+		req.Header{"Content-Type": body.Headers.ContentType},
+		req.Header{"Upstash-Method": body.Headers.Method},
+		req.Header{"Upstash-Delay": body.Headers.Delay},
 		req.Header{"Upstash-Retries": fmt.Sprint(body.Headers.Retries)},
+		req.Header{"Upstash-Callback": body.Headers.Callback},
+		req.Header{"Upstash-Cron": body.Headers.Cron},
+
 		req.Header{"Accept": "application/json"},
 		req.Header{"Authorization": "Bearer " + BEARER_TOKEN},
-		req.Header{"Content-Type": body.Headers.ContentType},
-		req.Header{"Upstash-Deduplication-Id": body.Headers.DeduplicationId},
-		req.Header{"Upstash-Content-Based-Deduplication": fmt.Sprint(body.Headers.ContentBasedDeduplication)},
-		req.Header{"Upstash-NotBefore": fmt.Sprint(body.Headers.NotBefore)},
-		req.Header{"Upstash-Delay": body.Headers.Delay},
-		req.Header{"Upstash-Callback": body.Headers.Callback},
+
 		req.BodyJSON(body.Body),
 	}
 
@@ -58,20 +62,18 @@ func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (
 	)
 
 	if err != nil {
-		return schedule, err
+		return "", err
 	}
 
 	if resp.Response().StatusCode != http.StatusOK && resp.Response().StatusCode != http.StatusAccepted && resp.Response().StatusCode != http.StatusCreated {
-		return schedule, errors.New("Create QStash Schedule failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
+		return "", errors.New("Create QStash Schedule failed, status code: " + strconv.Itoa(resp.Response().StatusCode) + " response: " + resp.String())
 	}
 
-	err = resp.ToJSON(&schedule)
+	var response CreateQstashScheduleResponse
+	err = resp.ToJSON(&response)
 	if err != nil {
-		return schedule, fmt.Errorf("ERR: %+v, %+v", resp, err)
+		return scheduleID, fmt.Errorf("ERR: %+v, %+v", resp, err)
 	}
-	return schedule, err
-}
 
-func deleteSchedule(c *client.UpstashClient, scheduleId string) (err error) {
-	return c.SendDeleteRequest(c.GetQstashEndpoint()+"/schedules/"+scheduleId, nil, "Delete QStash Schedule", true)
+	return response.ScheduleId, err
 }

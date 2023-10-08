@@ -24,7 +24,7 @@ func NewUpstashClient(email string, apikey string) *UpstashClient {
 }
 
 func (c *UpstashClient) GetQstashEndpoint() string {
-	return "https://qstash.upstash.io/v1"
+	return "https://qstash.upstash.io/v2"
 }
 
 func (c *UpstashClient) GetQstashToken() (error, string) {
