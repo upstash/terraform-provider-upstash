@@ -21,10 +21,10 @@ resource "upstash_qstash_schedule" "exampleQstashSchedule2" {
     method = "GET"
 }
 
-data "upstash_qstash_schedule_data" "kafkaClusterData" {
+data "upstash_qstash_schedule_data" "qstashData" {
     schedule_id = upstash_qstash_schedule.exampleQstashSchedule2.schedule_id
 }
 
-output a {
-    value = data.upstash_qstash_schedule_data.kafkaClusterData
+output exampleOutput {
+    value = data.upstash_qstash_schedule_data.qstashData
 }
