@@ -64,7 +64,7 @@ resource "upstash_kafka_connector" "exampleKafkaConnector" {
 
 ### Optional
 
-- `running_state` (String) Running state of the connector
+- `running_state` (String) Running state of the connector. Can be either 'paused', 'running' or 'restart'
 
 ### Read-Only
 

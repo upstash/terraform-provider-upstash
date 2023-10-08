@@ -17,12 +17,13 @@ description: |-
 
 ### Required
 
-- `topic_id` (String) Unique Qstash Topic ID for requested topic
+- `name` (String) Name of the Qstash Topic
 
 ### Read-Only
 
-- `endpoints` (List of Map of String) Endpoints for the Qstash Topic
+- `created_at` (Number) Creation time for Qstash Topic.
+- `endpoints` (Set of String) Endpoints for the Qstash Topic
 - `id` (String) The ID of this resource.
-- `name` (String) Name of the Qstash Topic
+- `updated_at` (Number) Last Update time for Qstash Topic.
 
 

@@ -28,23 +28,22 @@ resource "upstash_qstash_schedule" "exampleQstashSchedule" {
 ### Required
 
 - `cron` (String) Cron string for Qstash Schedule
-- `destination` (String) Destination for Qstash Schedule. Either Topic ID or valid URL
+- `destination` (String) Destination for Qstash Schedule. Either Topic Name or valid URL
 
 ### Optional
 
 - `body` (String) Body to send for the POST request in string format. Needs escaping (\) double quotes.
 - `callback` (String) Callback URL for Qstash Schedule.
-- `content_based_deduplication` (Boolean) Content Based Deduplication (bool) for Qstash Scheduling.
 - `content_type` (String) Content type for Qstash Scheduling.
-- `deduplication_id` (String) Deduplication ID for Qstash Scheduling.
-- `delay` (String) Delay for Qstash Schedule.
+- `delay` (String) Delay for Qstash Schedule. Delay should be given in seconds
 - `forward_headers` (Map of String) Forward headers to your API
-- `not_before` (Number) Start time for Qstash Scheduling.
+- `method` (String) Method of Http Request on QStash
 - `retries` (Number) Retries for Qstash Schedule requests.
 
 ### Read-Only
 
 - `created_at` (Number) Creation time for Qstash Schedule.
+- `header` (String) Headers for the QStash schedule
 - `id` (String) The ID of this resource.
 - `schedule_id` (String) Unique Qstash Schedule ID for requested schedule
 
