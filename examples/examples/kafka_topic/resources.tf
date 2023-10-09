@@ -13,6 +13,10 @@ resource "upstash_kafka_topic" "exampleKafkaTopic" {
     max_message_size = var.max_message_size
     cleanup_policy = var.cleanup_policy
     cluster_id = resource.upstash_kafka_cluster.exampleKafkaCluster.cluster_id
+
+    # Or, if you defined locals, you can use those as such 
+    # retention_size = local.retention_size_bytes
+    # max_message_size = local.max_message_size_bytes
 }
 
 
