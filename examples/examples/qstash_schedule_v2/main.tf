@@ -1,15 +1,15 @@
-resource "upstash_qstash_topic" "exampleQstashTopicNew" {
+resource "upstash_qstash_topic_v2" "exampleQstashTopicNew" {
     name = "terraform_qstash_topic"
     endpoints = ["https://google.com"]
 }
 
-resource "upstash_qstash_schedule" "exampleQstashSchedule" {
+resource "upstash_qstash_schedule_v2" "exampleQstashSchedule" {
     destination = upstash_qstash_topic.exampleQstashTopicNew.name
     cron = "* * * * */2"
     delay = 3600
 }
 
-resource "upstash_qstash_schedule" "exampleQstashSchedule2" {
+resource "upstash_qstash_schedule_v2" "exampleQstashSchedule2" {
     destination = "https://google.com"
     cron = "* * * * */3"
     forward_headers = {
@@ -21,10 +21,10 @@ resource "upstash_qstash_schedule" "exampleQstashSchedule2" {
     method = "GET"
 }
 
-data "upstash_qstash_schedule_data" "qstashData" {
-    schedule_id = upstash_qstash_schedule.exampleQstashSchedule2.schedule_id
+data "upstash_qstash_schedule_v2_data" "qstashData" {
+    schedule_id = upstash_qstash_schedule_v2.exampleQstashSchedule2.schedule_id
 }
 
 output exampleOutput {
-    value = data.upstash_qstash_schedule_data.qstashData
+    value = data.upstash_qstash_schedule_v2_data.qstashData
 }
