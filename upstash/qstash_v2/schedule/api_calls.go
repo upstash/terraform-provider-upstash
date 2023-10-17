@@ -12,7 +12,7 @@ import (
 
 func getSchedule(c *client.UpstashClient, scheduleId string) (schedule QstashSchedule, err error) {
 
-	resp, _ := c.SendGetRequest(c.GetQstashEndpoint()+"/schedules/"+scheduleId, "Get QStash Schedule", true)
+	resp, _ := c.SendGetRequest(c.GetQstashEndpointV2()+"/schedules/"+scheduleId, "Get QStash Schedule", true)
 
 	if err != nil {
 		return schedule, err
@@ -26,7 +26,7 @@ func getSchedule(c *client.UpstashClient, scheduleId string) (schedule QstashSch
 }
 
 func deleteSchedule(c *client.UpstashClient, scheduleId string) (err error) {
-	return c.SendDeleteRequest(c.GetQstashEndpoint()+"/schedules/"+scheduleId, nil, "Delete QStash Schedule", true)
+	return c.SendDeleteRequest(c.GetQstashEndpointV2()+"/schedules/"+scheduleId, nil, "Delete QStash Schedule", true)
 }
 
 func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (scheduleID string, err error) {
@@ -35,7 +35,7 @@ func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (
 	if err != nil {
 		return "", err
 	}
-	endpoint := c.GetQstashEndpoint() + "/schedules/" + body.Destination
+	endpoint := c.GetQstashEndpointV2() + "/schedules/" + body.Destination
 
 	postParameters := []interface{}{
 		req.Header{"Content-Type": body.Headers.ContentType},
