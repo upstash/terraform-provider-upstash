@@ -11,11 +11,15 @@ import (
 )
 
 func getSchedule(c *client.UpstashClient, scheduleId string) (schedule QstashSchedule, err error) {
+
 	resp, _ := c.SendGetRequest(c.GetQstashEndpoint()+"/schedules/"+scheduleId, "Get QStash Schedule", true)
+
 	if err != nil {
 		return schedule, err
 	}
+
 	err = resp.ToJSON(&schedule)
+
 	if err != nil {
 		return schedule, fmt.Errorf("ERR: %+v\n\n schedule:%+v\n\n resp:%+v", err, schedule, resp)
 	}
@@ -48,6 +52,7 @@ func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (
 	for index := range forwardHeaders {
 		postParameters = append(postParameters, req.Header{fmt.Sprintf("Upstash-Forward-%s", index): forwardHeaders[index].(string)})
 	}
+
 	resp, err := req.Post(
 		endpoint,
 		postParameters...,

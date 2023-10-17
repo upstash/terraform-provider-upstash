@@ -15,6 +15,7 @@ func resourceScheduleRead(ctx context.Context, data *schema.ResourceData, m inte
 	if scheduleId == "" {
 		scheduleId = data.Id()
 	}
+
 	schedule, err := getSchedule(c, scheduleId)
 	if err != nil {
 		return diag.FromErr(err)
