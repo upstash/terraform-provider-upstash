@@ -25,20 +25,15 @@ data "upstash_qstash_schedule_data" "exampleQstashScheduleData" {
 
 - `schedule_id` (String) Unique Qstash Schedule ID for requested schedule
 
-### Optional
-
-- `body` (String) Body to send for the POST request in string format. Needs escaping (\) double quotes.
-- `callback` (String) Callback URL for Qstash Schedule.
-- `delay` (String) Delay for Qstash Schedule.
-- `header` (String) Headers for the QStash schedule
-- `retries` (Number) Retries for Qstash Schedule requests.
-
 ### Read-Only
 
-- `created_at` (Number) Creation time for Qstash Schedule.
+- `body` (String) Encoded body for Qstash Schedule
+- `created_at` (Number) Creation time for Qstash Schedule
 - `cron` (String) Cron string for Qstash Schedule
-- `destination` (String) Destination for Qstash Schedule. Either Topic Name or valid URL
+- `destination` (String) Destination for Qstash Schedule. Either Topic ID or valid URL
+- `forward_headers` (Map of String) Forward headers to your API
 - `id` (String) The ID of this resource.
-- `method` (String) Method of Http Request on QStash
+- `not_before` (Number) Start time for Qstash Schedule
+- `retries` (Number) Retries for Qstash Schedule. Either Topic ID or valid URL
 
 

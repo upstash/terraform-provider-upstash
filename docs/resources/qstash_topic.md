@@ -23,13 +23,12 @@ resource "upstash_qstash_topic" "exampleQstashTopic" {
 
 ### Required
 
-- `endpoints` (Set of String) Endpoints for the Qstash Topic
 - `name` (String) Name of the Qstash Topic
 
 ### Read-Only
 
-- `created_at` (Number) Creation time for Qstash Topic.
+- `endpoints` (List of Map of String) Endpoints for the Qstash Topic
 - `id` (String) The ID of this resource.
-- `updated_at` (Number) Last Update time for Qstash Topic.
+- `topic_id` (String) Unique Qstash Topic ID for requested topic
 
 
