@@ -4,7 +4,7 @@ resource "upstash_qstash_topic_v2" "exampleQstashTopicNew" {
 }
 
 resource "upstash_qstash_schedule_v2" "exampleQstashSchedule" {
-    destination = upstash_qstash_topic.exampleQstashTopicNew.name
+    destination = upstash_qstash_topic_v2.exampleQstashTopicNew.name
     cron = "* * * * */2"
     delay = 3600
 }
