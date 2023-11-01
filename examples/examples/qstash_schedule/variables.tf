@@ -1,4 +1,3 @@
-
 variable "email" {
   description = "Upstash user email"
   default     = "<email here>"

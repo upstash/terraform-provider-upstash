@@ -12,6 +12,8 @@ import (
 	qstashEndpoint "github.com/upstash/terraform-provider-upstash/upstash/qstash/endpoint"
 	qstashSchedule "github.com/upstash/terraform-provider-upstash/upstash/qstash/schedule"
 	qstashTopic "github.com/upstash/terraform-provider-upstash/upstash/qstash/topic"
+	qstashScheduleV2 "github.com/upstash/terraform-provider-upstash/upstash/qstash_v2/schedule"
+	qstashTopicV2 "github.com/upstash/terraform-provider-upstash/upstash/qstash_v2/topic"
 
 	"github.com/upstash/terraform-provider-upstash/upstash/redis/database"
 	"github.com/upstash/terraform-provider-upstash/upstash/team"
@@ -36,26 +38,30 @@ func Provider() *schema.Provider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"upstash_redis_database":   database.ResourceDatabase(),
-			"upstash_kafka_cluster":    cluster.ResourceCluster(),
-			"upstash_kafka_topic":      topic.ResourceTopic(),
-			"upstash_kafka_credential": credential.ResourceCredential(),
-			"upstash_kafka_connector":  connector.ResourceConnector(),
-			"upstash_team":             team.ResourceTeam(),
-			"upstash_qstash_topic":     qstashTopic.ResourceQstashTopic(),
-			"upstash_qstash_endpoint":  qstashEndpoint.ResourceQstashEndpoint(),
-			"upstash_qstash_schedule":  qstashSchedule.ResourceQstashSchedule(),
+			"upstash_redis_database":     database.ResourceDatabase(),
+			"upstash_kafka_cluster":      cluster.ResourceCluster(),
+			"upstash_kafka_topic":        topic.ResourceTopic(),
+			"upstash_kafka_credential":   credential.ResourceCredential(),
+			"upstash_kafka_connector":    connector.ResourceConnector(),
+			"upstash_team":               team.ResourceTeam(),
+			"upstash_qstash_topic":       qstashTopic.ResourceQstashTopic(),
+			"upstash_qstash_endpoint":    qstashEndpoint.ResourceQstashEndpoint(),
+			"upstash_qstash_schedule":    qstashSchedule.ResourceQstashSchedule(),
+			"upstash_qstash_topic_v2":    qstashTopicV2.ResourceQstashTopic(),
+			"upstash_qstash_schedule_v2": qstashScheduleV2.ResourceQstashSchedule(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
-			"upstash_redis_database_data":   database.DataSourceDatabase(),
-			"upstash_kafka_cluster_data":    cluster.DataSourceCluster(),
-			"upstash_kafka_topic_data":      topic.DataSourceTopic(),
-			"upstash_kafka_credential_data": credential.DataSourceCredential(),
-			"upstash_kafka_connector_data":  connector.DataSourceConnector(),
-			"upstash_team_data":             team.DataSourceTeam(),
-			"upstash_qstash_topic_data":     qstashTopic.DataSourceQstashTopic(),
-			"upstash_qstash_endpoint_data":  qstashEndpoint.DataSourceQstashEndpoint(),
-			"upstash_qstash_schedule_data":  qstashSchedule.DataSourceQstashSchedule(),
+			"upstash_redis_database_data":     database.DataSourceDatabase(),
+			"upstash_kafka_cluster_data":      cluster.DataSourceCluster(),
+			"upstash_kafka_topic_data":        topic.DataSourceTopic(),
+			"upstash_kafka_credential_data":   credential.DataSourceCredential(),
+			"upstash_kafka_connector_data":    connector.DataSourceConnector(),
+			"upstash_team_data":               team.DataSourceTeam(),
+			"upstash_qstash_topic_data":       qstashTopic.DataSourceQstashTopic(),
+			"upstash_qstash_endpoint_data":    qstashEndpoint.DataSourceQstashEndpoint(),
+			"upstash_qstash_schedule_data":    qstashSchedule.DataSourceQstashSchedule(),
+			"upstash_qstash_topic_v2_data":    qstashTopicV2.DataSourceQstashTopic(),
+			"upstash_qstash_schedule_v2_data": qstashScheduleV2.DataSourceQstashSchedule(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}
