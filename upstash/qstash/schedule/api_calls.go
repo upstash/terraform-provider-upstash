@@ -12,7 +12,7 @@ import (
 
 func getSchedule(c *client.UpstashClient, scheduleId string) (schedule QstashSchedule, err error) {
 
-	resp, _ := c.SendGetRequest(c.GetQstashEndpoint()+"/schedules/"+scheduleId, "Get QStash Schedule", true)
+	resp, err := c.SendGetRequest(c.GetQstashEndpoint()+"/schedules/"+scheduleId, "Get QStash Schedule", true)
 
 	if err != nil {
 		return schedule, err
@@ -28,7 +28,7 @@ func getSchedule(c *client.UpstashClient, scheduleId string) (schedule QstashSch
 
 func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (schedule QstashSchedule, err error) {
 
-	err, BEARER_TOKEN := c.GetQstashToken()
+	err, authorizationToken := c.GetQstashToken()
 	if err != nil {
 		return schedule, err
 	}
@@ -38,7 +38,7 @@ func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (
 		req.Header{"Upstash-Cron": body.Headers.Cron},
 		req.Header{"Upstash-Retries": fmt.Sprint(body.Headers.Retries)},
 		req.Header{"Accept": "application/json"},
-		req.Header{"Authorization": "Bearer " + BEARER_TOKEN},
+		req.Header{"Authorization": "Bearer " + authorizationToken},
 		req.Header{"Content-Type": body.Headers.ContentType},
 		req.Header{"Upstash-Deduplication-Id": body.Headers.DeduplicationId},
 		req.Header{"Upstash-Content-Based-Deduplication": fmt.Sprint(body.Headers.ContentBasedDeduplication)},

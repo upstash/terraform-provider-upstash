@@ -12,7 +12,7 @@ import (
 
 func getSchedule(c *client.UpstashClient, scheduleId string) (schedule QstashSchedule, err error) {
 
-	resp, _ := c.SendGetRequest(c.GetQstashEndpointV2()+"/schedules/"+scheduleId, "Get QStash Schedule", true)
+	resp, err := c.SendGetRequest(c.GetQstashEndpointV2()+"/schedules/"+scheduleId, "Get QStash Schedule", true)
 
 	if err != nil {
 		return schedule, err
@@ -31,7 +31,7 @@ func deleteSchedule(c *client.UpstashClient, scheduleId string) (err error) {
 
 func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (scheduleID string, err error) {
 
-	err, BEARER_TOKEN := c.GetQstashToken()
+	err, authorizationToken := c.GetQstashToken()
 	if err != nil {
 		return "", err
 	}
@@ -46,7 +46,7 @@ func createSchedule(c *client.UpstashClient, body CreateQstashScheduleRequest) (
 		req.Header{"Upstash-Cron": body.Headers.Cron},
 
 		req.Header{"Accept": "application/json"},
-		req.Header{"Authorization": "Bearer " + BEARER_TOKEN},
+		req.Header{"Authorization": "Bearer " + authorizationToken},
 
 		req.BodyJSON(body.Body),
 	}

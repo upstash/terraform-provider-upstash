@@ -55,11 +55,11 @@ func (c *UpstashClient) SendDeleteRequest(endpointExtensionOrQstashEndpoint stri
 
 	if qstashFlag {
 		endpoint = endpointExtensionOrQstashEndpoint
-		err, BEARER_TOKEN := c.GetQstashToken()
+		err, authorizationToken := c.GetQstashToken()
 		if err != nil {
 			return err
 		}
-		authHeader = req.Header{"Authorization": "Bearer " + BEARER_TOKEN}
+		authHeader = req.Header{"Authorization": "Bearer " + authorizationToken}
 	}
 
 	resp, err := req.Delete(
@@ -83,11 +83,11 @@ func (c *UpstashClient) SendGetRequest(endpointExtensionOrQstashEndpoint string,
 
 	if qstashFlag {
 		endpoint = endpointExtensionOrQstashEndpoint
-		err, BEARER_TOKEN := c.GetQstashToken()
+		err, authorizationToken := c.GetQstashToken()
 		if err != nil {
 			return response, err
 		}
-		authHeader = req.Header{"Authorization": "Bearer " + BEARER_TOKEN}
+		authHeader = req.Header{"Authorization": "Bearer " + authorizationToken}
 	}
 
 	resp, err := req.Get(
@@ -110,11 +110,11 @@ func (c *UpstashClient) SendPostRequest(endpointExtensionOrQstashEndpoint string
 
 	if qstashFlag {
 		endpoint = endpointExtensionOrQstashEndpoint
-		err, BEARER_TOKEN := c.GetQstashToken()
+		err, authorizationToken := c.GetQstashToken()
 		if err != nil {
 			return response, err
 		}
-		authHeader = req.Header{"Authorization": "Bearer " + BEARER_TOKEN}
+		authHeader = req.Header{"Authorization": "Bearer " + authorizationToken}
 	}
 
 	resp, err := req.Post(
@@ -139,11 +139,11 @@ func (c *UpstashClient) SendPutRequest(endpointExtensionOrQstashEndpoint string,
 
 	if qstashFlag {
 		endpoint = endpointExtensionOrQstashEndpoint
-		err, BEARER_TOKEN := c.GetQstashToken()
+		err, authorizationToken := c.GetQstashToken()
 		if err != nil {
 			return response, err
 		}
-		authHeader = req.Header{"Authorization": "Bearer " + BEARER_TOKEN}
+		authHeader = req.Header{"Authorization": "Bearer " + authorizationToken}
 	}
 
 	resp, err := req.Put(
