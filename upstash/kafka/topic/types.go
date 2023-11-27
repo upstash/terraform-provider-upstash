@@ -34,4 +34,5 @@ type ReconfigureTopic struct {
 	RetentionTime  int `json:"retention_time"`
 	RetentionSize  int `json:"retention_size"`
 	MaxMessageSize int `json:"max_message_size"`
+	Partitions     int `json:"partitions"`
 }

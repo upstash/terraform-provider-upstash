@@ -68,11 +68,12 @@ func resourceRead(ctx context.Context, data *schema.ResourceData, m interface{})
 func resourceUpdate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	topicId := data.Get("topic_id").(string)
-	if data.HasChange("retention_time") || data.HasChange("retention_size") || data.HasChange("max_message_size") {
+	if data.HasChange("retention_time") || data.HasChange("retention_size") || data.HasChange("max_message_size") || data.HasChange("partitions") {
 		err := reconfigureKafkaTopic(c, topicId, ReconfigureTopic{
 			RetentionTime:  data.Get("retention_time").(int),
 			RetentionSize:  data.Get("retention_size").(int),
 			MaxMessageSize: data.Get("max_message_size").(int),
+			Partitions:     data.Get("partitions").(int),
 		})
 
 		if err != nil {
