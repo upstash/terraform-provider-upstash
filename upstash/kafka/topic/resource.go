@@ -23,7 +23,6 @@ func ResourceTopic() *schema.Resource {
 			"partitions": &schema.Schema{
 				Type:        schema.TypeInt,
 				Required:    true,
-				ForceNew:    true,
 				Description: "The number of partitions the topic will have",
 			},
 			"retention_time": &schema.Schema{
