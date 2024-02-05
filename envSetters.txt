@@ -1,4 +1,4 @@
-export TF_CLI_CONFIG_FILE=<Path to terraform.rc file>
+export TF_CLI_CONFIG_FILE="/Users/fahreddinozcan/Desktop/Upstash/terraform-provider-upstash/terraform-provider-upstash"
 export UPSTASH_EMAIL=<email address of the api-key owner>
 export UPSTASH_API_KEY=<api_key>
 
