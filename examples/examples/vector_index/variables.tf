@@ -1,11 +1,11 @@
 variable "email" {
-  default = "fahreddin@upstash.com"
+  default = "<YOUR MAIL ADDRESS>"
   description = "Upstash user email"
   type = string
 }
 
 variable "api_key" {
-  default     = "fb3b1b26-c2c0-43d9-a0fa-1a528b01b633"
+  default     = "<RELATED MANAGEMENT API KEY>"
   description = "Api key for the given user"
   type = string
 }
