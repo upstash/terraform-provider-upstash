@@ -15,6 +15,11 @@ func ResourceIndex() *schema.Resource {
 		UpdateContext: resourceIndexUpdate,
 		DeleteContext: resourceIndexDelete,
 		Schema: map[string]*schema.Schema{
+			"customer_id": &schema.Schema{
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "The unique ID associated to the owner of this index.",
+			},
 			"id": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
@@ -22,17 +27,17 @@ func ResourceIndex() *schema.Resource {
 			},
 			"name": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
+				Required:    true,
 				Description: "Name of the index.",
 			},
 			"similarity_function": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
+				Required:    true,
 				Description: "Associated distance metric to calculate the similarity.",
 			},
 			"dimension_count": &schema.Schema{
 				Type:        schema.TypeInt,
-				Computed:    true,
+				Required:    true,
 				Description: "Size of the vector array.",
 			},
 			"endpoint": &schema.Schema{
@@ -43,21 +48,23 @@ func ResourceIndex() *schema.Resource {
 			"token": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
+				Sensitive:   true,
 				Description: "REST token to send request to the related index.",
 			},
 			"read_only_token": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
+				Sensitive:   true,
 				Description: "Readonly REST token to send request to the related index. You can't perform update operation with this token.",
 			},
 			"type": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
+				Required:    true,
 				Description: "Associated plan of the index. Either `free`, `paid`, `fixed` or `pro`.",
 			},
 			"region": &schema.Schema{
 				Type:        schema.TypeString,
-				Computed:    true,
+				Required:    true,
 				Description: "The region where your index is deployed.",
 			},
 			"max_vector_count": &schema.Schema{
@@ -108,12 +115,13 @@ func ResourceIndex() *schema.Resource {
 			"reserved_price": &schema.Schema{
 				Type:        schema.TypeInt,
 				Computed:    true,
+				Optional:    true,
 				Description: "Monthly pricing of your index. Only available for fixed and pro plans.",
 			},
-			"customer_id": &schema.Schema{
-				Type:        schema.TypeString,
+			"creation_time": &schema.Schema{
+				Type:        schema.TypeInt,
 				Computed:    true,
-				Description: "The unique ID associated to the owner of this index.",
+				Description: "The creation time of the vector index in UTC as unix timestamp.",
 			},
 		},
 		Importer: &schema.ResourceImporter{

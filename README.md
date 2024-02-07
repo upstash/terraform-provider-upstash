@@ -80,3 +80,24 @@ provider_installation {
   direct {}
 }
 ```
+
+### Testing
+
+* First set your environment variables using the `envSetters.txt` file.
+
+```shell
+source envSetters.txt
+```
+
+* Then, navigate to `integrationtesting` folder, and un the tests using the following command:
+
+```shell
+go test -v
+```
+
+If you want to run a specific test, you can use the `-run` flag. To run the test, first navigate to `integrationtesting` folder, and then run the following command. You can replace `TestUpstashVectorIndexMAIN` with the name of the test you want to run.
+
+```shell
+go test -v . -run TestUpstashVectorIndexMAIN
+```
+

@@ -11,7 +11,7 @@ variable "api_key" {
 }
 
 variable "name" {
-  default = "terraform_index_rename"
+  default = "terraform_index"
   type = string
 }
 

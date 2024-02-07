@@ -1,20 +1,22 @@
 package index
 
 import (
-	//"context"
-
-	//"github.com/hashicorp/terraform-plugin-sdk/v2/helper/customdiff"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func DataResourceIndex() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: resourceIndexRead,
+
 		Schema: map[string]*schema.Schema{
-			"id": &schema.Schema{
+			"customer_id": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
+				Description: "The unique ID associated to the owner of this index.",
+			},
+			"id": &schema.Schema{
+				Type:        schema.TypeString,
+				Required:    true,
 				Description: "Unique Index ID for created index.",
 			},
 			"name": &schema.Schema{
@@ -40,6 +42,7 @@ func DataResourceIndex() *schema.Resource {
 			"token": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
+				Sensitive:   true,
 				Description: "REST token to send request to the related index.",
 			},
 			"read_only_token": &schema.Schema{
@@ -107,10 +110,10 @@ func DataResourceIndex() *schema.Resource {
 				Computed:    true,
 				Description: "Monthly pricing of your index. Only available for fixed and pro plans.",
 			},
-			"customer_id": &schema.Schema{
-				Type:        schema.TypeString,
+			"creation_time": &schema.Schema{
+				Type:        schema.TypeInt,
 				Computed:    true,
-				Description: "The unique ID associated to the owner of this index.",
+				Description: "The creation time of the vector index in UTC as unix timestamp.",
 			},
 		},
 		Importer: &schema.ResourceImporter{

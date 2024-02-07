@@ -1,6 +1,6 @@
-export TF_CLI_CONFIG_FILE="/Users/fahreddinozcan/Desktop/Upstash/terraform-provider-upstash/terraform-provider-upstash"
-export UPSTASH_EMAIL=<email address of the api-key owner>
-export UPSTASH_API_KEY=<api_key>
+export TF_CLI_CONFIG_FILE="/Users/fahreddinozcan/Desktop/Upstash/terraform-provider-upstash/terraform.rc"
+export UPSTASH_EMAIL="fahreddin@upstash.com"
+export UPSTASH_API_KEY="fb3b1b26-c2c0-43d9-a0fa-1a528b01b633"
 
 export UPSTASH_REDIS_DATABASE_NAME="TestingRedisDatabase"
 export UPSTASH_REDIS_DATABASE_REGION="eu-west-1"
@@ -21,8 +21,14 @@ export UPSTASH_KAFKA_TOPIC_CLEANUP_POLICY="delete"
 export UPSTASH_KAFKA_CREDENTIAL_NAME="<Name of credential>"
 export UPSTASH_KAFKA_CREDENTIAL_PERMISSIONS="<Permission for the credential>"
 
+export UPSTASH_VECTOR_INDEX_NAME="TerraformTestingIndex"
+export UPSTASH_VECTOR_INDEX_REGION="us-east-1"
+export UPSTASH_VECTOR_INDEX_TYPE="payg"
+export UPSTASH_VECTOR_INDEX_DIMENSION_COUNT="1"
+export UPSTASH_VECTOR_INDEX_SIMILARITY_FUNCTION="COSINE"
+
 export UPSTASH_TEAM_NAME="TestingTeam"
 export UPSTASH_TEAM_COPY_CC="false"
-export UPSTASH_TEAM_OWNER=<email address of the api-key owner>
+export UPSTASH_TEAM_OWNER="fahreddin@upstash.com"
 export UPSTASH_TEAM_DEVS="dev1@a.com dev2@b.com"
 export UPSTASH_TEAM_FINANCES="finance1@c.com finance2@d.com"

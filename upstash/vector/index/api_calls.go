@@ -4,8 +4,6 @@ import (
 	"github.com/upstash/terraform-provider-upstash/upstash/client"
 )
 
-// not needed if changes
-
 func CreateIndex(c *client.UpstashClient, body CreateIndexRequest) (index Index, err error) {
 
 	resp, err := c.SendPostRequest("/v2/vector/index", body, "Create Vector Index", false)
@@ -32,7 +30,7 @@ func GetIndex(c *client.UpstashClient, indexId string) (index Index, err error) 
 
 }
 
-func SetIndexPlan(c *client.UpstashClient, indexId string, plan string) (err error) {
+func SetIndexPlan(c *client.UpstashClient, indexId string, plan SetPlanRequest) (err error) {
 	_, err = c.SendPostRequest("/v2/vector/index/"+indexId+"/setplan", plan, "Set Plan for Vector Index", false)
 
 	return err
@@ -50,12 +48,12 @@ func TransferIndex(c *client.UpstashClient, indexId string, team string) (err er
 	return err
 }
 
-func RenameIndex(c *client.UpstashClient, indexId string, name string) (err error) {
+func RenameIndex(c *client.UpstashClient, indexId string, name RenameIndexRequest) (err error) {
 	_, err = c.SendPostRequest("/v2/vector/index/"+indexId+"/rename", name, "Rename Vector Index", false)
 
 	return err
 }
 
 func DeleteIndex(c *client.UpstashClient, indexId string) (err error) {
-	return c.SendDeleteRequest("/v2/vector/index"+indexId, nil, "Delete Vector Index", false)
+	return c.SendDeleteRequest("/v2/vector/index/"+indexId, nil, "Delete Vector Index", false)
 }
