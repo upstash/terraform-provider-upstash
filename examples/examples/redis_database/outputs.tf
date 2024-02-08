@@ -39,6 +39,7 @@ output "rest_token" {
 
 output "read_only_rest_token" {
   value = data.upstash_redis_database_data.exampleDBData.read_only_rest_token
+  sensitive = true
 }
 
 output "creation_time" {

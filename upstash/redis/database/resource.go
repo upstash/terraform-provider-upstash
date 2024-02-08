@@ -104,6 +104,7 @@ func ResourceDatabase() *schema.Resource {
 			"read_only_rest_token": &schema.Schema{
 				Type:        schema.TypeString,
 				Computed:    true,
+				Sensitive:   true,
 				Description: "Rest Token for the database.",
 			},
 			"creation_time": &schema.Schema{
