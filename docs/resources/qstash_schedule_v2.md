@@ -36,5 +36,3 @@ description: |-
 - `header` (String) Headers for the QStash schedule
 - `id` (String) The ID of this resource.
 - `schedule_id` (String) Unique Qstash Schedule ID for requested schedule
-
-

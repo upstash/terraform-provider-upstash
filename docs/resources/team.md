@@ -39,5 +39,3 @@ resource "upstash_team" "exampleTeam" {
 
 - `id` (String) The ID of this resource.
 - `team_id` (String) Unique Cluster ID for created cluster
-
-

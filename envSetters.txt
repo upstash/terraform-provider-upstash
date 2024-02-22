@@ -1,6 +1,6 @@
-export TF_CLI_CONFIG_FILE="<PATH TO terraform.rc FILE>"
-export UPSTASH_EMAIL="<YOUR MAIL>"
-export UPSTASH_API_KEY="<YOUR API KEY>"
+export TF_CLI_CONFIG_FILE="/Users/fahreddinozcan/Desktop/Upstash/terraform-provider-upstash/terraform.rc"
+export UPSTASH_EMAIL="fahreddin@upstash.com"
+export UPSTASH_API_KEY="97281577-3166-460d-b5b4-583e029a447d"
 
 export UPSTASH_REDIS_DATABASE_NAME="TestingRedisDatabase"
 export UPSTASH_REDIS_DATABASE_REGION="eu-west-1"
@@ -29,6 +29,6 @@ export UPSTASH_VECTOR_INDEX_SIMILARITY_FUNCTION="COSINE"
 
 export UPSTASH_TEAM_NAME="TestingTeam"
 export UPSTASH_TEAM_COPY_CC="false"
-export UPSTASH_TEAM_OWNER="<OWNER MAIL ADDRESS>"
+export UPSTASH_TEAM_OWNER="fahreddin@upstash.com"
 export UPSTASH_TEAM_DEVS="dev1@a.com dev2@b.com"
 export UPSTASH_TEAM_FINANCES="finance1@c.com finance2@d.com"

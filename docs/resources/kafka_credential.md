@@ -63,5 +63,3 @@ resource "upstash_kafka_credential" "exampleKafkaCredentialAllTopics" {
 - `password` (String, Sensitive) Password to be used in authenticating to the cluster
 - `state` (String) State of the credential(active or deleted)
 - `username` (String) Username to be used for the kafka credential
-
-

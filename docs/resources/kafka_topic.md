@@ -62,5 +62,3 @@ resource "upstash_kafka_topic" "exampleKafkaTopic" {
 - `tcp_endpoint` (String) TCP Endpoint of the kafka topic
 - `topic_id` (String) Unique Cluster ID for created topic
 - `username` (String) Base64 encoded username to be used in authenticating to the cluster
-
-

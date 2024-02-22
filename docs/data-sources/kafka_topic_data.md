@@ -43,5 +43,3 @@ data "upstash_kafka_topic_data" "kafkaTopicData" {
 - `tcp_endpoint` (String) TCP Endpoint of the topic
 - `topic_name` (String) Name of the kafka topic
 - `username` (String) Base64 encoded username to be used in authenticating to the cluster
-
-

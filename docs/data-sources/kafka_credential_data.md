@@ -36,5 +36,3 @@ data "upstash_kafka_credential_data" "kafkaCredentialData" {
 - `state` (String) State of the credential(active or deleted)
 - `topic` (String) Name of the kafka topic
 - `username` (String) Username to be used for the kafka credential
-
-
