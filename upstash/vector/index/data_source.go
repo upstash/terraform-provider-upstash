@@ -106,7 +106,7 @@ func DataResourceIndex() *schema.Resource {
 				Description: "The amount of maximum size for the total metadata sizes in your index.",
 			},
 			"reserved_price": &schema.Schema{
-				Type:        schema.TypeInt,
+				Type:        schema.TypeFloat,
 				Computed:    true,
 				Description: "Monthly pricing of your index. Only available for fixed and pro plans.",
 			},

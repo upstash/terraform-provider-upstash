@@ -8,8 +8,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	_ "github.com/upstash/terraform-provider-upstash/upstash/client"
-	_ "github.com/upstash/terraform-provider-upstash/upstash/utils"
 )
 
 func resourceIndexCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
@@ -35,8 +33,8 @@ func resourceIndexCreate(ctx context.Context, data *schema.ResourceData, m inter
 	}
 
 	return resourceIndexRead(ctx, data, m)
-
 }
+
 func resourceIndexRead(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	indexId := data.Get("id").(string)
@@ -57,15 +55,14 @@ func resourceIndexRead(ctx context.Context, data *schema.ResourceData, m interfa
 	}
 
 	mapping := map[string]interface{}{
-		"customer_id":         index.CustomerId,
-		"id":                  index.Id,
-		"name":                index.Name,
-		"similarity_function": index.SimilarityFunction,
-		"dimension_count":     index.DimensionCount,
-		"endpoint":            index.Endpoint,
-		"token":               index.Token,
-		"read_only_token":     index.ReadOnlyToken,
-		//"type":                    index.Type,
+		"customer_id":             index.CustomerId,
+		"id":                      index.Id,
+		"name":                    index.Name,
+		"similarity_function":     index.SimilarityFunction,
+		"dimension_count":         index.DimensionCount,
+		"endpoint":                index.Endpoint,
+		"token":                   index.Token,
+		"read_only_token":         index.ReadOnlyToken,
 		"type":                    indexType,
 		"region":                  index.Region,
 		"max_vector_count":        index.MaxVectorCount,

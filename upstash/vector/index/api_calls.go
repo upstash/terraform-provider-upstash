@@ -36,18 +36,6 @@ func SetIndexPlan(c *client.UpstashClient, indexId string, plan SetPlanRequest) 
 	return err
 }
 
-func ResetIndexPassword(c *client.UpstashClient, indexId string) (err error) {
-	_, err = c.SendPostRequest("/v2/vector/index/"+indexId+"/reset-password", nil, "Reset Password for Vector Index", false)
-
-	return err
-}
-
-func TransferIndex(c *client.UpstashClient, indexId string, team string) (err error) {
-	_, err = c.SendPostRequest("/v2/vector/index/"+indexId+"/transfer", team, "Transfer Vector Index to Another Team", false)
-
-	return err
-}
-
 func RenameIndex(c *client.UpstashClient, indexId string, name RenameIndexRequest) (err error) {
 	_, err = c.SendPostRequest("/v2/vector/index/"+indexId+"/rename", name, "Rename Vector Index", false)
 

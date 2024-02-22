@@ -1,10 +1,6 @@
 package index
 
 import (
-	//"context"
-
-	//"github.com/hashicorp/terraform-plugin-sdk/v2/helper/customdiff"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
@@ -113,7 +109,7 @@ func ResourceIndex() *schema.Resource {
 				Description: "The amount of maximum size for the total metadata sizes in your index.",
 			},
 			"reserved_price": &schema.Schema{
-				Type:        schema.TypeInt,
+				Type:        schema.TypeFloat,
 				Computed:    true,
 				Optional:    true,
 				Description: "Monthly pricing of your index. Only available for fixed and pro plans.",
@@ -123,9 +119,6 @@ func ResourceIndex() *schema.Resource {
 				Computed:    true,
 				Description: "The creation time of the vector index in UTC as unix timestamp.",
 			},
-		},
-		Importer: &schema.ResourceImporter{
-			StateContext: schema.ImportStatePassthroughContext,
 		},
 	}
 }

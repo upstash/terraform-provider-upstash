@@ -11,8 +11,6 @@ import (
 var vectorIndexName, vectorIndexType, vectorIndexRegion, vectorIndexSimilarityFunction, vectorIndexDimensionCount string
 
 func TestUpstashVectorIndexMAIN(t *testing.T) {
-	//t.Parallel()
-
 	envVars := GetEnvVars()
 
 	email = envVars.Email
