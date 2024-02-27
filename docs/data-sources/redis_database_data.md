@@ -53,5 +53,3 @@ data "upstash_redis_database_data" "exampleDBData" {
 - `state` (String) State of the database
 - `tls` (Boolean) When enabled data is encrypted in transit
 - `user_email` (String) User email for the database
-
-

@@ -31,6 +31,12 @@ type EnvVars struct {
 	KafkaTopicMaxMessageSize int
 	KafkaTopicCleanupPolicy  string
 
+	VectorIndexName               string
+	VectorIndexType               string
+	VectorIndexRegion             string
+	VectorIndexDimensionCount     int
+	VectorIndexSimilarityFunction string
+
 	TeamName    string
 	CopyCC      bool
 	TeamMembers map[string]string
@@ -41,6 +47,8 @@ func GetEnvVars() EnvVars {
 	kafkaTopicRetentionTime, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_RETENTION_TIME"))
 	kafkaTopicRetentionSize, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_RETENTION_SIZE"))
 	kafkaTopicMessageSize, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_MAX_MESSAGE_SIZE"))
+
+	vectorIndexDimensionCount, _ := strconv.Atoi(os.Getenv("UPSTASH_VECTOR_INDEX_DIMENSION_COUNT"))
 
 	teamMembers := make(map[string]string)
 
@@ -79,6 +87,12 @@ func GetEnvVars() EnvVars {
 		KafkaTopicRetentionSize:  kafkaTopicRetentionSize,
 		KafkaTopicMaxMessageSize: kafkaTopicMessageSize,
 		KafkaTopicCleanupPolicy:  os.Getenv("UPSTASH_KAFKA_TOPIC_CLEANUP_POLICY"),
+
+		VectorIndexName:               os.Getenv("UPSTASH_VECTOR_INDEX_NAME"),
+		VectorIndexType:               os.Getenv("UPSTASH_VECTOR_INDEX_TYPE"),
+		VectorIndexRegion:             os.Getenv("UPSTASH_VECTOR_INDEX_REGION"),
+		VectorIndexDimensionCount:     vectorIndexDimensionCount,
+		VectorIndexSimilarityFunction: os.Getenv("UPSTASH_VECTOR_INDEX_SIMILARITY_FUNCTION"),
 
 		KafkaCredentialName:        os.Getenv("UPSTASH_KAFKA_CREDENTIAL_NAME"),
 		KafkaCredentialPermissions: os.Getenv("UPSTASH_KAFKA_CREDENTIAL_PERMISSIONS"),

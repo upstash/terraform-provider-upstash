@@ -43,5 +43,3 @@ data "upstash_kafka_cluster_data" "clusterData" {
 - `tcp_endpoint` (String) TCP Endpoint of the cluster
 - `type` (String) Type of the cluster
 - `username` (String) Base64 encoded username for the cluster
-
-

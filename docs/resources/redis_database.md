@@ -59,5 +59,3 @@ resource "upstash_redis_database" "exampleDB" {
 - `rest_token` (String, Sensitive) Rest Token for the database.
 - `state` (String) State of the database
 - `user_email` (String) User email for the database
-
-

@@ -2,6 +2,7 @@ package upstash
 
 import (
 	"context"
+	"github.com/upstash/terraform-provider-upstash/upstash/vector/index"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/upstash/terraform-provider-upstash/upstash/client"
@@ -39,6 +40,7 @@ func Provider() *schema.Provider {
 		},
 		ResourcesMap: map[string]*schema.Resource{
 			"upstash_redis_database":     database.ResourceDatabase(),
+			"upstash_vector_index":       index.ResourceIndex(),
 			"upstash_kafka_cluster":      cluster.ResourceCluster(),
 			"upstash_kafka_topic":        topic.ResourceTopic(),
 			"upstash_kafka_credential":   credential.ResourceCredential(),
@@ -52,6 +54,7 @@ func Provider() *schema.Provider {
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"upstash_redis_database_data":     database.DataSourceDatabase(),
+			"upstash_vector_index_data":       index.DataResourceIndex(),
 			"upstash_kafka_cluster_data":      cluster.DataSourceCluster(),
 			"upstash_kafka_topic_data":        topic.DataSourceTopic(),
 			"upstash_kafka_credential_data":   credential.DataSourceCredential(),
