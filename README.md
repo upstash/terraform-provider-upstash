@@ -16,7 +16,7 @@ terraform {
 }
 
 provider "upstash" {
-  email = var.email
+  email    = var.email
   api_key  = var.api_key
 }
 ```
@@ -32,9 +32,9 @@ Here example code snippet that creates database:
 ```hcl
 resource "upstash_redis_database" "redis" {
   database_name = "db-name"
-  region = "eu-west-1"
-  tls = "true"
-  multi_zone = "false"
+  region        = "eu-west-1"
+  tls           = "true"
+  multi_zone    = "false"
 }
 ```
 ## Import Resources From Outside of Terraform
@@ -73,7 +73,6 @@ If you want to locally build/test the provider then follow these steps:
 * Now your `terraform` commands will use local Upstash provider. 
 ```hcl
 provider_installation {
-
   dev_overrides {
     "upstash" = "[PATH THAT CONTAINS CUSTOM PROVIDER]"
   }
