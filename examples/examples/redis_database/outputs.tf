@@ -24,7 +24,7 @@ output "db_name" {
 }
 
 output "password" {
-  value = resource.upstash_redis_database.exampleDB
+  value     = resource.upstash_redis_database.exampleDB
   sensitive = true
 }
 
@@ -33,12 +33,12 @@ output "port" {
 }
 
 output "rest_token" {
-  value = data.upstash_redis_database_data.exampleDBData.rest_token
+  value     = data.upstash_redis_database_data.exampleDBData.rest_token
   sensitive = true
 }
 
 output "read_only_rest_token" {
-  value = data.upstash_redis_database_data.exampleDBData.read_only_rest_token
+  value     = data.upstash_redis_database_data.exampleDBData.read_only_rest_token
   sensitive = true
 }
 

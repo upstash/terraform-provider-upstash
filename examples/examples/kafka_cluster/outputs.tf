@@ -3,11 +3,11 @@ output "cluster_id" {
 }
 
 output "cluster_name" {
-  value = data.upstash_kafka_cluster_data.clusterData.cluster_name 
+  value = data.upstash_kafka_cluster_data.clusterData.cluster_name
 }
 
 output "region" {
-  value = data.upstash_kafka_cluster_data.clusterData.region 
+  value = data.upstash_kafka_cluster_data.clusterData.region
 }
 
 output "type" {
@@ -35,7 +35,7 @@ output "username" {
 }
 
 output "password" {
-  value = data.upstash_kafka_cluster_data.clusterData.password
+  value     = data.upstash_kafka_cluster_data.clusterData.password
   sensitive = true
 }
 
