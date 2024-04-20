@@ -1,6 +1,6 @@
 module github.com/upstash/terraform-provider-upstash
 
-go 1.21
+go 1.22
 
 require (
 	github.com/gruntwork-io/terratest v0.40.0
