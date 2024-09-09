@@ -62,7 +62,7 @@ func ResourceDatabase() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
-				Description: "When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)",
+				Description: "When enabled, data is encrypted in transit. TLS is enabled by default for newly created databases and cannot be disabled.",
 			},
 			"eviction": &schema.Schema{
 				Type:        schema.TypeBool,

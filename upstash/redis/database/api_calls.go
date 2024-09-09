@@ -48,16 +48,7 @@ func EnableTLS(c *client.UpstashClient, databaseId string) (err error) {
 
 }
 
-func EnableMultiZone(c *client.UpstashClient, databaseId string, enabled bool) (err error) {
-
-	_, err = c.SendPostRequest("/v2/redis/enable-multizone/"+databaseId, nil, "Enable Multizone for Redis Database", false)
-
-	return err
-
-}
-
 func ConfigureEviction(c *client.UpstashClient, databaseId string, enabled bool) (err error) {
-
 	path := "/v2/redis/"
 	if enabled {
 		path += "enable-eviction/"
@@ -69,7 +60,6 @@ func ConfigureEviction(c *client.UpstashClient, databaseId string, enabled bool)
 	_, err = c.SendPostRequest(path, nil, "Configure Eviction Redis Database", false)
 
 	return err
-
 }
 
 func ConfigureAutoUpgrade(c *client.UpstashClient, databaseId string, enabled bool) (err error) {
