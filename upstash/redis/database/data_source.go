@@ -48,7 +48,7 @@ func DataSourceDatabase() *schema.Resource {
 			"tls": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
-				Description: "When enabled data is encrypted in transit",
+				Description: "When enabled, data is encrypted in transit. TLS is enabled by default for newly created databases and cannot be disabled.",
 			},
 			"eviction": &schema.Schema{
 				Type:        schema.TypeBool,
