@@ -80,3 +80,9 @@ provider_installation {
   direct {}
 }
 ```
+
+### Updating the Docs
+This provider uses `tfplugindocs` to generate its documentation. Run the command below, and the docs will be automatically generated from the provider code and examples
+```
+tfplugindocs
+```
