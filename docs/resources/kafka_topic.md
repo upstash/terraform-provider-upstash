@@ -33,7 +33,7 @@ resource "upstash_kafka_topic" "exampleKafkaTopic" {
     # And use its ID so that the topic binds to it.
 
     # Alternatively, provide the ID of an already created cluster.
-    cluster_id = "4c10abb9-f875-44ce-a7f9-9a706625eb02"
+    cluster_id = resource.upstash_kafka_cluster.exampleKafkaCluster.cluster_id
 }
 ```
 
