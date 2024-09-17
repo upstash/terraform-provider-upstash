@@ -33,7 +33,7 @@ resource "upstash_kafka_topic" "exampleKafkaTopic" {
     # And use its ID so that the topic binds to it.
 
     # Alternatively, provide the ID of an already created cluster.
-    cluster_id = resource.upstash_kafka_cluster.exampleKafkaCluster.cluster_id
+    cluster_id = "4c10abb9-f875-44ce-a7f9-9a706625eb02"
 }
 ```
 
@@ -62,5 +62,3 @@ resource "upstash_kafka_topic" "exampleKafkaTopic" {
 - `tcp_endpoint` (String) TCP Endpoint of the kafka topic
 - `topic_id` (String) Unique Cluster ID for created topic
 - `username` (String) Base64 encoded username to be used in authenticating to the cluster
-
-

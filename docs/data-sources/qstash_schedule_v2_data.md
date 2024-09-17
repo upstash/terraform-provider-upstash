@@ -34,5 +34,3 @@ description: |-
 - `destination` (String) Destination for Qstash Schedule. Either Topic Name or valid URL
 - `id` (String) The ID of this resource.
 - `method` (String) Method of Http Request on QStash
-
-
