@@ -32,6 +32,9 @@ type Database struct {
 type CreateDatabaseRequest struct {
 	Region        string   `json:"region"`
 	DatabaseName  string   `json:"database_name"`
+	Tls           bool     `json:"tls"`
+	Consistent    bool     `json:"consistent"`
+	MultiZone     bool     `json:"multizone"`
 	Eviction      bool     `json:"eviction"`
 	AutoUpgrade   bool     `json:"auto_upgrade"`
 	PrimaryRegion string   `json:"primary_region,omitempty"`
