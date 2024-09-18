@@ -56,16 +56,6 @@ func resourceDatabaseUpdate(ctx context.Context, data *schema.ResourceData, m in
 	return resourceDatabaseRead(ctx, data, m)
 }
 
-func resourceDatabaseDelete(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
-	c := m.(*client.UpstashClient)
-	databaseId := data.Get("database_id").(string)
-	err := DeleteDatabase(c, databaseId)
-	if err != nil {
-		return diag.FromErr(err)
-	}
-	return nil
-}
-
 func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	databaseId := data.Get("database_id").(string)
@@ -135,4 +125,14 @@ func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m in
 	data.SetId("upstash-database-" + database.DatabaseId)
 	data.Set("database_id", database.DatabaseId)
 	return resourceDatabaseRead(ctx, data, m)
+}
+
+func resourceDatabaseDelete(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
+	c := m.(*client.UpstashClient)
+	databaseId := data.Get("database_id").(string)
+	err := DeleteDatabase(c, databaseId)
+	if err != nil {
+		return diag.FromErr(err)
+	}
+	return nil
 }

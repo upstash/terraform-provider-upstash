@@ -1,4 +1,4 @@
 provider "upstash" {
-  email = var.email
+  email   = var.email
   api_key = var.api_key
 }

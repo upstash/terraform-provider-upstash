@@ -7,12 +7,12 @@ variable "api_key" {
   default     = ""
 }
 
-variable "cluster_name"{
+variable "cluster_name" {
   default = "terraform_cluster"
 }
-variable "region"{
+variable "region" {
   default = "eu-west-1"
 }
-variable "multizone"{
+variable "multizone" {
   default = false
 }

@@ -1,22 +1,22 @@
 variable "email" {
   description = "Upstash user email"
-  default = ""
+  default     = ""
 }
 variable "api_key" {
   description = "Api key for the given user"
-  default = ""
+  default     = ""
 }
 
-variable "cluster_name"{
+variable "cluster_name" {
   default = "clusterForConnector"
 }
-variable "region"{
-  default = "eu-west-1" 
+variable "region" {
+  default = "eu-west-1"
 }
-variable "multizone"{
+variable "multizone" {
   default = false
 }
 
-variable "connector_name"{
-    default = "test_connector2"
+variable "connector_name" {
+  default = "test_connector2"
 }

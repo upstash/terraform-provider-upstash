@@ -7,9 +7,9 @@ variable "api_key" {
   default     = ""
 }
 
-variable "team_name"{}
-variable "copy_cc"{}
-variable "team_members"{
-  type = map
+variable "team_name" {}
+variable "copy_cc" {}
+variable "team_members" {
+  type = map(any)
 }
 
