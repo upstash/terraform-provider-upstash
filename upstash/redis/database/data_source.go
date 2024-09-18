@@ -20,7 +20,7 @@ func DataSourceDatabase() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 				Description: "region of the database. Possible values are: " +
-					"\"global\", \"eu-west-1\", \"us-east-1\", \"us-west-1\", \"ap-northeast-1\" , \"eu-central1\"",
+					"\"global\", \"us-central1\"",
 			},
 			"endpoint": &schema.Schema{
 				Type:        schema.TypeString,
@@ -48,7 +48,8 @@ func DataSourceDatabase() *schema.Resource {
 			"tls": &schema.Schema{
 				Type:        schema.TypeBool,
 				Computed:    true,
-				Description: "When enabled data is encrypted in transit",
+				Description: "When enabled, data is encrypted in transit.",
+				Deprecated:  "TLS option is deprecated. It's enabled by default for all databases.",
 			},
 			"eviction": &schema.Schema{
 				Type:        schema.TypeBool,

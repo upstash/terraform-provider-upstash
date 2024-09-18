@@ -80,6 +80,11 @@ provider_installation {
 }
 ```
 
+### Updating the Docs
+This provider uses `tfplugindocs` to generate its documentation. Run the command below, and the docs will be automatically generated from the provider code and examples
+```
+tfplugindocs
+```
 ### Testing
 
 * First set your environment variables using the `envSetters.txt` file.
@@ -99,4 +104,3 @@ If you want to run a specific test, you can use the `-run` flag. To run the test
 ```shell
 go test -v . -run TestUpstashVectorIndexMAIN
 ```
-

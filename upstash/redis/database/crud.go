@@ -52,6 +52,7 @@ func resourceDatabaseUpdate(ctx context.Context, data *schema.ResourceData, m in
 			return diag.Errorf("Cannot enable strong consistency on the DB. All the newly created DBs will be eventually consistent. Set consistent=false.")
 		}
 	}
+
 	return resourceDatabaseRead(ctx, data, m)
 }
 
@@ -101,9 +102,6 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 }
 
 func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
-	if data.Get("consistent").(bool) {
-		return diag.Errorf("Newly created DBs are eventually consistent. Set consistent=false in the resource.")
-	}
 	c := m.(*client.UpstashClient)
 
 	var readRegions []string
@@ -116,11 +114,8 @@ func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m in
 	database, err := CreateDatabase(c, CreateDatabaseRequest{
 		Region:        data.Get("region").(string),
 		DatabaseName:  data.Get("database_name").(string),
-		Tls:           data.Get("tls").(bool),
 		Eviction:      data.Get("eviction").(bool),
 		AutoUpgrade:   data.Get("auto_scale").(bool),
-		Consistent:    data.Get("consistent").(bool),
-		MultiZone:     data.Get("multizone").(bool),
 		PrimaryRegion: data.Get("primary_region").(string),
 		ReadRegions:   readRegions,
 	})

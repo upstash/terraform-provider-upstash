@@ -15,9 +15,9 @@ description: |-
 ```terraform
 resource "upstash_redis_database" "exampleDB" {
   database_name = "Terraform DB6"
-  region        = "eu-west-1"
-  tls           = true
-  multizone     = true
+  region = "global"
+  tls = "true"
+  primary_region = "eu-west-1"
 }
 ```
 
@@ -37,7 +37,7 @@ resource "upstash_redis_database" "exampleDB" {
 - `multizone` (Boolean, Deprecated) When enabled, database becomes highly available and is deployed in multiple zones. (If changed to false from true, results in deletion and recreation of the resource)
 - `primary_region` (String) Primary region for the database (Only works if region='global'. Can be one of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2])
 - `read_regions` (Set of String) Read regions for the database (Only works if region='global' and primary_region is set. Can be any combination of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2], excluding the one given as primary.)
-- `tls` (Boolean) When enabled, data is encrypted in transit. (If changed to false from true, results in deletion and recreation of the resource)
+- `tls` (Boolean) When enabled, data is encrypted in transit. TLS is enabled by default for newly created databases and cannot be disabled.
 
 ### Read-Only
 
@@ -55,7 +55,7 @@ resource "upstash_redis_database" "exampleDB" {
 - `id` (String) The ID of this resource.
 - `password` (String, Sensitive) Password of the database
 - `port` (Number) Port of the endpoint
-- `read_only_rest_token` (String) Rest Token for the database.
+- `read_only_rest_token` (String, Sensitive) Rest Token for the database.
 - `rest_token` (String, Sensitive) Rest Token for the database.
 - `state` (String) State of the database
 - `user_email` (String) User email for the database
