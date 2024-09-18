@@ -89,5 +89,6 @@ func DataSourceCluster() *schema.Resource {
 				Description: "Creation time of the cluster",
 			},
 		},
+		DeprecationMessage: "Upstash Kafka service is deprecated. It's no longer possible to create new clusters, but existing clusters will be continued until March 2025. For further information regarding this issue, see https://upstash.com/blog/workflow-kafka",
 	}
 }
