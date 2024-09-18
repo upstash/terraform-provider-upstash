@@ -71,5 +71,3 @@ resource "upstash_kafka_connector" "exampleKafkaConnector" {
 - `connector_id` (String) Unique Connector ID for created connector
 - `creation_time` (Number) Creation of the connector
 - `id` (String) The ID of this resource.
-
-

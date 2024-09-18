@@ -15,9 +15,9 @@ description: |-
 ```terraform
 resource "upstash_redis_database" "exampleDB" {
   database_name = "Terraform DB6"
-  region = "eu-west-1"
+  region = "global"
   tls = "true"
-  multizone = "true"
+  primary_region = "eu-west-1"
 }
 ```
 
@@ -55,9 +55,7 @@ resource "upstash_redis_database" "exampleDB" {
 - `id` (String) The ID of this resource.
 - `password` (String, Sensitive) Password of the database
 - `port` (Number) Port of the endpoint
-- `read_only_rest_token` (String) Rest Token for the database.
+- `read_only_rest_token` (String, Sensitive) Rest Token for the database.
 - `rest_token` (String, Sensitive) Rest Token for the database.
 - `state` (String) State of the database
 - `user_email` (String) User email for the database
-
-

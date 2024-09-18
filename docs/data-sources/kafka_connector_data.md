@@ -42,5 +42,3 @@ data "upstash_kafka_connector_data" "kafkaConnectorData" {
 - `topics` (List of String) Topics for the connector
 - `ttl` (Number) TTL for the connector
 - `user_password` (String, Sensitive) User password for the connector
-
-

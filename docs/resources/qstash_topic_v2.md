@@ -25,5 +25,3 @@ description: |-
 - `created_at` (Number) Creation time for Qstash Topic.
 - `id` (String) The ID of this resource.
 - `updated_at` (Number) Last Update time for Qstash Topic.
-
-
