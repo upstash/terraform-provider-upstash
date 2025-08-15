@@ -41,8 +41,8 @@ func resourceDatabaseUpdate(ctx context.Context, data *schema.ResourceData, m in
 		}
 	}
 
-	if data.HasChange("auto_scale") {
-		if err := ConfigureAutoUpgrade(c, databaseId, data.Get("auto_scale").(bool)); err != nil {
+	if data.HasChange("auto_upgrade") {
+		if err := ConfigureAutoUpgrade(c, databaseId, data.Get("auto_upgrade").(bool)); err != nil {
 			return diag.FromErr(err)
 		}
 	}
@@ -79,7 +79,7 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 		"multizone":                  database.MultiZone,
 		"tls":                        database.Tls,
 		"eviction":                   database.Eviction,
-		"auto_scale":                 database.AutoUpgrade,
+		"auto_upgrade":               database.AutoUpgrade,
 		"port":                       database.Port,
 		"rest_token":                 database.RestToken,
 		"read_only_rest_token":       database.ReadOnlyRestToken,
@@ -115,7 +115,7 @@ func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m in
 		Region:        data.Get("region").(string),
 		DatabaseName:  data.Get("database_name").(string),
 		Eviction:      data.Get("eviction").(bool),
-		AutoUpgrade:   data.Get("auto_scale").(bool),
+		AutoUpgrade:   data.Get("auto_upgrade").(bool),
 		PrimaryRegion: data.Get("primary_region").(string),
 		ReadRegions:   readRegions,
 	})

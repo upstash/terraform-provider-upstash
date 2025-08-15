@@ -41,16 +41,6 @@ type CreateDatabaseRequest struct {
 	ReadRegions   []string `json:"read_regions,omitempty"`
 }
 
-type ConfigureEvictionRequest struct {
-	DatabaseId string `json:"database_id"`
-	Eviction   bool   `json:"eviction"`
-}
-
-type ConfigureAutoUpgradeRequest struct {
-	DatabaseId  string `json:"database_id"`
-	AutoUpgrade bool   `json:"auto_upgrade"`
-}
-
 type UpdateReadRegionsRequest struct {
 	ReadRegions []string `json:"read_regions"`
 }

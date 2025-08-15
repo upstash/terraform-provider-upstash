@@ -27,7 +27,7 @@ data "upstash_redis_database_data" "exampleDBData" {
 
 ### Read-Only
 
-- `auto_scale` (Boolean) Upgrade to higher plans automatically when it hits quotas
+- `auto_upgrade` (Boolean) Upgrade to higher plans automatically when it hits quotas
 - `consistent` (Boolean, Deprecated) When enabled database runs in Consistency Mode
 - `creation_time` (Number) Creation time of the database
 - `database_name` (String) Name of the database
