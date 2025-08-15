@@ -47,6 +47,16 @@ func resourceDatabaseUpdate(ctx context.Context, data *schema.ResourceData, m in
 		}
 	}
 
+	if data.HasChange("budget") {
+		err := UpdateDBBudget(c, databaseId, UpdateDBBudgetRequest{
+			Budget: data.Get("budget").(int),
+		})
+
+		if err != nil {
+			return diag.FromErr(err)
+		}
+	}
+
 	if data.HasChange("consistent") {
 		if data.Get("consistent").(bool) {
 			return diag.Errorf("Cannot enable strong consistency on the DB. All the newly created DBs will be eventually consistent. Set consistent=false.")
@@ -80,6 +90,7 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 		"tls":                        database.Tls,
 		"eviction":                   database.Eviction,
 		"auto_upgrade":               database.AutoUpgrade,
+		"budget":                     database.Budget,
 		"port":                       database.Port,
 		"rest_token":                 database.RestToken,
 		"read_only_rest_token":       database.ReadOnlyRestToken,
@@ -116,6 +127,7 @@ func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m in
 		DatabaseName:  data.Get("database_name").(string),
 		Eviction:      data.Get("eviction").(bool),
 		AutoUpgrade:   data.Get("auto_upgrade").(bool),
+		Budget:        data.Get("budget").(int),
 		PrimaryRegion: data.Get("primary_region").(string),
 		ReadRegions:   readRegions,
 	})

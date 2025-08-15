@@ -61,6 +61,11 @@ func DataSourceDatabase() *schema.Resource {
 				Computed:    true,
 				Description: "Upgrade to higher plans automatically when it hits quotas",
 			},
+			"budget": {
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Budget for the database. It is used to limit the cost of the database. If the budget is reached, the database will be throttled until the next month.",
+			},
 			"primary_region": {
 				Type:        schema.TypeString,
 				Computed:    true,

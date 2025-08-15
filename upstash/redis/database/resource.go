@@ -76,6 +76,12 @@ func ResourceDatabase() *schema.Resource {
 				Default:     false,
 				Description: "Upgrade to higher plans automatically when it hits quotas",
 			},
+			"budget": {
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Default:     20,
+				Description: "Budget for the database (default $20). It is used to limit the cost of the database. If the budget is reached, the database will be throttled until the next month.",
+			},
 			"primary_region": {
 				Type:        schema.TypeString,
 				Optional:    true,

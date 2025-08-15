@@ -32,6 +32,7 @@ resource "upstash_redis_database" "exampleDB" {
 ### Optional
 
 - `auto_upgrade` (Boolean) Upgrade to higher plans automatically when it hits quotas
+- `budget` (Number) Budget for the payg database (default $20). It is used to limit the cost of the database. If the budget is reached, the database will be throttled until the next month.
 - `consistent` (Boolean, Deprecated) When enabled, all writes are synchronously persisted to the disk.
 - `eviction` (Boolean) Enable eviction, to evict keys when your database reaches the max size
 - `multizone` (Boolean, Deprecated) When enabled, database becomes highly available and is deployed in multiple zones. (If changed to false from true, results in deletion and recreation of the resource)
