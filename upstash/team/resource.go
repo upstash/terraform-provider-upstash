@@ -13,24 +13,24 @@ func ResourceTeam() *schema.Resource {
 		UpdateContext: resourceUpdate,
 		DeleteContext: resourceDelete,
 		Schema: map[string]*schema.Schema{
-			"team_id": &schema.Schema{
+			"team_id": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "Unique Cluster ID for created cluster",
 			},
-			"team_name": &schema.Schema{
+			"team_name": {
 				Type:        schema.TypeString,
 				Required:    true,
 				ForceNew:    true,
 				Description: "Name of the team",
 			},
-			"copy_cc": &schema.Schema{
+			"copy_cc": {
 				Type:        schema.TypeBool,
 				Required:    true,
 				ForceNew:    true,
 				Description: "Whether Credit Card is copied",
 			},
-			"team_members": &schema.Schema{
+			"team_members": {
 				Type:     schema.TypeMap,
 				Required: true,
 				ForceNew: false,

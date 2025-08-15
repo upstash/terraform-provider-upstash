@@ -6,22 +6,22 @@ func DataSourceTeam() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: resourceRead,
 		Schema: map[string]*schema.Schema{
-			"team_id": &schema.Schema{
+			"team_id": {
 				Type:        schema.TypeString,
 				Required:    true,
 				Description: "Unique Cluster ID for requested cluster",
 			},
-			"team_name": &schema.Schema{
+			"team_name": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "Name of the team",
 			},
-			"copy_cc": &schema.Schema{
+			"copy_cc": {
 				Type:        schema.TypeBool,
 				Computed:    true,
 				Description: "Whether Credit card info is copied or not",
 			},
-			"team_members": &schema.Schema{
+			"team_members": {
 				Type:     schema.TypeMap,
 				Computed: true,
 				Elem: &schema.Schema{

@@ -10,78 +10,78 @@ func ResourceQstashSchedule() *schema.Resource {
 		ReadContext:   resourceScheduleRead,
 		DeleteContext: resourceScheduleDelete,
 		Schema: map[string]*schema.Schema{
-			"schedule_id": &schema.Schema{
+			"schedule_id": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "Unique Qstash Schedule ID for requested schedule",
 			},
-			"body": &schema.Schema{
+			"body": {
 				Type:        schema.TypeString,
 				ForceNew:    true,
 				Optional:    true,
 				Description: "Body to send for the POST request in string format. Needs escaping (\\) double quotes.",
 			},
-			"cron": &schema.Schema{
+			"cron": {
 				Type:        schema.TypeString,
 				Required:    true,
 				ForceNew:    true,
 				Description: "Cron string for Qstash Schedule",
 			},
-			"destination": &schema.Schema{
+			"destination": {
 				Type:        schema.TypeString,
 				Required:    true,
 				ForceNew:    true,
 				Description: "Destination for Qstash Schedule. Either Topic ID or valid URL",
 			},
-			"content_type": &schema.Schema{
+			"content_type": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				ForceNew:    true,
 				Description: "Content type for Qstash Scheduling.",
 			},
-			"deduplication_id": &schema.Schema{
+			"deduplication_id": {
 				Type:        schema.TypeString,
 				ForceNew:    true,
 				Optional:    true,
 				Description: "Deduplication ID for Qstash Scheduling.",
 			},
-			"content_based_deduplication": &schema.Schema{
+			"content_based_deduplication": {
 				Type:        schema.TypeBool,
 				ForceNew:    true,
 				Optional:    true,
 				Description: "Content Based Deduplication (bool) for Qstash Scheduling.",
 			},
-			"not_before": &schema.Schema{
+			"not_before": {
 				Type:        schema.TypeInt,
 				ForceNew:    true,
 				Optional:    true,
 				Description: "Start time for Qstash Scheduling.",
 			},
-			"delay": &schema.Schema{
+			"delay": {
 				Type:        schema.TypeString,
 				ForceNew:    true,
 				Optional:    true,
 				Description: "Delay for Qstash Schedule.",
 			},
-			"callback": &schema.Schema{
+			"callback": {
 				Type:        schema.TypeString,
 				ForceNew:    true,
 				Optional:    true,
 				Description: "Callback URL for Qstash Schedule.",
 			},
-			"retries": &schema.Schema{
+			"retries": {
 				Type:        schema.TypeInt,
 				ForceNew:    true,
 				Optional:    true,
 				Default:     3,
 				Description: "Retries for Qstash Schedule requests.",
 			},
-			"created_at": &schema.Schema{
+			"created_at": {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Creation time for Qstash Schedule.",
 			},
-			"forward_headers": &schema.Schema{
+			"forward_headers": {
 				Type:     schema.TypeMap,
 				ForceNew: true,
 				Optional: true,
