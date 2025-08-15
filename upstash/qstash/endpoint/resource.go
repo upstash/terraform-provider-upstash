@@ -9,23 +9,23 @@ func ResourceQstashEndpoint() *schema.Resource {
 		UpdateContext: resourceEndpointUpdate,
 		DeleteContext: resourceEndpointDelete,
 		Schema: map[string]*schema.Schema{
-			"topic_id": &schema.Schema{
+			"topic_id": {
 				Type:        schema.TypeString,
 				Required:    true,
 				ForceNew:    true,
 				Description: "Topic Id that the endpoint is added to",
 			},
-			"endpoint_id": &schema.Schema{
+			"endpoint_id": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "Unique Qstash Endpoint ID",
 			},
-			"topic_name": &schema.Schema{
+			"topic_name": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "Unique Qstash Topic Name for Endpoint",
 			},
-			"url": &schema.Schema{
+			"url": {
 				Type:        schema.TypeString,
 				Required:    true,
 				Description: "URL of the endpoint",

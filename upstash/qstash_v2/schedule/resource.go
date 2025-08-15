@@ -10,66 +10,66 @@ func ResourceQstashSchedule() *schema.Resource {
 		ReadContext:   resourceScheduleRead,
 		DeleteContext: resourceScheduleDelete,
 		Schema: map[string]*schema.Schema{
-			"created_at": &schema.Schema{
+			"created_at": {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Creation time for Qstash Schedule.",
 			},
-			"schedule_id": &schema.Schema{
+			"schedule_id": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "Unique Qstash Schedule ID for requested schedule",
 			},
-			"cron": &schema.Schema{
+			"cron": {
 				Type:        schema.TypeString,
 				Required:    true,
 				ForceNew:    true,
 				Description: "Cron string for Qstash Schedule",
 			},
-			"destination": &schema.Schema{
+			"destination": {
 				Type:        schema.TypeString,
 				Required:    true,
 				ForceNew:    true,
 				Description: "Destination for Qstash Schedule. Either Topic Name or valid URL",
 			},
-			"method": &schema.Schema{
+			"method": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				ForceNew:    true,
 				Description: "Method of Http Request on QStash",
 			},
-			"header": &schema.Schema{
+			"header": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "Headers for the QStash schedule",
 			},
-			"body": &schema.Schema{
+			"body": {
 				Type:        schema.TypeString,
 				ForceNew:    true,
 				Optional:    true,
 				Description: "Body to send for the POST request in string format. Needs escaping (\\) double quotes.",
 			},
-			"retries": &schema.Schema{
+			"retries": {
 				Type:        schema.TypeInt,
 				ForceNew:    true,
 				Optional:    true,
 				Default:     3,
 				Description: "Retries for Qstash Schedule requests.",
 			},
-			"delay": &schema.Schema{
+			"delay": {
 				Type:        schema.TypeString,
 				ForceNew:    true,
 				Optional:    true,
 				Default:     "0",
 				Description: "Delay for Qstash Schedule. Delay should be given in seconds",
 			},
-			"callback": &schema.Schema{
+			"callback": {
 				Type:        schema.TypeString,
 				ForceNew:    true,
 				Optional:    true,
 				Description: "Callback URL for Qstash Schedule.",
 			},
-			"forward_headers": &schema.Schema{
+			"forward_headers": {
 				Type:     schema.TypeMap,
 				ForceNew: true,
 				Optional: true,
@@ -78,7 +78,7 @@ func ResourceQstashSchedule() *schema.Resource {
 				},
 				Description: "Forward headers to your API",
 			},
-			"content_type": &schema.Schema{
+			"content_type": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				ForceNew:    true,

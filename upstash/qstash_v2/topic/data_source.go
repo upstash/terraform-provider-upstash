@@ -8,22 +8,22 @@ func DataSourceQstashTopic() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: resourceTopicRead,
 		Schema: map[string]*schema.Schema{
-			"name": &schema.Schema{
+			"name": {
 				Type:        schema.TypeString,
 				Required:    true,
 				Description: "Name of the Qstash Topic",
 			},
-			"created_at": &schema.Schema{
+			"created_at": {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Creation time for Qstash Topic.",
 			},
-			"updated_at": &schema.Schema{
+			"updated_at": {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Last Update time for Qstash Topic.",
 			},
-			"endpoints": &schema.Schema{
+			"endpoints": {
 				Type: schema.TypeSet,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,

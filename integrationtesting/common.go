@@ -17,20 +17,6 @@ type EnvVars struct {
 	RedisDatabaseTls       bool
 	RedisDatabaseMultiZone bool
 
-	KafkaClusterName      string
-	KafkaClusterRegion    string
-	KafkaClusterMultiZone bool
-
-	KafkaCredentialName        string
-	KafkaCredentialPermissions string
-
-	KafkaTopicName           string
-	KafkaTopicPartitions     int
-	KafkaTopicRetentionTime  int
-	KafkaTopicRetentionSize  int
-	KafkaTopicMaxMessageSize int
-	KafkaTopicCleanupPolicy  string
-
 	VectorIndexName               string
 	VectorIndexType               string
 	VectorIndexRegion             string
@@ -43,11 +29,6 @@ type EnvVars struct {
 }
 
 func GetEnvVars() EnvVars {
-	kafkaTopicPartitions, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_PARTITIONS"))
-	kafkaTopicRetentionTime, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_RETENTION_TIME"))
-	kafkaTopicRetentionSize, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_RETENTION_SIZE"))
-	kafkaTopicMessageSize, _ := strconv.Atoi(os.Getenv("UPSTASH_KAFKA_TOPIC_MAX_MESSAGE_SIZE"))
-
 	vectorIndexDimensionCount, _ := strconv.Atoi(os.Getenv("UPSTASH_VECTOR_INDEX_DIMENSION_COUNT"))
 
 	teamMembers := make(map[string]string)
@@ -77,25 +58,11 @@ func GetEnvVars() EnvVars {
 		RedisDatabaseTls:       os.Getenv("UPSTASH_REDIS_DATABASE_TLS") == "true",
 		RedisDatabaseMultiZone: os.Getenv("UPSTASH_REDIS_DATABASE_MULTIZONE") == "true",
 
-		KafkaClusterName:      os.Getenv("UPSTASH_KAFKA_CLUSTER_NAME"),
-		KafkaClusterRegion:    os.Getenv("UPSTASH_KAFKA_CLUSTER_REGION"),
-		KafkaClusterMultiZone: os.Getenv("UPSTASH_KAFKA_CLUSTER_MULTIZONE") == "true",
-
-		KafkaTopicName:           os.Getenv("UPSTASH_KAFKA_TOPIC_NAME"),
-		KafkaTopicPartitions:     kafkaTopicPartitions,
-		KafkaTopicRetentionTime:  kafkaTopicRetentionTime,
-		KafkaTopicRetentionSize:  kafkaTopicRetentionSize,
-		KafkaTopicMaxMessageSize: kafkaTopicMessageSize,
-		KafkaTopicCleanupPolicy:  os.Getenv("UPSTASH_KAFKA_TOPIC_CLEANUP_POLICY"),
-
 		VectorIndexName:               os.Getenv("UPSTASH_VECTOR_INDEX_NAME"),
 		VectorIndexType:               os.Getenv("UPSTASH_VECTOR_INDEX_TYPE"),
 		VectorIndexRegion:             os.Getenv("UPSTASH_VECTOR_INDEX_REGION"),
 		VectorIndexDimensionCount:     vectorIndexDimensionCount,
 		VectorIndexSimilarityFunction: os.Getenv("UPSTASH_VECTOR_INDEX_SIMILARITY_FUNCTION"),
-
-		KafkaCredentialName:        os.Getenv("UPSTASH_KAFKA_CREDENTIAL_NAME"),
-		KafkaCredentialPermissions: os.Getenv("UPSTASH_KAFKA_CREDENTIAL_PERMISSIONS"),
 
 		TeamName:    os.Getenv("UPSTASH_TEAM_NAME"),
 		CopyCC:      os.Getenv("UPSTASH_TEAM_COPY_CC") == "true",
