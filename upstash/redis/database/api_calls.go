@@ -63,6 +63,19 @@ func ConfigureAutoUpgrade(c *client.UpstashClient, databaseId string, enabled bo
 	return err
 }
 
+func ConfigureProdPack(c *client.UpstashClient, databaseId string, enabled bool) (err error) {
+	path := "/v2/redis/"
+	if enabled {
+		path += "enable-prodpack/"
+	} else {
+		path += "disable-prodpack/"
+	}
+	path += databaseId
+	_, err = c.SendPostRequest(path, nil, "Configure Prod Pack for Redis Database", false)
+
+	return err
+}
+
 func UpdateDBBudget(c *client.UpstashClient, databaseId string, budgetBody UpdateDBBudgetRequest) (err error) {
 	_, err = c.SendPatchRequest("/v2/redis/update-budget/"+databaseId, budgetBody, "Update Redis Database Budget", false)
 	return err
