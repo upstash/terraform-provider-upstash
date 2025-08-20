@@ -54,3 +54,5 @@ resource "upstash_vector_index" "vectorResource" {
 - `max_writes_per_second` (Number) The number of maximum write operations you can perform per second. Only upsert operations are included in write count.
 - `read_only_token` (String, Sensitive) Readonly REST token to send request to the related index. You can't perform update operation with this token.
 - `token` (String, Sensitive) REST token to send request to the related index.
+
+

@@ -35,9 +35,11 @@ description: |-
 - `max_writes_per_request` (Number) The number of maximum vectors in a write operation. Only upsert operations are included in write operations.
 - `max_writes_per_second` (Number) The number of maximum write operations you can perform per second. Only upsert operations are included in write count.
 - `name` (String) Name of the index.
-- `read_only_token` (String) Readonly REST token to send request to the related index. You can't perform update operation with this token.
+- `read_only_token` (String, Sensitive) Readonly REST token to send request to the related index. You can't perform update operation with this token.
 - `region` (String) The region where your index is deployed.
 - `reserved_price` (Number) Monthly pricing of your index. Only available for fixed and pro plans.
 - `similarity_function` (String) Associated distance metric to calculate the similarity.
 - `token` (String, Sensitive) REST token to send request to the related index.
 - `type` (String) Associated plan of the index. Either `free`, `paid`, `fixed` or `pro`.
+
+

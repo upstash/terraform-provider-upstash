@@ -14,8 +14,8 @@ description: |-
 
 ```terraform
 resource "upstash_qstash_endpoint" "exampleQstashEndpoint" {
-    url = "https://***.***"
-    topic_id = resource.upstash_qstash_topic.exampleQstashTopic.topic_id
+  url      = "https://***.***"
+  topic_id = resource.upstash_qstash_topic.exampleQstashTopic.topic_id
 }
 ```
 
@@ -32,3 +32,5 @@ resource "upstash_qstash_endpoint" "exampleQstashEndpoint" {
 - `endpoint_id` (String) Unique Qstash Endpoint ID
 - `id` (String) The ID of this resource.
 - `topic_name` (String) Unique Qstash Topic Name for Endpoint
+
+

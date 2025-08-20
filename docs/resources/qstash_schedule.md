@@ -14,11 +14,11 @@ description: |-
 
 ```terraform
 resource "upstash_qstash_schedule" "exampleQstashSchedule" {
-    destination = resource.upstash_qstash_topic.exampleQstashTopic.topic_id
-    cron = "* * * * */2"
+  destination = resource.upstash_qstash_topic.exampleQstashTopic.topic_id
+  cron        = "* * * * */2"
 
-    # or simply provide a link
-    # destination = "https://***.***"
+  # or simply provide a link
+  # destination = "https://***.***"
 }
 ```
 
@@ -47,3 +47,5 @@ resource "upstash_qstash_schedule" "exampleQstashSchedule" {
 - `created_at` (Number) Creation time for Qstash Schedule.
 - `id` (String) The ID of this resource.
 - `schedule_id` (String) Unique Qstash Schedule ID for requested schedule
+
+

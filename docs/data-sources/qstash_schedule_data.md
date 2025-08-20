@@ -14,7 +14,7 @@ description: |-
 
 ```terraform
 data "upstash_qstash_schedule_data" "exampleQstashScheduleData" {
-    schedule_id = resource.upstash_qstash_schedule.exampleQstashSchedule.schedule_id
+  schedule_id = resource.upstash_qstash_schedule.exampleQstashSchedule.schedule_id
 }
 ```
 
@@ -35,3 +35,5 @@ data "upstash_qstash_schedule_data" "exampleQstashScheduleData" {
 - `id` (String) The ID of this resource.
 - `not_before` (Number) Start time for Qstash Schedule
 - `retries` (Number) Retries for Qstash Schedule. Either Topic ID or valid URL
+
+
