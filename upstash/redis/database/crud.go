@@ -63,6 +63,23 @@ func resourceDatabaseUpdate(ctx context.Context, data *schema.ResourceData, m in
 		}
 	}
 
+	if data.HasChange("ip_allowlist") {
+		var ipAllowList []string
+		for _, v := range (data.Get("ip_allowlist").(*schema.Set)).List() {
+			if v != nil {
+				ipAllowList = append(ipAllowList, v.(string))
+			}
+		}
+
+		err := UpdateDBIpAllowlist(c, databaseId, UpdateDBIpAllowlistRequest{
+			AllowedIps: ipAllowList,
+		})
+
+		if err != nil {
+			return diag.FromErr(err)
+		}
+	}
+
 	if data.HasChange("consistent") {
 		if data.Get("consistent").(bool) {
 			return diag.Errorf("Cannot enable strong consistency on the DB. All the newly created DBs will be eventually consistent. Set consistent=false.")
@@ -113,7 +130,13 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 		"db_max_commands_per_second": database.DBMaxCommandsPerSecond,
 		"creation_time":              database.CreationTime,
 		"primary_region":             database.PrimaryRegion,
-		"read_regions":               database.ReadRegions,
+	}
+	if len(database.IpAllowList) > 0 {
+		mapping["ip_allowlist"] = database.IpAllowList
+	}
+
+	if len(database.IpAllowList) > 0 {
+		mapping["read_regions"] = database.ReadRegions
 	}
 
 	return utils.SetAndCheckErrors(data, mapping)
@@ -137,6 +160,7 @@ func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m in
 		ProdPack:      data.Get("prod_pack").(bool),
 		Budget:        data.Get("budget").(int),
 		PrimaryRegion: data.Get("primary_region").(string),
+		Tls:           data.Get("tls").(bool),
 		ReadRegions:   readRegions,
 	})
 	if err != nil {
@@ -144,6 +168,23 @@ func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m in
 	}
 	data.SetId("upstash-database-" + database.DatabaseId)
 	data.Set("database_id", database.DatabaseId)
+
+	var ipAllowList []string
+	for _, v := range (data.Get("ip_allowlist").(*schema.Set)).List() {
+		if v != nil {
+			ipAllowList = append(ipAllowList, v.(string))
+		}
+	}
+
+	if len(ipAllowList) > 0 {
+		err = UpdateDBIpAllowlist(c, database.DatabaseId, UpdateDBIpAllowlistRequest{
+			AllowedIps: ipAllowList,
+		})
+		if err != nil {
+			return diag.FromErr(err)
+		}
+	}
+
 	return resourceDatabaseRead(ctx, data, m)
 }
 

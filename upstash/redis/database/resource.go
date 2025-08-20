@@ -102,6 +102,14 @@ func ResourceDatabase() *schema.Resource {
 				Optional:    true,
 				Description: "Read regions for the database (Only works if region='global' and primary_region is set. Can be any combination of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2], excluding the one given as primary.)",
 			},
+			"ip_allowlist": {
+				Type: schema.TypeSet,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Optional:    true,
+				Description: "Ip CIDR allowlist for the database. If not set, all IPs are allowed to connect to the database.",
+			},
 			"port": {
 				Type:        schema.TypeInt,
 				Computed:    true,

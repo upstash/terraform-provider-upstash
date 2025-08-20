@@ -1,6 +1,8 @@
 package database
 
 import (
+	"strings"
+
 	"github.com/upstash/terraform-provider-upstash/upstash/client"
 )
 
@@ -60,6 +62,9 @@ func ConfigureAutoUpgrade(c *client.UpstashClient, databaseId string, enabled bo
 	path += databaseId
 	_, err = c.SendPostRequest(path, nil, "Configure Auto Upgrade for Redis Database", false)
 
+	if err != nil && (strings.Contains(err.Error(), "already enabled") || strings.Contains(err.Error(), "already disabled")) {
+		return nil
+	}
 	return err
 }
 
@@ -78,6 +83,10 @@ func ConfigureProdPack(c *client.UpstashClient, databaseId string, enabled bool)
 
 func UpdateDBBudget(c *client.UpstashClient, databaseId string, budgetBody UpdateDBBudgetRequest) (err error) {
 	_, err = c.SendPatchRequest("/v2/redis/update-budget/"+databaseId, budgetBody, "Update Redis Database Budget", false)
+	return err
+}
+func UpdateDBIpAllowlist(c *client.UpstashClient, databaseId string, body UpdateDBIpAllowlistRequest) (err error) {
+	_, err = c.SendPostRequest("/v2/redis/update-allowlist/"+databaseId, body, "Update Redis Database Ip Allowlist", false)
 	return err
 }
 

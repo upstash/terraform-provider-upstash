@@ -84,6 +84,14 @@ func DataSourceDatabase() *schema.Resource {
 				Computed:    true,
 				Description: "Read regions for the database",
 			},
+			"ip_allowlist": {
+				Type: schema.TypeSet,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Description: "Ip CIDR allowlist for the database. If not set, all IPs are allowed to connect to the database.",
+			},
 			"port": {
 				Type:        schema.TypeInt,
 				Computed:    true,

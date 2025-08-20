@@ -101,3 +101,6 @@ output "primary_region" {
 output "read_regions" {
   value = data.upstash_redis_database_data.exampleDBData.read_regions
 }
+output "ip_allowlist" {
+  value = data.upstash_redis_database_data.exampleDBData.ip_allowlist
+}
