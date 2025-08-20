@@ -27,7 +27,7 @@ variable "eviction" {
   default = "true"
 }
 
-variable "auto_upgrade" {
+variable "auto_scale" {
   default = "true"
 }
 

@@ -70,7 +70,7 @@ func ResourceDatabase() *schema.Resource {
 				Default:     false,
 				Description: "Enable eviction, to evict keys when your database reaches the max size",
 			},
-			"auto_upgrade": {
+			"auto_scale": {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     false,
@@ -81,6 +81,12 @@ func ResourceDatabase() *schema.Resource {
 				Optional:    true,
 				Default:     20,
 				Description: "Budget for the database (default $20). It is used to limit the cost of the database. If the budget is reached, the database will be throttled until the next month.",
+			},
+			"prod_pack": {
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+				Description: "Whether Prod Pack is enabled for the database.",
 			},
 			"primary_region": {
 				Type:        schema.TypeString,

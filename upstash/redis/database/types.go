@@ -10,7 +10,7 @@ type Database struct {
 	Endpoint               string   `json:"endpoint"`
 	Tls                    bool     `json:"tls"`
 	Eviction               bool     `json:"eviction"`
-	AutoUpgrade            bool     `json:"auto_upgrade"`
+	AutoUpgrade            bool     `json:"auto_scale"`
 	ProdPack               bool     `json:"prod_pack"`
 	Budget                 int      `json:"budget"`
 	Consistent             bool     `json:"consistent"`
@@ -29,6 +29,7 @@ type Database struct {
 	DBMaxCommandsPerSecond int64    `json:"db_max_commands_per_second"`
 	PrimaryRegion          string   `json:"primary_region"`
 	ReadRegions            []string `json:"read_regions"`
+	IpAllowList            []string `json:"allowed_ip_ranges"`
 }
 
 type CreateDatabaseRequest struct {
@@ -43,6 +44,7 @@ type CreateDatabaseRequest struct {
 	Budget        int      `json:"budget"`
 	PrimaryRegion string   `json:"primary_region,omitempty"`
 	ReadRegions   []string `json:"read_regions,omitempty"`
+	IpAllowList   []string `json:"allowed_ip_ranges,omitempty"`
 }
 
 type UpdateDBBudgetRequest struct {

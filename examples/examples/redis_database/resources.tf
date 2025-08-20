@@ -2,7 +2,7 @@ resource "upstash_redis_database" "exampleDB" {
   database_name = var.database_name
   region        = var.region
   tls           = var.tls
-  auto_upgrade    = var.auto_upgrade
+  auto_scale    = var.auto_scale
   eviction      = var.eviction
 
   // below ones only work if the region is given as "global"

@@ -27,7 +27,7 @@ data "upstash_redis_database_data" "exampleDBData" {
 
 ### Read-Only
 
-- `auto_upgrade` (Boolean) Upgrade to higher plans automatically when it hits quotas
+- `auto_scale` (Boolean) Upgrade to higher plans automatically when it hits quotas
 - `budget` (Number) Budget for the payg database. It is used to limit the cost of the database. If the budget is reached, the database will be throttled until the next month.
 - `consistent` (Boolean, Deprecated) When enabled database runs in Consistency Mode
 - `creation_time` (Number) Creation time of the database

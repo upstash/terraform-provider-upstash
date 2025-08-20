@@ -56,7 +56,7 @@ func DataSourceDatabase() *schema.Resource {
 				Computed:    true,
 				Description: "Enable eviction, to evict keys when your database reaches the max size",
 			},
-			"auto_upgrade": {
+			"auto_scale": {
 				Type:        schema.TypeBool,
 				Computed:    true,
 				Description: "Upgrade to higher plans automatically when it hits quotas",
@@ -65,6 +65,11 @@ func DataSourceDatabase() *schema.Resource {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Budget for the database. It is used to limit the cost of the database. If the budget is reached, the database will be throttled until the next month.",
+			},
+			"prod_pack": {
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Description: "Whether Prod Pack is enabled for the database.",
 			},
 			"primary_region": {
 				Type:        schema.TypeString,
