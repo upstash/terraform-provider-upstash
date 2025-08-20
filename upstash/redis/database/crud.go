@@ -135,7 +135,7 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 		mapping["ip_allowlist"] = database.IpAllowList
 	}
 
-	if len(database.IpAllowList) > 0 {
+	if len(database.ReadRegions) > 0 {
 		mapping["read_regions"] = database.ReadRegions
 	}
 
