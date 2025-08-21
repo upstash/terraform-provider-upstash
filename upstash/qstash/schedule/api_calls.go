@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	"github.com/imroc/req"
-	"github.com/upstash/terraform-provider-upstash/upstash/client"
+	"github.com/upstash/terraform-provider-upstash/v2/upstash/client"
 )
 
 func getSchedule(c *client.UpstashClient, scheduleId string) (schedule QstashSchedule, err error) {

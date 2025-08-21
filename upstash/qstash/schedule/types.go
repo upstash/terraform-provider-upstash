@@ -1,6 +1,6 @@
 package schedule
 
-import "github.com/upstash/terraform-provider-upstash/upstash/qstash/topic"
+import "github.com/upstash/terraform-provider-upstash/v2/upstash/qstash/topic"
 
 type CreateQstashScheduleRequest struct {
 	Destination    string `json:"destination"`

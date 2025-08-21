@@ -1,4 +1,4 @@
-module github.com/upstash/terraform-provider-upstash
+module github.com/upstash/terraform-provider-upstash/v2
 
 go 1.24.0
 

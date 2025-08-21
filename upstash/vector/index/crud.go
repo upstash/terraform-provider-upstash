@@ -2,9 +2,10 @@ package index
 
 import (
 	"context"
-	"github.com/upstash/terraform-provider-upstash/upstash/utils"
 
-	"github.com/upstash/terraform-provider-upstash/upstash/client"
+	"github.com/upstash/terraform-provider-upstash/v2/upstash/utils"
+
+	"github.com/upstash/terraform-provider-upstash/v2/upstash/client"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"

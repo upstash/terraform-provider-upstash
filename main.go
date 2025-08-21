@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
-	"github.com/upstash/terraform-provider-upstash/upstash"
+	"github.com/upstash/terraform-provider-upstash/v2/upstash"
 )
 
 func main() {

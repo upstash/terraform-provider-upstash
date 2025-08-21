@@ -1,7 +1,7 @@
 package topic
 
 import (
-	"github.com/upstash/terraform-provider-upstash/upstash/client"
+	"github.com/upstash/terraform-provider-upstash/v2/upstash/client"
 )
 
 func createTopic(c *client.UpstashClient, body createQstashTopicRequest) (topic QstashTopic, err error) {

@@ -1,7 +1,7 @@
 package index
 
 import (
-	"github.com/upstash/terraform-provider-upstash/upstash/client"
+	"github.com/upstash/terraform-provider-upstash/v2/upstash/client"
 )
 
 func CreateIndex(c *client.UpstashClient, body CreateIndexRequest) (index Index, err error) {

@@ -3,7 +3,7 @@ package database
 import (
 	"strings"
 
-	"github.com/upstash/terraform-provider-upstash/upstash/client"
+	"github.com/upstash/terraform-provider-upstash/v2/upstash/client"
 )
 
 // not needed if changes

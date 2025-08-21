@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/imroc/req"
-	"github.com/upstash/terraform-provider-upstash/upstash/utils"
+	"github.com/upstash/terraform-provider-upstash/v2/upstash/utils"
 )
 
 const UPSTASH_API_ENDPOINT = "https://api.upstash.com"

@@ -2,7 +2,7 @@ package team
 
 import (
 	"github.com/imroc/req"
-	"github.com/upstash/terraform-provider-upstash/upstash/client"
+	"github.com/upstash/terraform-provider-upstash/v2/upstash/client"
 )
 
 func createTeam(c *client.UpstashClient, body CreateTeamRequest) (team Team, err error) {

@@ -3,18 +3,18 @@ package upstash
 import (
 	"context"
 
-	"github.com/upstash/terraform-provider-upstash/upstash/vector/index"
+	"github.com/upstash/terraform-provider-upstash/v2/upstash/vector/index"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	"github.com/upstash/terraform-provider-upstash/upstash/client"
-	qstashEndpoint "github.com/upstash/terraform-provider-upstash/upstash/qstash/endpoint"
-	qstashSchedule "github.com/upstash/terraform-provider-upstash/upstash/qstash/schedule"
-	qstashTopic "github.com/upstash/terraform-provider-upstash/upstash/qstash/topic"
-	qstashScheduleV2 "github.com/upstash/terraform-provider-upstash/upstash/qstash_v2/schedule"
-	qstashTopicV2 "github.com/upstash/terraform-provider-upstash/upstash/qstash_v2/topic"
+	"github.com/upstash/terraform-provider-upstash/v2/upstash/client"
+	qstashEndpoint "github.com/upstash/terraform-provider-upstash/v2/upstash/qstash/endpoint"
+	qstashSchedule "github.com/upstash/terraform-provider-upstash/v2/upstash/qstash/schedule"
+	qstashTopic "github.com/upstash/terraform-provider-upstash/v2/upstash/qstash/topic"
+	qstashScheduleV2 "github.com/upstash/terraform-provider-upstash/v2/upstash/qstash_v2/schedule"
+	qstashTopicV2 "github.com/upstash/terraform-provider-upstash/v2/upstash/qstash_v2/topic"
 
-	"github.com/upstash/terraform-provider-upstash/upstash/redis/database"
-	"github.com/upstash/terraform-provider-upstash/upstash/team"
+	"github.com/upstash/terraform-provider-upstash/v2/upstash/redis/database"
+	"github.com/upstash/terraform-provider-upstash/v2/upstash/team"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )

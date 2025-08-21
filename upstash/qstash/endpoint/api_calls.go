@@ -1,6 +1,6 @@
 package endpoint
 
-import "github.com/upstash/terraform-provider-upstash/upstash/client"
+import "github.com/upstash/terraform-provider-upstash/v2/upstash/client"
 
 func getEndpoint(c *client.UpstashClient, endpointId string) (endpoint QstashEndpoint, err error) {
 
