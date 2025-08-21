@@ -14,7 +14,7 @@ description: |-
 
 ```terraform
 data "upstash_redis_database_data" "exampleDBData" {
-    database_id = resource.upstash_redis_database.exampleDB.database_id
+  database_id = resource.upstash_redis_database.exampleDB.database_id
 }
 ```
 
@@ -28,6 +28,7 @@ data "upstash_redis_database_data" "exampleDBData" {
 ### Read-Only
 
 - `auto_scale` (Boolean) Upgrade to higher plans automatically when it hits quotas
+- `budget` (Number) Budget for the database. It is used to limit the cost of the database. If the budget is reached, the database will be throttled until the next month.
 - `consistent` (Boolean, Deprecated) When enabled database runs in Consistency Mode
 - `creation_time` (Number) Creation time of the database
 - `database_name` (String) Name of the database
@@ -42,10 +43,12 @@ data "upstash_redis_database_data" "exampleDBData" {
 - `endpoint` (String) Database URL for connection
 - `eviction` (Boolean) Enable eviction, to evict keys when your database reaches the max size
 - `id` (String) The ID of this resource.
+- `ip_allowlist` (Set of String) Ip CIDR allowlist for the database. If not set, all IPs are allowed to connect to the database.
 - `multizone` (Boolean, Deprecated) When enabled database is highly available and deployed multi-zone
 - `password` (String, Sensitive) Password of the database
 - `port` (Number) Port of the endpoint
 - `primary_region` (String) Primary region for the database
+- `prod_pack` (Boolean) Whether Prod Pack is enabled for the database.
 - `read_only_rest_token` (String, Sensitive) Rest Token for the database.
 - `read_regions` (Set of String) Read regions for the database
 - `region` (String) region of the database. Possible values are: "global", "us-central1"
@@ -53,3 +56,5 @@ data "upstash_redis_database_data" "exampleDBData" {
 - `state` (String) State of the database
 - `tls` (Boolean, Deprecated) When enabled, data is encrypted in transit.
 - `user_email` (String) User email for the database
+
+

@@ -11,6 +11,8 @@ type Database struct {
 	Tls                    bool     `json:"tls"`
 	Eviction               bool     `json:"eviction"`
 	AutoUpgrade            bool     `json:"auto_upgrade"`
+	ProdPack               bool     `json:"prod_pack_enabled"`
+	Budget                 int      `json:"budget"`
 	Consistent             bool     `json:"consistent"`
 	MultiZone              bool     `json:"multizone"`
 	RestToken              string   `json:"rest_token,omitempty"`
@@ -27,6 +29,7 @@ type Database struct {
 	DBMaxCommandsPerSecond int64    `json:"db_max_commands_per_second"`
 	PrimaryRegion          string   `json:"primary_region"`
 	ReadRegions            []string `json:"read_regions"`
+	IpAllowList            []string `json:"allowed_ip_ranges"`
 }
 
 type CreateDatabaseRequest struct {
@@ -37,18 +40,18 @@ type CreateDatabaseRequest struct {
 	MultiZone     bool     `json:"multizone"`
 	Eviction      bool     `json:"eviction"`
 	AutoUpgrade   bool     `json:"auto_upgrade"`
+	ProdPack      bool     `json:"prod_pack_enabled"`
+	Budget        int      `json:"budget"`
 	PrimaryRegion string   `json:"primary_region,omitempty"`
 	ReadRegions   []string `json:"read_regions,omitempty"`
 }
 
-type ConfigureEvictionRequest struct {
-	DatabaseId string `json:"database_id"`
-	Eviction   bool   `json:"eviction"`
+type UpdateDBBudgetRequest struct {
+	Budget int `json:"budget"`
 }
 
-type ConfigureAutoUpgradeRequest struct {
-	DatabaseId  string `json:"database_id"`
-	AutoUpgrade bool   `json:"auto_upgrade"`
+type UpdateDBIpAllowlistRequest struct {
+	AllowedIps []string `json:"allowed_ips"`
 }
 
 type UpdateReadRegionsRequest struct {

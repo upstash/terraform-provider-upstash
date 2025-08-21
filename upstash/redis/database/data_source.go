@@ -6,67 +6,77 @@ func DataSourceDatabase() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: resourceDatabaseRead,
 		Schema: map[string]*schema.Schema{
-			"database_id": &schema.Schema{
+			"database_id": {
 				Type:        schema.TypeString,
 				Required:    true,
 				Description: "Unique Database ID for requested database",
 			},
-			"database_name": &schema.Schema{
+			"database_name": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "Name of the database",
 			},
-			"region": &schema.Schema{
+			"region": {
 				Type:     schema.TypeString,
 				Computed: true,
 				Description: "region of the database. Possible values are: " +
 					"\"global\", \"us-central1\"",
 			},
-			"endpoint": &schema.Schema{
+			"endpoint": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "Database URL for connection",
 			},
-			"password": &schema.Schema{
+			"password": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Sensitive:   true,
 				Description: "Password of the database",
 			},
-			"consistent": &schema.Schema{
+			"consistent": {
 				Type:        schema.TypeBool,
 				Computed:    true,
 				Description: "When enabled database runs in Consistency Mode",
 				Deprecated:  "Consistent option is deprecated.",
 			},
-			"multizone": &schema.Schema{
+			"multizone": {
 				Type:        schema.TypeBool,
 				Computed:    true,
 				Description: "When enabled database is highly available and deployed multi-zone",
 				Deprecated:  "Multizone option is deprecated. It is enabled by default for paid databases.",
 			},
-			"tls": &schema.Schema{
+			"tls": {
 				Type:        schema.TypeBool,
 				Computed:    true,
 				Description: "When enabled, data is encrypted in transit.",
 				Deprecated:  "TLS option is deprecated. It's enabled by default for all databases.",
 			},
-			"eviction": &schema.Schema{
+			"eviction": {
 				Type:        schema.TypeBool,
 				Computed:    true,
 				Description: "Enable eviction, to evict keys when your database reaches the max size",
 			},
-			"auto_scale": &schema.Schema{
+			"auto_scale": {
 				Type:        schema.TypeBool,
 				Computed:    true,
 				Description: "Upgrade to higher plans automatically when it hits quotas",
 			},
-			"primary_region": &schema.Schema{
+			"budget": {
+				Type:        schema.TypeInt,
+				Computed:    true,
+				Description: "Budget for the database. It is used to limit the cost of the database. If the budget is reached, the database will be throttled until the next month.",
+			},
+			"prod_pack": {
+				Type:        schema.TypeBool,
+				Computed:    true,
+				Description: "Whether Prod Pack is enabled for the database.",
+			},
+			"primary_region": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "Primary region for the database",
 			},
-			"read_regions": &schema.Schema{
+			"read_regions": {
 				Type: schema.TypeSet,
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
@@ -74,74 +84,82 @@ func DataSourceDatabase() *schema.Resource {
 				Computed:    true,
 				Description: "Read regions for the database",
 			},
-			"port": &schema.Schema{
+			"ip_allowlist": {
+				Type: schema.TypeSet,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+				Computed:    true,
+				Description: "Ip CIDR allowlist for the database. If not set, all IPs are allowed to connect to the database.",
+			},
+			"port": {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Port of the endpoint",
 			},
-			"rest_token": &schema.Schema{
+			"rest_token": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Sensitive:   true,
 				Description: "Rest Token for the database.",
 			},
-			"read_only_rest_token": &schema.Schema{
+			"read_only_rest_token": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Sensitive:   true,
 				Description: "Rest Token for the database.",
 			},
-			"creation_time": &schema.Schema{
+			"creation_time": {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Creation time of the database",
 			},
-			"database_type": &schema.Schema{
+			"database_type": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "Type of the database",
 			},
-			"state": &schema.Schema{
+			"state": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "State of the database",
 			},
-			"user_email": &schema.Schema{
+			"user_email": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "User email for the database",
 			},
-			"db_max_clients": &schema.Schema{
+			"db_max_clients": {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Max clients for the database",
 			},
-			"db_max_request_size": &schema.Schema{
+			"db_max_request_size": {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Max request size for the database",
 			},
-			"db_disk_threshold": &schema.Schema{
+			"db_disk_threshold": {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Disk threshold for the database",
 			},
-			"db_max_entry_size": &schema.Schema{
+			"db_max_entry_size": {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Max entry size for the database",
 			},
-			"db_memory_threshold": &schema.Schema{
+			"db_memory_threshold": {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Memory threshold for the database",
 			},
-			"db_daily_bandwidth_limit": &schema.Schema{
+			"db_daily_bandwidth_limit": {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Daily bandwidth limit for the database",
 			},
-			"db_max_commands_per_second": &schema.Schema{
+			"db_max_commands_per_second": {
 				Type:        schema.TypeInt,
 				Computed:    true,
 				Description: "Max commands per second for the database",

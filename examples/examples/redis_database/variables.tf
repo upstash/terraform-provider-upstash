@@ -10,15 +10,8 @@ variable "api_key" {
 variable "database_name" {
   default = "terraform_db"
 }
-variable "region" {
-  type = string
-  # default = "global"
-  # or for regional, pick a region. eg default="eu-west-1"
-}
 
-variable "tls" {
-  default = "false"
-}
+
 variable "multizone" {
   default = "true"
 }
