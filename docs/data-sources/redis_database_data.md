@@ -51,7 +51,7 @@ data "upstash_redis_database_data" "exampleDBData" {
 - `prod_pack` (Boolean) Whether Prod Pack is enabled for the database.
 - `read_only_rest_token` (String, Sensitive) Rest Token for the database.
 - `read_regions` (Set of String) Read regions for the database
-- `region` (String) region of the database. Possible values are: "global", "us-central1"
+- `region` (String) Region of the database. For globals, check for primary_region and read_regions fields
 - `rest_token` (String, Sensitive) Rest Token for the database.
 - `state` (String) State of the database
 - `tls` (Boolean, Deprecated) When enabled, data is encrypted in transit.

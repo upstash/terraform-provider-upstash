@@ -46,7 +46,7 @@ func ResourceSearch() *schema.Resource {
 			"type": {
 				Type:        schema.TypeString,
 				Required:    true,
-				Description: "Associated plan of the search. Either `free`, `paid`, `fixed` or `pro`.",
+				Description: "Associated plan of the search. `payg` can be used",
 			},
 			"region": {
 				Type:        schema.TypeString,
@@ -107,7 +107,7 @@ func ResourceSearch() *schema.Resource {
 			"creation_time": {
 				Type:        schema.TypeInt,
 				Computed:    true,
-				Description: "The creation time of the vector search in UTC as unix timestamp.",
+				Description: "The creation time of the search in UTC as unix timestamp.",
 			},
 		},
 	}
