@@ -19,7 +19,6 @@ func resourceSearchCreate(ctx context.Context, data *schema.ResourceData, m inte
 		Region: data.Get("region").(string),
 		Type:   data.Get("type").(string),
 	})
-
 	if err != nil {
 		return diag.FromErr(err)
 	}
@@ -43,12 +42,13 @@ func resourceSearchRead(ctx context.Context, data *schema.ResourceData, m interf
 	}
 
 	search, err := GetSearch(c, searchId)
-
 	if err != nil {
 		return diag.FromErr(err)
 	}
-	searchType := search.Type
 
+	data.SetId(search.Id)
+
+	searchType := search.Type
 	if searchType == "paid" {
 		searchType = "payg"
 	}
