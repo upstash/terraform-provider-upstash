@@ -17,10 +17,9 @@ func DataSourceDatabase() *schema.Resource {
 				Description: "Name of the database",
 			},
 			"region": {
-				Type:     schema.TypeString,
-				Computed: true,
-				Description: "region of the database. Possible values are: " +
-					"\"global\", \"us-central1\"",
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Region of the database. For globals, check for primary_region and read_regions fields",
 			},
 			"endpoint": {
 				Type:        schema.TypeString,

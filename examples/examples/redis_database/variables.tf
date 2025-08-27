@@ -24,15 +24,17 @@ variable "auto_scale" {
   default = "true"
 }
 
-# below ones only work when region="global"
+variable "region" {
+  type    = string
+  default = "global"
+}
+
 variable "primary_region" {
   type    = string
-  default = ""
-  # default = "eu-central-1"
+  default = "us-east-1"
 }
 
 variable "read_regions" {
   type    = set(string)
-  default = []
-  # default = ["us-east-1", "eu-west-1", "ap-southeast-1"]
+  default = ["eu-central-1"]
 }
