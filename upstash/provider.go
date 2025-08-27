@@ -3,6 +3,7 @@ package upstash
 import (
 	"context"
 
+	"github.com/upstash/terraform-provider-upstash/v2/upstash/search"
 	"github.com/upstash/terraform-provider-upstash/v2/upstash/vector/index"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -38,6 +39,7 @@ func Provider() *schema.Provider {
 		ResourcesMap: map[string]*schema.Resource{
 			"upstash_redis_database":     database.ResourceDatabase(),
 			"upstash_vector_index":       index.ResourceIndex(),
+			"upstash_search":             search.ResourceSearch(),
 			"upstash_team":               team.ResourceTeam(),
 			"upstash_qstash_topic":       qstashTopic.ResourceQstashTopic(),
 			"upstash_qstash_endpoint":    qstashEndpoint.ResourceQstashEndpoint(),
@@ -48,6 +50,7 @@ func Provider() *schema.Provider {
 		DataSourcesMap: map[string]*schema.Resource{
 			"upstash_redis_database_data":     database.DataSourceDatabase(),
 			"upstash_vector_index_data":       index.DataResourceIndex(),
+			"upstash_search_data":             search.DataResourceSearch(),
 			"upstash_team_data":               team.DataSourceTeam(),
 			"upstash_qstash_topic_data":       qstashTopic.DataSourceQstashTopic(),
 			"upstash_qstash_endpoint_data":    qstashEndpoint.DataSourceQstashEndpoint(),

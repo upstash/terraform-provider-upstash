@@ -45,12 +45,12 @@ func resourceIndexRead(ctx context.Context, data *schema.ResourceData, m interfa
 	}
 
 	index, err := GetIndex(c, indexId)
-
 	if err != nil {
 		return diag.FromErr(err)
 	}
-	indexType := index.Type
+	data.SetId(index.Id)
 
+	indexType := index.Type
 	if indexType == "paid" {
 		indexType = "payg"
 	}

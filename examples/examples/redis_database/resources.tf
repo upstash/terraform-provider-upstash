@@ -1,6 +1,5 @@
 resource "upstash_redis_database" "exampleDB" {
   database_name = var.database_name
-  region        = "global"
   tls           = true
   auto_scale    = true
   eviction      = true
@@ -8,6 +7,7 @@ resource "upstash_redis_database" "exampleDB" {
   budget        = 30
 
 
+  region        = var.region
   primary_region = var.primary_region
   read_regions   = var.read_regions
 }
