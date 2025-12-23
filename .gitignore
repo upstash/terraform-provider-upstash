@@ -148,3 +148,7 @@ tfplugindocs
 
 **.terraform.lock.hcl**
 localEnvSetters.txt
+
+
+.env
+dev.tfrc
