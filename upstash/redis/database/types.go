@@ -33,7 +33,8 @@ type Database struct {
 }
 
 type CreateDatabaseRequest struct {
-	Region        string   `json:"region"`
+	Region        string   `json:"region,omitempty"`
+	Platform      string   `json:"platform,omitempty"`
 	DatabaseName  string   `json:"database_name"`
 	Tls           bool     `json:"tls"`
 	Consistent    bool     `json:"consistent"`

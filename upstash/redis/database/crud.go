@@ -102,6 +102,13 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 
 	data.SetId("upstash-database-" + database.DatabaseId)
 
+	var platform string
+	switch database.Region {
+	case "gcp-global":
+		platform = "gcp"
+	case "global":
+		platform = "aws"
+	}
 	mapping := map[string]interface{}{
 		"database_id":                database.DatabaseId,
 		"database_name":              database.DatabaseName,
@@ -130,6 +137,7 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 		"db_max_commands_per_second": database.DBMaxCommandsPerSecond,
 		"creation_time":              database.CreationTime,
 		"primary_region":             database.PrimaryRegion,
+		"platform":                   platform,
 	}
 	if len(database.IpAllowList) > 0 {
 		mapping["ip_allowlist"] = database.IpAllowList
@@ -154,6 +162,7 @@ func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m in
 
 	database, err := CreateDatabase(c, CreateDatabaseRequest{
 		Region:        data.Get("region").(string),
+		Platform:      data.Get("platform").(string),
 		DatabaseName:  data.Get("database_name").(string),
 		Eviction:      data.Get("eviction").(bool),
 		AutoUpgrade:   data.Get("auto_scale").(bool),
