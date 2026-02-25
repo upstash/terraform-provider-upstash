@@ -132,8 +132,6 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 		"primary_region":             database.PrimaryRegion,
 	}
 
-	// Only set platform if the user originally provided it (it's not a Computed field on the resource).
-	// Setting it for users who only use the deprecated "region" field would cause unwanted drift.
 	if _, ok := data.GetOk("platform"); ok {
 		var platform string
 		switch database.Region {
