@@ -13,7 +13,6 @@ func dataSourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m in
 		return diags
 	}
 
-	// Derive platform from region for data source (where it's a Computed field)
 	region := data.Get("region").(string)
 	var platform string
 	switch region {
