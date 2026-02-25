@@ -1,10 +1,37 @@
 package database
 
-import "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+import (
+	"context"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+)
+
+func dataSourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
+	diags := resourceDatabaseRead(ctx, data, m)
+	if diags.HasError() {
+		return diags
+	}
+
+	// Derive platform from region for data source (where it's a Computed field)
+	region := data.Get("region").(string)
+	var platform string
+	switch region {
+	case "gcp-global":
+		platform = "gcp"
+	case "global":
+		platform = "aws"
+	}
+	if platform != "" {
+		data.Set("platform", platform)
+	}
+
+	return diags
+}
 
 func DataSourceDatabase() *schema.Resource {
 	return &schema.Resource{
-		ReadContext: resourceDatabaseRead,
+		ReadContext: dataSourceDatabaseRead,
 		Schema: map[string]*schema.Schema{
 			"database_id": {
 				Type:        schema.TypeString,
@@ -20,6 +47,11 @@ func DataSourceDatabase() *schema.Resource {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Description: "Region of the database. For globals, check for primary_region and read_regions fields",
+			},
+			"platform": {
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Platform of the database. Can be one of [aws, gcp]",
 			},
 			"endpoint": {
 				Type:        schema.TypeString,

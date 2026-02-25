@@ -14,10 +14,10 @@ description: |-
 
 ```terraform
 resource "upstash_redis_database" "exampleDB" {
-  database_name   = "Terraform DB6"
-  region          = "global"
-  primary_region  = "eu-west-1"
-  tls             = true
+  database_name  = "Terraform DB6"
+  platform       = "aws"
+  primary_region = "eu-west-1"
+  tls            = true
 }
 ```
 
@@ -27,7 +27,6 @@ resource "upstash_redis_database" "exampleDB" {
 ### Required
 
 - `database_name` (String) Name of the database
-- `region` (String) Region of the database. For global gcp regions, use `gcp-global`. For globals, check for primary_region and read_regions fields
 
 ### Optional
 
@@ -37,9 +36,11 @@ resource "upstash_redis_database" "exampleDB" {
 - `eviction` (Boolean) Enable eviction, to evict keys when your database reaches the max size
 - `ip_allowlist` (Set of String) Ip CIDR allowlist for the database. If not set, all IPs are allowed to connect to the database.
 - `multizone` (Boolean, Deprecated) When enabled, database becomes highly available and is deployed in multiple zones. (If changed to false from true, results in deletion and recreation of the resource)
+- `platform` (String) Platform of the database. Can be one of [aws, gcp]
 - `primary_region` (String) Primary region for the database (Only works if region='global'. Can be one of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2])
 - `prod_pack` (Boolean) Whether Prod Pack is enabled for the database.
 - `read_regions` (Set of String) Read regions for the database (Only works if region='global' and primary_region is set. Can be any combination of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2], excluding the one given as primary.)
+- `region` (String, Deprecated)
 - `tls` (Boolean) When enabled, data is encrypted in transit. TLS is enabled by default for newly created databases and cannot be disabled.
 
 ### Read-Only
@@ -62,5 +63,3 @@ resource "upstash_redis_database" "exampleDB" {
 - `rest_token` (String, Sensitive) Rest Token for the database.
 - `state` (String) State of the database
 - `user_email` (String) User email for the database
-
-

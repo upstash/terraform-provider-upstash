@@ -47,5 +47,3 @@ data "upstash_vector_index_data" "vectorResourceData" {
 - `similarity_function` (String) Associated distance metric to calculate the similarity.
 - `token` (String, Sensitive) REST token to send request to the related index.
 - `type` (String) Associated plan of the index. Either `free`, `paid`, `fixed` or `pro`.
-
-

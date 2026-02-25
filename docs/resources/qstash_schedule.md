@@ -47,5 +47,3 @@ resource "upstash_qstash_schedule" "exampleQstashSchedule" {
 - `created_at` (Number) Creation time for Qstash Schedule.
 - `id` (String) The ID of this resource.
 - `schedule_id` (String) Unique Qstash Schedule ID for requested schedule
-
-

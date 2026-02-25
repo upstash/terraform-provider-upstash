@@ -46,6 +46,7 @@ data "upstash_redis_database_data" "exampleDBData" {
 - `ip_allowlist` (Set of String) Ip CIDR allowlist for the database. If not set, all IPs are allowed to connect to the database.
 - `multizone` (Boolean, Deprecated) When enabled database is highly available and deployed multi-zone
 - `password` (String, Sensitive) Password of the database
+- `platform` (String) Platform of the database. Can be one of [aws, gcp]
 - `port` (Number) Port of the endpoint
 - `primary_region` (String) Primary region for the database
 - `prod_pack` (Boolean) Whether Prod Pack is enabled for the database.
@@ -56,5 +57,3 @@ data "upstash_redis_database_data" "exampleDBData" {
 - `state` (String) State of the database
 - `tls` (Boolean, Deprecated) When enabled, data is encrypted in transit.
 - `user_email` (String) User email for the database
-
-

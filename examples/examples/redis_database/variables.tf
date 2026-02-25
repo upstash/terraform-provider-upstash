@@ -11,7 +11,20 @@ variable "database_name" {
   default = "terraform_db"
 }
 
+variable "tls" {
+  type = bool
+  default = true
+}
 
+variable "platform" {
+  type = string
+  default = "aws"
+}
+
+variable "primary_region" {
+  type = string
+  default = "us-east-1"
+}
 variable "multizone" {
   default = "true"
 }
@@ -24,15 +37,6 @@ variable "auto_scale" {
   default = "true"
 }
 
-variable "region" {
-  type    = string
-  default = "global"
-}
-
-variable "primary_region" {
-  type    = string
-  default = "us-east-1"
-}
 
 variable "read_regions" {
   type    = set(string)

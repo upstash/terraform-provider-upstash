@@ -30,5 +30,3 @@ data "upstash_qstash_endpoint_data" "exampleQstashEndpointData" {
 - `endpoint_id` (String) Unique Qstash Endpoint ID
 - `id` (String) The ID of this resource.
 - `url` (String) URL of the endpoint
-
-

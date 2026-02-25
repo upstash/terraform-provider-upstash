@@ -7,8 +7,8 @@ resource "upstash_redis_database" "exampleDB" {
   budget        = 30
 
 
-  region        = var.region
   primary_region = var.primary_region
+  platform       = var.platform
   read_regions   = var.read_regions
 }
 

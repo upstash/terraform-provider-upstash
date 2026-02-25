@@ -27,12 +27,10 @@ func ResourceDatabase() *schema.Resource {
 				Description: "Name of the database",
 			},
 			"platform": {
-				Type:         schema.TypeString,
-				Optional:     true,
-				Computed:     true,
-				ForceNew:     true,
-				Description:  "Platform of the database. Can be one of [aws, gcp]",
-				AtLeastOneOf: []string{"platform", "region"},
+				Type:        schema.TypeString,
+				Optional:    true,
+				ForceNew:    true,
+				Description: "Platform of the database. Can be one of [aws, gcp]",
 			},
 			"region": {
 				Type:       schema.TypeString,

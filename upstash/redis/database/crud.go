@@ -102,13 +102,6 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 
 	data.SetId("upstash-database-" + database.DatabaseId)
 
-	var platform string
-	switch database.Region {
-	case "gcp-global":
-		platform = "gcp"
-	case "global":
-		platform = "aws"
-	}
 	mapping := map[string]interface{}{
 		"database_id":                database.DatabaseId,
 		"database_name":              database.DatabaseName,
@@ -137,7 +130,19 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 		"db_max_commands_per_second": database.DBMaxCommandsPerSecond,
 		"creation_time":              database.CreationTime,
 		"primary_region":             database.PrimaryRegion,
-		"platform":                   platform,
+	}
+
+	// Only set platform if the user originally provided it (it's not a Computed field on the resource).
+	// Setting it for users who only use the deprecated "region" field would cause unwanted drift.
+	if _, ok := data.GetOk("platform"); ok {
+		var platform string
+		switch database.Region {
+		case "gcp-global":
+			platform = "gcp"
+		case "global":
+			platform = "aws"
+		}
+		mapping["platform"] = platform
 	}
 	if len(database.IpAllowList) > 0 {
 		mapping["ip_allowlist"] = database.IpAllowList
