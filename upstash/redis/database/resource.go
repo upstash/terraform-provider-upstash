@@ -29,7 +29,6 @@ func ResourceDatabase() *schema.Resource {
 			"platform": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				ForceNew:    true,
 				Description: "Platform of the database. Can be one of [aws, gcp]",
 			},
 			"region": {
@@ -200,6 +199,14 @@ func ResourceDatabase() *schema.Resource {
 			}),
 			customdiff.ForceNewIfChange("tls", func(ctx context.Context, old, new, meta interface{}) bool {
 				return old.(bool) && !new.(bool)
+			}),
+			customdiff.ForceNewIfChange("platform", func(ctx context.Context, old, new, meta interface{}) bool {
+				oldVal := old.(string)
+				newVal := new.(string)
+				if oldVal == "" || newVal == "" {
+					return false
+				}
+				return oldVal != newVal
 			}),
 		),
 	}
