@@ -10,6 +10,7 @@ output "region" {
 output "platform" {
   value = data.upstash_redis_database_data.exampleDBData.platform
 }
+
 output "multizone" {
   value = resource.upstash_redis_database.exampleDB.multizone
 }

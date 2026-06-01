@@ -45,3 +45,5 @@ data "upstash_search_data" "exampleSearchData" {
 - `reserved_price` (Number) Monthly pricing of your search. Only available for fixed and pro plans.
 - `token` (String, Sensitive) REST token to send request to the related search.
 - `type` (String) Associated plan of the search.
+
+
