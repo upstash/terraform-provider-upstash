@@ -37,8 +37,8 @@ type CreateDatabaseRequest struct {
 	Platform      string   `json:"platform,omitempty"`
 	DatabaseName  string   `json:"database_name"`
 	Tls           bool     `json:"tls"`
-	Consistent    bool     `json:"consistent"`
-	MultiZone     bool     `json:"multizone"`
+	Consistent    bool     `json:"consistent,omitempty"`
+	MultiZone     bool     `json:"multizone,omitempty"`
 	Eviction      bool     `json:"eviction"`
 	AutoUpgrade   bool     `json:"auto_upgrade"`
 	ProdPack      bool     `json:"prod_pack_enabled"`

@@ -40,7 +40,7 @@ resource "upstash_redis_database" "exampleDB" {
 - `primary_region` (String) Primary region for the database (Only works if region='global'. Can be one of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2])
 - `prod_pack` (Boolean) Whether Prod Pack is enabled for the database.
 - `read_regions` (Set of String) Read regions for the database (Only works if region='global' and primary_region is set. Can be any combination of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2], excluding the one given as primary.)
-- `region` (String, Deprecated)
+- `region` (String, Deprecated) [Deprecated] Region of the database. Use the 'platform' field instead. For global gcp regions, use `gcp-global`; for global aws regions, use `global`.
 - `tls` (Boolean) When enabled, data is encrypted in transit. TLS is enabled by default for newly created databases and cannot be disabled.
 
 ### Read-Only

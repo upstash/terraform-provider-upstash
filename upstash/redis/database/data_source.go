@@ -1,36 +1,10 @@
 package database
 
-import (
-	"context"
-
-	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-)
-
-func dataSourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
-	diags := resourceDatabaseRead(ctx, data, m)
-	if diags.HasError() {
-		return diags
-	}
-
-	region := data.Get("region").(string)
-	var platform string
-	switch region {
-	case "gcp-global":
-		platform = "gcp"
-	case "global":
-		platform = "aws"
-	}
-	if platform != "" {
-		data.Set("platform", platform)
-	}
-
-	return diags
-}
+import "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 func DataSourceDatabase() *schema.Resource {
 	return &schema.Resource{
-		ReadContext: dataSourceDatabaseRead,
+		ReadContext: resourceDatabaseRead,
 		Schema: map[string]*schema.Schema{
 			"database_id": {
 				Type:        schema.TypeString,

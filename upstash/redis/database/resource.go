@@ -6,6 +6,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/customdiff"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func ResourceDatabase() *schema.Resource {
@@ -27,16 +28,21 @@ func ResourceDatabase() *schema.Resource {
 				Description: "Name of the database",
 			},
 			"platform": {
-				Type:        schema.TypeString,
-				Optional:    true,
-				Description: "Platform of the database. Can be one of [aws, gcp]",
+				Type:         schema.TypeString,
+				Optional:     true,
+				Computed:     true,
+				ValidateFunc: validation.StringInSlice([]string{"aws", "gcp"}, false),
+				AtLeastOneOf: []string{"platform", "region"},
+				Description:  "Platform of the database. Can be one of [aws, gcp]",
 			},
 			"region": {
-				Type:       schema.TypeString,
-				Optional:   true,
-				ForceNew:   true,
-				Computed:   true,
-				Deprecated: "The 'region' field is deprecated. Use 'platform' field instead.",
+				Type:         schema.TypeString,
+				Optional:     true,
+				ForceNew:     true,
+				Computed:     true,
+				AtLeastOneOf: []string{"platform", "region"},
+				Deprecated:   "The 'region' field is deprecated. Use 'platform' field instead.",
+				Description:  "[Deprecated] Region of the database. Use the 'platform' field instead. For global gcp regions, use `gcp-global`; for global aws regions, use `global`.",
 			},
 			"endpoint": {
 				Type:        schema.TypeString,
@@ -200,13 +206,19 @@ func ResourceDatabase() *schema.Resource {
 			customdiff.ForceNewIfChange("tls", func(ctx context.Context, old, new, meta interface{}) bool {
 				return old.(bool) && !new.(bool)
 			}),
-			customdiff.ForceNewIfChange("platform", func(ctx context.Context, old, new, meta interface{}) bool {
-				oldVal := old.(string)
-				newVal := new.(string)
-				if oldVal == "" || newVal == "" {
+			customdiff.ForceNewIf("platform", func(ctx context.Context, d *schema.ResourceDiff, meta interface{}) bool {
+				oldRaw, newRaw := d.GetChange("platform")
+				oldVal := oldRaw.(string)
+				newVal := newRaw.(string)
+				if newVal == "" || oldVal == newVal {
 					return false
 				}
-				return oldVal != newVal
+				if oldVal == "" {
+					wantRegion := regionFromPlatform(newVal)
+					currentRegion := d.Get("region").(string)
+					return wantRegion != "" && currentRegion != "" && wantRegion != currentRegion
+				}
+				return true
 			}),
 		),
 	}

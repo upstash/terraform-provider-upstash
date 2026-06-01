@@ -11,13 +11,8 @@ variable "database_name" {
   default = "terraform_db"
 }
 
-variable "tls" {
-  type = bool
-  default = true
-}
-
 variable "platform" {
-  type = string
+  type    = string
   default = "aws"
 }
 
