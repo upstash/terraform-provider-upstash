@@ -36,10 +36,10 @@ resource "upstash_redis_database" "exampleDB" {
 - `eviction` (Boolean) Enable eviction, to evict keys when your database reaches the max size
 - `ip_allowlist` (Set of String) Ip CIDR allowlist for the database. If not set, all IPs are allowed to connect to the database.
 - `multizone` (Boolean, Deprecated) When enabled, database becomes highly available and is deployed in multiple zones. (If changed to false from true, results in deletion and recreation of the resource)
-- `platform` (String) Platform of the database. Can be one of [aws, gcp]
-- `primary_region` (String) Primary region for the database (Only works if region='global'. Can be one of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2])
+- `platform` (String) Cloud provider of the database. Possible values: `aws`, `gcp`. The specific region is selected automatically by Upstash (`aws` deploys to the global aws region, `gcp` to the global gcp region).
+- `primary_region` (String) Primary region for the database (Only works for global databases, i.e. when 'platform' is set or region='global'. Can be one of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2])
 - `prod_pack` (Boolean) Whether Prod Pack is enabled for the database.
-- `read_regions` (Set of String) Read regions for the database (Only works if region='global' and primary_region is set. Can be any combination of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2], excluding the one given as primary.)
+- `read_regions` (Set of String) Read regions for the database (Only works for global databases, i.e. when 'platform' is set or region='global', and primary_region is set. Can be any combination of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2], excluding the one given as primary.)
 - `region` (String, Deprecated) [Deprecated] Region of the database. Use the 'platform' field instead. For global gcp regions, use `gcp-global`; for global aws regions, use `global`.
 - `tls` (Boolean) When enabled, data is encrypted in transit. TLS is enabled by default for newly created databases and cannot be disabled.
 

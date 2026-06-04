@@ -24,7 +24,7 @@ func DataSourceDatabase() *schema.Resource {
 			"platform": {
 				Type:        schema.TypeString,
 				Computed:    true,
-				Description: "Platform of the database. Can be one of [aws, gcp]",
+				Description: "Cloud provider of the database. Possible values: `aws`, `gcp`.",
 			},
 			"endpoint": {
 				Type:        schema.TypeString,
