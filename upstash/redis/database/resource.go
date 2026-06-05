@@ -6,6 +6,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/customdiff"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
 func ResourceDatabase() *schema.Resource {
@@ -26,11 +27,22 @@ func ResourceDatabase() *schema.Resource {
 				ForceNew:    true,
 				Description: "Name of the database",
 			},
+			"platform": {
+				Type:         schema.TypeString,
+				Optional:     true,
+				Computed:     true,
+				ValidateFunc: validation.StringInSlice([]string{"aws", "gcp"}, false),
+				ExactlyOneOf: []string{"platform", "region"},
+				Description:  "Cloud provider of the database. Possible values: `aws`, `gcp`. The specific region is selected automatically by Upstash (`aws` deploys to the global aws region, `gcp` to the global gcp region).",
+			},
 			"region": {
-				Type:        schema.TypeString,
-				Required:    true,
-				ForceNew:    true,
-				Description: "Region of the database. For global gcp regions, use `gcp-global`. For globals, check for primary_region and read_regions fields",
+				Type:         schema.TypeString,
+				Optional:     true,
+				ForceNew:     true,
+				Computed:     true,
+				ExactlyOneOf: []string{"platform", "region"},
+				Deprecated:   "The 'region' field is deprecated and no longer used to select a specific region. Use the 'platform' field to choose the cloud provider (`aws` or `gcp`) instead.",
+				Description:  "[Deprecated] Region of the database. Use the 'platform' field instead. For global gcp regions, use `gcp-global`; for global aws regions, use `global`.",
 			},
 			"endpoint": {
 				Type:        schema.TypeString,
@@ -91,7 +103,7 @@ func ResourceDatabase() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				ForceNew:    true,
-				Description: "Primary region for the database (Only works if region='global'. Can be one of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2])",
+				Description: "Primary region for the database (Only works for global databases, i.e. when 'platform' is set or region='global'.",
 			},
 			"read_regions": {
 				Type: schema.TypeSet,
@@ -99,7 +111,7 @@ func ResourceDatabase() *schema.Resource {
 					Type: schema.TypeString,
 				},
 				Optional:    true,
-				Description: "Read regions for the database (Only works if region='global' and primary_region is set. Can be any combination of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2], excluding the one given as primary.)",
+				Description: "Read regions for the database (Only works for global databases, i.e. when 'platform' is set or region='global', and primary_region is set. Can be any combination of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2], excluding the one given as primary.)",
 			},
 			"ip_allowlist": {
 				Type: schema.TypeSet,
@@ -193,6 +205,20 @@ func ResourceDatabase() *schema.Resource {
 			}),
 			customdiff.ForceNewIfChange("tls", func(ctx context.Context, old, new, meta interface{}) bool {
 				return old.(bool) && !new.(bool)
+			}),
+			customdiff.ForceNewIf("platform", func(ctx context.Context, d *schema.ResourceDiff, meta interface{}) bool {
+				oldRaw, newRaw := d.GetChange("platform")
+				oldVal := oldRaw.(string)
+				newVal := newRaw.(string)
+				if newVal == "" || oldVal == newVal {
+					return false
+				}
+				if oldVal == "" {
+					wantRegion := regionFromPlatform(newVal)
+					currentRegion := d.Get("region").(string)
+					return wantRegion != "" && currentRegion != "" && wantRegion != currentRegion
+				}
+				return true
 			}),
 		),
 	}

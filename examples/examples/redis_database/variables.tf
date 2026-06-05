@@ -24,9 +24,9 @@ variable "auto_scale" {
   default = "true"
 }
 
-variable "region" {
+variable "platform" {
   type    = string
-  default = "global"
+  default = "aws"
 }
 
 variable "primary_region" {

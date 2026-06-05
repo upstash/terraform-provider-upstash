@@ -21,6 +21,11 @@ func DataSourceDatabase() *schema.Resource {
 				Computed:    true,
 				Description: "Region of the database. For globals, check for primary_region and read_regions fields",
 			},
+			"platform": {
+				Type:        schema.TypeString,
+				Computed:    true,
+				Description: "Cloud provider of the database. Possible values: `aws`, `gcp`.",
+			},
 			"endpoint": {
 				Type:        schema.TypeString,
 				Computed:    true,

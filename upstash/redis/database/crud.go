@@ -10,6 +10,28 @@ import (
 	"github.com/upstash/terraform-provider-upstash/v2/upstash/utils"
 )
 
+func platformFromRegion(region string) string {
+	switch region {
+	case "gcp-global":
+		return "gcp"
+	case "global":
+		return "aws"
+	default:
+		return ""
+	}
+}
+
+func regionFromPlatform(platform string) string {
+	switch platform {
+	case "gcp":
+		return "gcp-global"
+	case "aws":
+		return "global"
+	default:
+		return ""
+	}
+}
+
 func resourceDatabaseUpdate(ctx context.Context, data *schema.ResourceData, m interface{}) diag.Diagnostics {
 	c := m.(*client.UpstashClient)
 	databaseId := data.Get("database_id").(string)
@@ -131,6 +153,10 @@ func resourceDatabaseRead(ctx context.Context, data *schema.ResourceData, m inte
 		"creation_time":              database.CreationTime,
 		"primary_region":             database.PrimaryRegion,
 	}
+
+	if platform := platformFromRegion(database.Region); platform != "" {
+		mapping["platform"] = platform
+	}
 	if len(database.IpAllowList) > 0 {
 		mapping["ip_allowlist"] = database.IpAllowList
 	}
@@ -154,6 +180,7 @@ func resourceDatabaseCreate(ctx context.Context, data *schema.ResourceData, m in
 
 	database, err := CreateDatabase(c, CreateDatabaseRequest{
 		Region:        data.Get("region").(string),
+		Platform:      data.Get("platform").(string),
 		DatabaseName:  data.Get("database_name").(string),
 		Eviction:      data.Get("eviction").(bool),
 		AutoUpgrade:   data.Get("auto_scale").(bool),

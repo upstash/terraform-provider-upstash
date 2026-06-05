@@ -12,10 +12,8 @@ type EnvVars struct {
 	Email  string
 	Apikey string
 
-	RedisDatabaseName      string
-	RedisDatabaseRegion    string
-	RedisDatabaseTls       bool
-	RedisDatabaseMultiZone bool
+	RedisDatabaseName     string
+	RedisDatabasePlatform string
 
 	VectorIndexName               string
 	VectorIndexType               string
@@ -53,10 +51,8 @@ func GetEnvVars() EnvVars {
 		Email:  os.Getenv("UPSTASH_EMAIL"),
 		Apikey: os.Getenv("UPSTASH_API_KEY"),
 
-		RedisDatabaseName:      os.Getenv("UPSTASH_REDIS_DATABASE_NAME"),
-		RedisDatabaseRegion:    os.Getenv("UPSTASH_REDIS_DATABASE_REGION"),
-		RedisDatabaseTls:       os.Getenv("UPSTASH_REDIS_DATABASE_TLS") == "true",
-		RedisDatabaseMultiZone: os.Getenv("UPSTASH_REDIS_DATABASE_MULTIZONE") == "true",
+		RedisDatabaseName:     os.Getenv("UPSTASH_REDIS_DATABASE_NAME"),
+		RedisDatabasePlatform: os.Getenv("UPSTASH_REDIS_DATABASE_PLATFORM"),
 
 		VectorIndexName:               os.Getenv("UPSTASH_VECTOR_INDEX_NAME"),
 		VectorIndexType:               os.Getenv("UPSTASH_VECTOR_INDEX_TYPE"),
