@@ -103,7 +103,7 @@ func ResourceDatabase() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				ForceNew:    true,
-				Description: "Primary region for the database (Only works for global databases, i.e. when 'platform' is set or region='global'. Can be one of [us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, sa-east-1, ap-southeast-1, ap-southeast-2])",
+				Description: "Primary region for the database (Only works for global databases, i.e. when 'platform' is set or region='global'.",
 			},
 			"read_regions": {
 				Type: schema.TypeSet,
