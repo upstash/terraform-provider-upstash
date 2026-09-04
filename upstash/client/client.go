@@ -11,6 +11,8 @@ import (
 
 const UPSTASH_API_ENDPOINT = "https://api.upstash.com"
 
+var clientHeader = req.Header{"X-Upstash-Client": "terraform"}
+
 type UpstashClient struct {
 	Email  string
 	Apikey string
@@ -38,6 +40,7 @@ func (c *UpstashClient) GetQstashToken() (error, string) {
 	resp, err := req.Get(
 		UPSTASH_API_ENDPOINT+"/v2/qstash/user",
 		req.Header{"Accept": "application/json"},
+		clientHeader,
 		req.Header{"Authorization": utils.BasicAuth(c.Email, c.Apikey)},
 	)
 	if err != nil {
@@ -65,6 +68,7 @@ func (c *UpstashClient) SendDeleteRequest(endpointExtensionOrQstashEndpoint stri
 	resp, err := req.Delete(
 		endpoint,
 		req.Header{"Accept": "application/json"},
+		clientHeader,
 		authHeader,
 		req.BodyJSON(body),
 	)
@@ -93,6 +97,7 @@ func (c *UpstashClient) SendGetRequest(endpointExtensionOrQstashEndpoint string,
 	resp, err := req.Get(
 		endpoint,
 		req.Header{"Accept": "application/json"},
+		clientHeader,
 		authHeader,
 	)
 	if err != nil {
@@ -120,6 +125,7 @@ func (c *UpstashClient) SendPostRequest(endpointExtensionOrQstashEndpoint string
 	resp, err := req.Post(
 		endpoint,
 		req.Header{"Accept": "application/json"},
+		clientHeader,
 		authHeader,
 		req.BodyJSON(body),
 	)
@@ -149,6 +155,7 @@ func (c *UpstashClient) SendPutRequest(endpointExtensionOrQstashEndpoint string,
 	resp, err := req.Put(
 		endpoint,
 		req.Header{"Accept": "application/json"},
+		clientHeader,
 		authHeader,
 		req.BodyJSON(body),
 	)
@@ -178,6 +185,7 @@ func (c *UpstashClient) SendPatchRequest(endpointExtensionOrQstashEndpoint strin
 	resp, err := req.Patch(
 		endpoint,
 		req.Header{"Accept": "application/json"},
+		clientHeader,
 		authHeader,
 		req.BodyJSON(body),
 	)
